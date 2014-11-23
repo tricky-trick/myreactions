@@ -1,0 +1,26 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@drawable/mainbg1</item>
+        <item name="android:colorBackground">@drawable/mainbg1</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+         <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@drawable/mainbg1</item>
+        <item name="android:colorBackground">@drawable/mainbg1</item>
+    </style>
+
+    <style name="CustomTheme">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@drawable/mainbg1</item>
+        <item name="android:colorBackground">@drawable/mainbg1</item>
+    </style>
+
+</resources>

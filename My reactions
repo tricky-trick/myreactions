@@ -1,0 +1,17 @@
+My reactions
+
+1. Description.
+	Application for android which will allow to check the speed of reflections, reminding. Ability of training reflections and monitoring results during long period of time.
+
+2. What type of verifications.
+	Tapping on object once to see time of response. Tapping on object which appears in random time. Tapping on object which dissapears.
+
+
+Logical part:
+1. Tapping.
+2. Sliding.
+3. Counter
+4. Graphs.
+5. Datasaver.
+6. Results shower
+7. Logging or skip login - Done
