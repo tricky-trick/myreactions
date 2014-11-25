@@ -7,19 +7,46 @@
         android:id="@+id/txtLabeFasterClicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/shapearea"
+        android:background="@drawable/abc_menu_dropdown_panel_holo_light"
         android:padding="10dp"
         android:text="@string/you_have_10_seconds_how_much_taps_you_can_make"
-        android:textColor="@color/clue_theme"
-        android:textSize="25dp" />
+        android:textColor="@color/black_overlay"
+        android:textSize="14dp" />
+
+    <Button
+        android:id="@+id/handButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtLabeFasterClicker"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shapebutton_start_normal"
+        android:padding="10dp"
+        android:text="Choose hand"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/fingerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtLabeFasterClicker"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shapebutton_start_normal"
+        android:padding="5dp"
+        android:text="Choose finger"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/chronometerFasterClicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtLabeFasterClicker"
+        android:layout_below="@+id/handButton"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:textSize="70dp"
@@ -29,64 +56,37 @@
         android:id="@+id/startButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtLabeFasterClicker"
+        android:layout_below="@+id/handButton"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shapebutton_selector"
         android:text="@string/start"
-        android:textColor="@color/white"/>
-
-    <ImageView
-        android:id="@+id/imageThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/startButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/three" 
-        android:visibility="invisible"/>
-
-    <ImageView
-        android:id="@+id/imageTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/startButton"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/two"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:id="@+id/imageOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/startButton"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/one"
-        android:visibility="invisible" />
+        android:textColor="@color/white" />
 
     <ImageView
         android:id="@+id/imageTapButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/startButton"
+        android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
+        android:background="@drawable/tapbutton_selector"
         android:src="@drawable/tapbutton"
         android:visibility="invisible" />
-    
+
     <TextView
         android:id="@+id/resultsFasterClicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/startButton"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
         android:layout_marginTop="50dp"
-        android:textSize="100dp" 
-        android:visibility="invisible"/>
-    
+        android:textColor="@color/white"
+        android:textSize="100dp"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/tryAgainButton"
         android:layout_width="match_parent"
@@ -99,6 +99,84 @@
         android:background="@drawable/shapebutton_selector"
         android:text="@string/try_again"
         android:textColor="@color/white"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageHandLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startButton"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/left_hand"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageRightHand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/imageHandLeft"
+        android:layout_below="@+id/startButton"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/right_hand"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageThumbFinger"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/startButton"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/right_hand"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageIndexFinger"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/imageThumbFinger"
+        android:layout_below="@+id/startButton"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/right_hand"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageMiddleFinger"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/imageThumbFinger"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/right_hand"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageRingFinger"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/imageMiddleFinger"
+        android:layout_below="@+id/imageIndexFinger"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/right_hand"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imagePinkyFinger"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/imageRingFinger"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/right_hand"
         android:visibility="invisible" />
 
 </RelativeLayout>
