@@ -21,3 +21,5 @@ a.settings/
 *.prefs
 
 *.iml
+
+*.class
