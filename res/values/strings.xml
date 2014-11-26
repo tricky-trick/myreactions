@@ -40,9 +40,10 @@
     
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
-    <string name="you_have_10_seconds_how_much_taps_you_can_make">"You have 10 seconds. How much taps You can make? "</string>
+    <string name="you_have_10_seconds_how_much_taps_you_can_make">"You have 10 seconds. How much taps You can make? Choose hand and finger for tapping."</string>
     <string name="todo">TODO</string>
     <string name="start">START</string>
     <string name="try_again">Try again</string>
+    <string name="title_statistics">Choose hand and finger from the list to see Your results.</string>
 
 </resources>

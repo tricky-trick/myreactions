@@ -90,6 +90,8 @@ public class StartActivity extends FragmentActivity {
 						Editor editor = prefs.edit();
 						editor.putString("USER_NAME", user.getFirstName());
 						editor.putString("FACEBOOK_ID", user.getId());
+						editor.putString("BIRTHDAY", user.getBirthday());
+						editor.putString("GENDER", user.asMap().get("gender").toString());
 						editor.commit();
 						Intent i = new Intent(StartActivity.this,
 								MainActivity.class);
@@ -98,6 +100,8 @@ public class StartActivity extends FragmentActivity {
 						Editor editor = prefs.edit();
 						editor.putString("USER_NAME", "Guest");
 						editor.putString("FACEBOOK_ID", "");
+						editor.putString("BIRTHDAY", "");
+						editor.putString("GENDER", "");
 						editor.commit();
 					}
 				}

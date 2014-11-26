@@ -123,7 +123,7 @@ public class FastClickerFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// Date date = new Date();
-				long date = System.currentTimeMillis() / 1000L;
+				long date = System.currentTimeMillis();
 				results.add(String.valueOf(date));
 			}
 		});
@@ -144,7 +144,7 @@ public class FastClickerFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				if (startTimer.getVisibility() == View.VISIBLE) {
+				if (startTimer.getVisibility() == View.VISIBLE && (fingerThumb.getVisibility() != View.VISIBLE)) {
 					leftHand.setVisibility(View.VISIBLE);
 					rightHand.setVisibility(View.VISIBLE);
 					doAnimation(leftHand);
@@ -179,7 +179,7 @@ public class FastClickerFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				if (startTimer.getVisibility() == View.VISIBLE) {
+				if (startTimer.getVisibility() == View.VISIBLE && (leftHand.getVisibility() != View.VISIBLE)) {
 					setFingersVisibility(View.VISIBLE);
 					doAnimation(fingerThumb);
 					doAnimation(fingerIndex);

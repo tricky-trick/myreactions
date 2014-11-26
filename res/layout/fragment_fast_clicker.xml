@@ -91,11 +91,11 @@
         android:id="@+id/tryAgainButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/resultsFasterClicker"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/shapebutton_selector"
         android:text="@string/try_again"
         android:textColor="@color/white"
@@ -129,7 +129,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/right_hand"
+        android:src="@drawable/thum_finger"
         android:visibility="invisible" />
 
     <ImageView
@@ -142,7 +142,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/right_hand"
+        android:src="@drawable/index_finger"
         android:visibility="invisible" />
 
     <ImageView
@@ -153,7 +153,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/right_hand"
+        android:src="@drawable/middle_finger"
         android:visibility="invisible" />
 
     <ImageView
@@ -166,7 +166,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/right_hand"
+        android:src="@drawable/ring_finger"
         android:visibility="invisible" />
 
     <ImageView
@@ -176,7 +176,7 @@
         android:layout_below="@+id/imageRingFinger"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:src="@drawable/right_hand"
+        android:src="@drawable/pinky_finger"
         android:visibility="invisible" />
 
 </RelativeLayout>
