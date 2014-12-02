@@ -1,11 +1,13 @@
 package com.denyszaiats.myreactions;
 
 import java.sql.Date;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 import android.widget.*;
+import com.fima.chartview.AbstractSeries;
+import com.fima.chartview.ChartView;
+import com.fima.chartview.LabelAdapter;
+import com.fima.chartview.LinearSeries;
 import com.squareup.picasso.Picasso;
 
 import android.app.Fragment;
@@ -25,6 +27,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private TextView ageView;
     private TextView textSummaryClicks;
     private TextView textMaxClicks;
+    private TextView textMinClicks;
     private TextView textTitleResults;
     private ImageView imgIcon;
     private Spinner dropMenuHand;
@@ -41,6 +44,11 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private String finger = Constants.THUMB_FINGER;
     private String resultsMaxClicks;
     private String resultsSummaryClicks;
+    private String resultsAmountOfTests;
+    private String resultsMinClicks;
+    private LinearSeries series;
+    private LinearSeries seriesSum;
+    private int maxI = 0;
 
     public HomeFragment() {
     }
@@ -50,7 +58,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                              Bundle savedInstanceState) {
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         summaryResults = (TextView) rootView.findViewById(R.id.textSummaryClicks);
         nameView = (TextView) rootView.findViewById(R.id.textViewName);
         genderView = (TextView) rootView.findViewById(R.id.textViewGender);
@@ -61,6 +69,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         buttonShowResults = (Button) rootView.findViewById(R.id.buttonShowResults);
         textSummaryClicks = (TextView) rootView.findViewById(R.id.textSummaryClicksByHandAndFinger);
         textMaxClicks = (TextView) rootView.findViewById(R.id.textMaxClicksByHandAndFinger);
+        textMinClicks = (TextView) rootView.findViewById(R.id.textMinClicksByHandAndFinger);
         textTitleResults = (TextView) rootView.findViewById(R.id.textTitleForStatisticsInScrollView);
         resultsScrollView = (ScrollView) rootView.findViewById(R.id.scrollViewHome);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressDialog);
@@ -128,21 +137,130 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
                 resultsScrollView.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
-                resultsMaxClicks = getMaxValueOfClicks(hand, finger).toString();
-                resultsSummaryClicks = getSumValueOfClicks(hand, finger).toString();
+                resultsMaxClicks = getMaxValueOfClicks().toString();
+                resultsMinClicks = getMinValueOfClicks().toString();
+                resultsSummaryClicks = getSumValueOfClicks().toString();
+                resultsAmountOfTests = getAmountOfTests().toString();
                 progressBar.setVisibility(View.INVISIBLE);
                 resultsScrollView.setVisibility(View.VISIBLE);
                 textTitleResults.setText(String.format("Results are showed for %s hand and %s finger:", dropMenuHand.getSelectedItem(), dropMenuFinger.getSelectedItem()));
-                textSummaryClicks.setText("Summary clicks: " + resultsSummaryClicks);
+                textSummaryClicks.setText(String.format("Summary clicks after %s tests: %s", resultsAmountOfTests, resultsSummaryClicks));
                 textMaxClicks.setText("Max clicks per 10 seconds: " + resultsMaxClicks);
-
+                textMinClicks.setText("Min clicks per 10 seconds: " + resultsMinClicks);
                 //TODO android graphs. Vertical - clicks, horizontal - seconds
                 //http://stackoverflow.com/questions/9741300/charts-for-android
+
+                // Find the chart view
+                ChartView chartViewSummaryResults = (ChartView) rootView.findViewById(R.id.chartViewSummaryResults);
+                ChartView chartViewMaxResult = (ChartView) rootView.findViewById(R.id.chartViewMaxResults);
+
+                chartViewSummaryResults.setVisibility(View.VISIBLE);
+                chartViewMaxResult.setVisibility(View.VISIBLE);
+
+                // Create the data points
+                series = new LinearSeries();
+                series.setLineColor(0xFF0099CC);
+                series.setLineWidth(5);
+                series.setPointWidth(7);
+
+                seriesSum = new LinearSeries();
+                seriesSum.setLineColor(0xFF0099CC);
+                seriesSum.setLineWidth(5);
+                seriesSum.setPointWidth(7);
+
+                chartViewSummaryResults.clearSeries();
+                chartViewMaxResult.clearSeries();
+                int seconds = setSeriesForMaxResults();
+                setSeriesForAllResults();
+
+                int amountOfDifferentResults = getAmountsOfDifferentResults();
+
+                // Add chart view data
+                chartViewSummaryResults.addSeries(series);
+                chartViewSummaryResults.setHorizontalScrollBarEnabled(true);
+                chartViewSummaryResults.setGridLinesVertical(3);
+                chartViewSummaryResults.setGridLinesHorizontal(Integer.parseInt(resultsAmountOfTests));
+                chartViewSummaryResults.setLeftLabelAdapter(new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL));
+                chartViewSummaryResults.setBottomLabelAdapter(new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
+                chartViewSummaryResults.animate();
+
+                chartViewMaxResult.addSeries(seriesSum);
+                chartViewMaxResult.setHorizontalScrollBarEnabled(true);
+                chartViewMaxResult.setGridLinesVertical(2);
+                chartViewMaxResult.setGridLinesHorizontal(seconds - 2);
+                chartViewMaxResult.setLeftLabelAdapter(new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.VERTICAL));
+                chartViewMaxResult.setBottomLabelAdapter(new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.HORIZONTAL));
+                chartViewMaxResult.animate();
 
             }
         });
 
         return rootView;
+    }
+
+    private void setSeriesForAllResults() {
+        String filter = hand + "-" + finger;
+        Map<String, ?> allEntries = prefs.getAll();
+        int i = 0;
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            if (entry.getKey().startsWith(filter)) {
+                double date = Double.parseDouble(entry.getKey().split("-")[2]);
+                double amount = entry.getValue().toString().split(",").length;
+                series.addPoint(new LinearSeries.LinearPoint(date, amount));
+                i++;
+            }
+        }
+        if (i == 0) {
+            series.addPoint(new LinearSeries.LinearPoint(0, 0));
+        }
+    }
+
+    private int setSeriesForMaxResults() {
+        String filter = hand + "-" + finger;
+        Map<String, ?> allEntries = prefs.getAll();
+        HashSet<String> set;
+        LinkedList<String> list = new LinkedList<String>();
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        int max = getMaxValueOfClicks();
+        int k = 0;
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            if (entry.getKey().startsWith(filter) && entry.getValue().toString().split(",").length == max) {
+                for (String s : entry.getValue().toString().split(",")) {
+                    list.add(s.replace("]", "").replace("[", "").trim());
+                }
+                break;
+            }
+        }
+        Collections.sort(list);
+        set = new HashSet<String>(list);
+        LinkedList<String> newSet = new LinkedList<String>(set);
+        Collections.sort(newSet);
+        for (int n = 0; n < newSet.size(); n++) {
+            int i = 0;
+            String s = newSet.get(n);
+            for (int m = 0; m < list.size(); m++) {
+                if (list.get(m).toString().equals(s)) {
+                    i++;
+                }
+                if (maxI < i) {
+                    maxI = i;
+                }
+            }
+            map.put(s, i);
+        }
+        int j = 0;
+
+        SortedSet<String> keys = new TreeSet<String>(map.keySet());
+        for (String key : keys) {
+            j++;
+            seriesSum.addPoint(new LinearSeries.LinearPoint(j, map.get(key)));
+            k++;
+        }
+
+        if (k == 0) {
+            seriesSum.addPoint(new LinearSeries.LinearPoint(0, 0));
+        }
+    return map.size();
     }
 
     private void setSpinnerAdapter(String[] data, Spinner spinner) {
@@ -152,7 +270,26 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         spinner.setOnItemSelectedListener(this);
     }
 
-    private Integer getMaxValueOfClicks(String hand, String finger) {
+    private Integer getMaxValueOfClicks() {
+        Integer value = 0;
+        String filter = hand + "-" + finger;
+        LinkedList<Integer> amount = new LinkedList<Integer>();
+        Map<String, ?> allEntries = prefs.getAll();
+
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            if (entry.getKey().startsWith(filter)) {
+                int sum = entry.getValue().toString().split(",").length;
+                amount.add(sum);
+            }
+        }
+        if (amount.size() != 0) {
+            Collections.sort(amount, Collections.reverseOrder());
+            value = amount.getFirst();
+        }
+        return value;
+    }
+
+    private Integer getMinValueOfClicks() {
         Integer value = 0;
         String filter = hand + "-" + finger;
         LinkedList<Integer> amount = new LinkedList<Integer>();
@@ -171,7 +308,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         return value;
     }
 
-    private Integer getSumValueOfClicks(String hand, String finger) {
+    private Integer getSumValueOfClicks() {
         Integer value = 0;
         String filter = hand + "-" + finger;
         LinkedList<Integer> amount = new LinkedList<Integer>();
@@ -189,6 +326,33 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
         }
         return value;
+    }
+
+    private Integer getAmountOfTests() {
+        Integer value = 0;
+        String filter = hand + "-" + finger;
+        Map<String, ?> allEntries = prefs.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            if (entry.getKey().startsWith(filter)) {
+                value++;
+            }
+        }
+        return value;
+    }
+
+    private Integer getAmountsOfDifferentResults() {
+        String filter = hand + "-" + finger;
+        LinkedList<Integer> amount = new LinkedList<Integer>();
+        Map<String, ?> allEntries = prefs.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            if (entry.getKey().startsWith(filter)) {
+                amount.add(entry.getValue().toString().split(",").length);
+            }
+        }
+
+        Set<Integer> newAmount = new HashSet<Integer>(amount);
+
+        return newAmount.size();
     }
 
     @Override

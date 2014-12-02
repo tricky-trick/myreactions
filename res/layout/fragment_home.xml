@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:chartview="http://schemas.android.com/apk/res/com.denyszaiats.myreactions"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" android:clickable="true">
 
     <RelativeLayout
             android:id="@+id/viewHeaderHome"
@@ -102,13 +103,13 @@
                 android:background="@drawable/shapebutton_selector"
                 android:text="Show results"/>
 
-            <ProgressBar
-                    android:id="@+id/progressDialog"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/buttonShowResults"
-                    android:layout_centerInParent="true"
-                    android:visibility="invisible"/>
+        <ProgressBar
+                android:id="@+id/progressDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buttonShowResults"
+                android:layout_centerInParent="true"
+                android:visibility="invisible"/>
 
         <ScrollView
                 android:id="@+id/scrollViewHome"
@@ -147,6 +148,59 @@
                         android:layout_below="@+id/textSummaryClicksByHandAndFinger"
                         android:layout_marginTop="5dp"
                         android:textSize="16dp"/>
+
+                <TextView
+                        android:id="@+id/textMinClicksByHandAndFinger"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textMaxClicksByHandAndFinger"
+                        android:layout_marginTop="5dp"
+                        android:textSize="16dp"/>
+
+                <TextView
+                        android:id="@+id/textTitleOfChartTemp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textMinClicksByHandAndFinger"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textSize="12dp"
+                        android:text="Graph of clicking frequency for Your best result"/>
+
+
+                <com.fima.chartview.ChartView
+                        android:id="@+id/chartViewMaxResults"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/textTitleOfChartTemp"
+                        android:layout_marginTop="8dp"
+                        chartview:bottomLabelHeight="20dp"
+                        chartview:gridLineColor="#E5E5E5"
+                        chartview:gridLineWidth="1dp"
+                        chartview:leftLabelWidth="20dp"/>
+
+                    <TextView
+                            android:id="@+id/textTitleOfChartSummary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/chartViewMaxResults"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:text="Graph of clicking for all Your results during all the period of time"/>
+
+                <com.fima.chartview.ChartView
+                        android:id="@+id/chartViewSummaryResults"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/textTitleOfChartSummary"
+                        android:layout_marginTop="8dp"
+                        chartview:bottomLabelHeight="20dp"
+                        chartview:gridLineColor="#E5E5E5"
+                        chartview:gridLineWidth="1dp"
+                        chartview:leftLabelWidth="20dp"/>
 
             </RelativeLayout>
 
