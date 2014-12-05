@@ -119,21 +119,11 @@ public class FastClickerFragment extends Fragment {
                             scrollView.setVisibility(View.VISIBLE);
 
                             series = new LinearSeries();
-                            series.setLineColor(0xFF0099CC);
-                            series.setLineWidth(5);
-                            series.setPointWidth(7);
 
-                            chartViewLatestResults.clearSeries();
                             int seconds = setSeriesForLatestResults();
-                            ;
-                            // Add chart view data
-                            chartViewLatestResults.addSeries(series);
-                            chartViewLatestResults.setHorizontalScrollBarEnabled(true);
-                            chartViewLatestResults.setGridLinesVertical(2);
-                            chartViewLatestResults.setGridLinesHorizontal(seconds - 2);
-                            chartViewLatestResults.setLeftLabelAdapter(new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL));
-                            chartViewLatestResults.setBottomLabelAdapter(new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
-                            chartViewLatestResults.animate();
+
+                            ChartBuilder.buildChart(series, chartViewLatestResults, 3, seconds - 2, new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL), new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
+
 
 
                         }

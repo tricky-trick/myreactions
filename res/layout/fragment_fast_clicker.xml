@@ -190,7 +190,6 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     chartview:gridLineColor="#E5E5E5"
-                    chartview:gridLineWidth="1dp"
                     chartview:leftLabelWidth="20dp"/>
 
             <Button

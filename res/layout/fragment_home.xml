@@ -197,9 +197,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/textTitleOfChartSummary"
                         android:layout_marginTop="8dp"
-                        chartview:bottomLabelHeight="20dp"
+                        chartview:bottomLabelHeight="40dp"
                         chartview:gridLineColor="#E5E5E5"
-                        chartview:gridLineWidth="1dp"
                         chartview:leftLabelWidth="20dp"/>
 
             </RelativeLayout>

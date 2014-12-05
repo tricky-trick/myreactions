@@ -4,9 +4,7 @@ import java.sql.Date;
 import java.util.*;
 
 import android.widget.*;
-import com.fima.chartview.AbstractSeries;
 import com.fima.chartview.ChartView;
-import com.fima.chartview.LabelAdapter;
 import com.fima.chartview.LinearSeries;
 import com.squareup.picasso.Picasso;
 
@@ -83,6 +81,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String username = prefs.getString("USER_NAME", "Guest");
         String facebookId = prefs.getString("FACEBOOK_ID", "");
+        String googlePlusImage = prefs.getString("GOOGLE_PLUS_IMAGE", "");
         String gender = prefs.getString("GENDER", "");
         String birthday = prefs.getString("BIRTHDAY", "");
         String age = "";
@@ -95,6 +94,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         }
 
+        if(gender.equals("0")){
+            gender="";
+        }
+
         nameView.setText("Name: " + username);
         genderView.setText("Gender: " + gender);
         ageView.setText("Age: " + age);
@@ -103,9 +106,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         if (username.equals("Guest")) {
             imgIcon.setImageResource(R.drawable.ic_guest);
         } else {
-            imgUri = "https://graph.facebook.com/" + facebookId
-                    + "/picture?type=large";
-            Picasso.with(context).load(imgUri).into(imgIcon);
+            if(facebookId.equals("")) {
+                imgUri = googlePlusImage;
+                Picasso.with(context).load(imgUri).resize(150,150).into(imgIcon);
+            }
+            else {
+                imgUri = "https://graph.facebook.com/" + facebookId
+                        + "/picture?type=large";
+                Picasso.with(context).load(imgUri).into(imgIcon);
+            }
         }
 
         String summaryClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
@@ -149,6 +158,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 textMinClicks.setText("Min clicks per 10 seconds: " + resultsMinClicks);
                 //TODO android graphs. Vertical - clicks, horizontal - seconds
                 //http://stackoverflow.com/questions/9741300/charts-for-android
+                //http://javapapers.com/android/android-chart-using-androidplot/
 
                 // Find the chart view
                 ChartView chartViewSummaryResults = (ChartView) rootView.findViewById(R.id.chartViewSummaryResults);
@@ -159,39 +169,17 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
                 // Create the data points
                 series = new LinearSeries();
-                series.setLineColor(0xFF0099CC);
-                series.setLineWidth(5);
-                series.setPointWidth(7);
-
                 seriesSum = new LinearSeries();
-                seriesSum.setLineColor(0xFF0099CC);
-                seriesSum.setLineWidth(5);
-                seriesSum.setPointWidth(7);
 
-                chartViewSummaryResults.clearSeries();
-                chartViewMaxResult.clearSeries();
                 int seconds = setSeriesForMaxResults();
                 setSeriesForAllResults();
 
-                int amountOfDifferentResults = getAmountsOfDifferentResults();
+                //int amountOfDifferentResults = getAmountsOfDifferentResults();
 
-                // Add chart view data
-                chartViewSummaryResults.addSeries(series);
-                chartViewSummaryResults.setHorizontalScrollBarEnabled(true);
-                chartViewSummaryResults.setGridLinesVertical(3);
-                chartViewSummaryResults.setGridLinesHorizontal(Integer.parseInt(resultsAmountOfTests));
-                chartViewSummaryResults.setLeftLabelAdapter(new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL));
-                chartViewSummaryResults.setBottomLabelAdapter(new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
-                chartViewSummaryResults.animate();
 
-                chartViewMaxResult.addSeries(seriesSum);
-                chartViewMaxResult.setHorizontalScrollBarEnabled(true);
-                chartViewMaxResult.setGridLinesVertical(2);
-                chartViewMaxResult.setGridLinesHorizontal(seconds - 2);
-                chartViewMaxResult.setLeftLabelAdapter(new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.VERTICAL));
-                chartViewMaxResult.setBottomLabelAdapter(new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.HORIZONTAL));
-                chartViewMaxResult.animate();
+                ChartBuilder.buildChart(series, chartViewSummaryResults, 3, Integer.parseInt(resultsAmountOfTests) - 2, new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL), new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
 
+                ChartBuilder.buildChart(seriesSum, chartViewMaxResult, 2, seconds - 2, new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.VERTICAL), new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.HORIZONTAL));
             }
         });
 
@@ -206,8 +194,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             if (entry.getKey().startsWith(filter)) {
                 double date = Double.parseDouble(entry.getKey().split("-")[2]);
                 double amount = entry.getValue().toString().split(",").length;
-                series.addPoint(new LinearSeries.LinearPoint(date, amount));
                 i++;
+                series.addPoint(new LinearSeries.LinearPoint(date, amount));
             }
         }
         if (i == 0) {

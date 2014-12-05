@@ -60,13 +60,19 @@ public class NavDrawerListAdapter extends BaseAdapter {
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String username = prefs.getString("USER_NAME", "Guest");
 		String facebookId = prefs.getString("FACEBOOK_ID", "");
+		String googlePlusImage = prefs.getString("GOOGLE_PLUS_IMAGE", "");
 		String imgUri = "";
 		if (position == 0) {
 			if (username.equals("Guest")) {
 				imgIcon.setImageResource(R.drawable.ic_guest);
 			} else {
-				imgUri = "https://graph.facebook.com/" + facebookId
-						+ "/picture?type=square";
+				if (!facebookId.equals("")) {
+					imgUri = "https://graph.facebook.com/" + facebookId
+							+ "/picture?type=square";
+				}
+				else{
+					imgUri = googlePlusImage;
+				}
 				Picasso.with(context).load(imgUri).resize(96, 96).into(imgIcon);
 			}
 		} else {
