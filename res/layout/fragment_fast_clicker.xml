@@ -13,11 +13,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/abc_menu_dropdown_panel_holo_light"
                 android:padding="10dp"
                 android:text="@string/you_have_10_seconds_how_much_taps_you_can_make"
-                android:textColor="@color/black_overlay"
-                android:textSize="14dp"/>
+                android:textSize="16dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:shadowColor="#000000"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"/>
 
         <Button
                 android:id="@+id/handButton"
