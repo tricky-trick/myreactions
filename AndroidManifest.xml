@@ -38,6 +38,8 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity android:name=".ChartFragment"
+                  android:theme="@android:style/Theme.Dialog"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

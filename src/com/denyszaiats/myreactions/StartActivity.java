@@ -22,8 +22,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import android.widget.Toast;
-import com.denyszaiats.myreactions.R;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
@@ -101,6 +99,7 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 				.addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build())
 				.addScope(Plus.SCOPE_PLUS_LOGIN).build();
 
+
 		logo.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -122,7 +121,11 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 
 	protected void onStart() {
 		super.onStart();
-		mGoogleApiClient.connect();
+		boolean isLoggedIn = prefs.getBoolean("IS_LOGGED_IN", false);
+		if(isLoggedIn) {
+			mGoogleApiClient.connect();
+		}
+
 	}
 
 	protected void onStop() {
@@ -154,7 +157,11 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	 * */
 	private void signInWithGplus() {
 		if (!mGoogleApiClient.isConnecting()) {
+			Editor editor = prefs.edit();
+			editor.putBoolean("IS_LOGGED_IN", true);
+			editor.commit();
 			mSignInClicked = true;
+
 			resolveSignInError();
 		}
 	}
@@ -163,15 +170,8 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	 * Method to resolve any signin errors
 	 * */
 	private void resolveSignInError() {
-		if (mConnectionResult.hasResolution()) {
-			try {
-				mIntentInProgress = true;
-				mConnectionResult.startResolutionForResult(this, RC_SIGN_IN);
-			} catch (IntentSender.SendIntentException e) {
-				mIntentInProgress = false;
-				mGoogleApiClient.connect();
-			}
-		}
+			mIntentInProgress = false;
+			mGoogleApiClient.connect();
 	}
 
 	/**
@@ -181,7 +181,6 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 		if (mGoogleApiClient.isConnected()) {
 			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
 			mGoogleApiClient.disconnect();
-			mGoogleApiClient.connect();
 			updateUI(false);
 		}
 	}
@@ -349,17 +348,17 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 		super.onActivityResult(requestCode, resultCode, data);
 		uiHelper.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == RC_SIGN_IN) {
-			if (resultCode != RESULT_OK) {
-				mSignInClicked = false;
-			}
+			if (requestCode == RC_SIGN_IN) {
+				if (resultCode != RESULT_OK) {
+					mSignInClicked = false;
+				}
 
-			mIntentInProgress = false;
+				mIntentInProgress = false;
 
-			if (!mGoogleApiClient.isConnecting()) {
-				mGoogleApiClient.connect();
+				if (!mGoogleApiClient.isConnecting()) {
+					mGoogleApiClient.connect();
+				}
 			}
-		}
 	}
 
 	@Override

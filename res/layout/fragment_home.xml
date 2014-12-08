@@ -1,159 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:chartview="http://schemas.android.com/apk/res/com.denyszaiats.myreactions"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:clickable="true">
-
-    <RelativeLayout
-            android:id="@+id/viewHeaderHome"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:chartview="http://schemas.android.com/apk/res/com.denyszaiats.myreactions"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/abc_menu_dropdown_panel_holo_light">
-
-        <ImageView
-                android:id="@+id/imageProfileHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_guest"
-                android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
-
-        <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
-                android:textSize="16dp"
-                android:textColor="@color/white"
-                android:shadowColor="#000000"
-                android:shadowRadius="4"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:textStyle="bold"/>
-
-        <TextView
-                android:id="@+id/textViewAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/textViewName"
-                android:layout_marginRight="30dp"
-                android:textSize="16dp"
-                android:textColor="@color/white"
-                android:shadowColor="#000000"
-                android:shadowRadius="4"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:textStyle="bold"/>
-
-        <TextView
-                android:id="@+id/textViewGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/textViewAge"
-                android:layout_marginRight="30dp"
-                android:textSize="16dp"
-                android:textColor="@color/white"
-                android:shadowColor="#000000"
-                android:shadowRadius="4"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:textStyle="bold"/>
-    </RelativeLayout>
-
+            android:layout_height="match_parent" android:clickable="true">
 
     <RelativeLayout
-            android:id="@+id/viewResultHome"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/viewHeaderHome"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:background="@drawable/abc_menu_dropdown_panel_holo_light">
-
-        <TextView
-                android:id="@+id/textSummaryClicks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:shadowColor="#000000"
-                android:shadowRadius="4"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:textStyle="bold"/>
-
-        <TextView
-                android:id="@+id/textTitleStatistics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/textSummaryClicks"
-                android:layout_marginTop="5dp"
-                android:padding="5dp"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:shadowColor="@color/clue_theme"
-                android:shadowRadius="4"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:textStyle="bold"
-                android:text="@string/title_statistics"/>
-
-        <Spinner
-                android:id="@+id/dropMenuHand"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textTitleStatistics"
-                android:spinnerMode="dropdown"/>
-
-        <Spinner
-                android:id="@+id/dropMenuFinger"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textTitleStatistics"
-                android:spinnerMode="dropdown"
-                android:layout_alignParentRight="true"/>
-
-        <Button
-                android:id="@+id/buttonShowResults"
+            android:layout_height="fill_parent">
+        <RelativeLayout
+                android:id="@+id/viewHeaderHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dropMenuFinger"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/shapebutton_selector"
-                android:text="Show results"/>
+                android:background="@drawable/abc_menu_dropdown_panel_holo_light">
 
-        <ProgressBar
-                android:id="@+id/progressDialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/buttonShowResults"
-                android:layout_centerInParent="true"
-                android:visibility="invisible"/>
+            <ImageView
+                    android:id="@+id/imageProfileHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_guest"
+                    android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
 
-        <ScrollView
-                android:id="@+id/scrollViewHome"
+            <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/silver"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="4"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/textViewAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/textViewName"
+                    android:layout_marginRight="30dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/silver"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="4"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/textViewGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/textViewAge"
+                    android:layout_marginRight="30dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/silver"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="4"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:textStyle="bold"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+                android:id="@+id/viewResultHome"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/buttonShowResults"
-                android:visibility="invisible">
+                android:layout_below="@+id/viewHeaderHome"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/abc_menu_dropdown_panel_holo_light">
+
+            <TextView
+                    android:id="@+id/textSummaryClicks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textColor="@color/silver"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="4"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/textTitleStatistics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/textSummaryClicks"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:shadowRadius="4"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:textStyle="bold"
+                    android:text="@string/title_statistics"/>
+
+            <Spinner
+                    android:id="@+id/dropMenuHand"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textTitleStatistics"
+                    android:spinnerMode="dropdown"/>
+
+            <Spinner
+                    android:id="@+id/dropMenuFinger"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textTitleStatistics"
+                    android:spinnerMode="dropdown"
+                    android:layout_alignParentRight="true"/>
+
+            <Button
+                    android:id="@+id/buttonShowResults"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dropMenuFinger"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shapebutton_selector"
+                    android:text="Show results"/>
+
+            <ProgressBar
+                    android:id="@+id/progressDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/buttonShowResults"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible"/>
 
             <RelativeLayout
+                    android:id="@+id/scrollViewHome"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/buttonShowResults"
+                    android:visibility="invisible">
 
                 <TextView
                         android:id="@+id/textTitleForStatisticsInScrollView"
@@ -163,10 +159,6 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textSize="16dp"
-                        android:shadowColor="@color/clue_theme"
-                        android:shadowRadius="4"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
                         android:textStyle="bold"/>
 
                 <TextView
@@ -176,11 +168,9 @@
                         android:layout_below="@+id/textTitleForStatisticsInScrollView"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:textSize="16dp"
-                        android:shadowColor="@color/clue_theme"
-                        android:shadowRadius="4"
-                        android:shadowDx="1"
-                        android:shadowDy="1"/>
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"/>
 
                 <TextView
                         android:id="@+id/textMaxClicksByHandAndFinger"
@@ -189,11 +179,9 @@
                         android:layout_below="@+id/textSummaryClicksByHandAndFinger"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:textSize="16dp"
-                        android:shadowColor="@color/clue_theme"
-                        android:shadowRadius="4"
-                        android:shadowDx="1"
-                        android:shadowDy="1"/>
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"/>
 
                 <TextView
                         android:id="@+id/textMinClicksByHandAndFinger"
@@ -202,11 +190,9 @@
                         android:layout_below="@+id/textMaxClicksByHandAndFinger"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:textSize="16dp"
-                        android:shadowColor="@color/clue_theme"
-                        android:shadowRadius="4"
-                        android:shadowDx="1"
-                        android:shadowDy="1"/>
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"/>
 
                 <TextView
                         android:id="@+id/textTitleOfChartTemp"
@@ -215,11 +201,9 @@
                         android:layout_below="@+id/textMinClicksByHandAndFinger"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
+                        android:layout_centerHorizontal="true"
                         android:textSize="12dp"
-                        android:shadowColor="@color/clue_theme"
-                        android:shadowRadius="2"
-                        android:shadowDx="1"
-                        android:shadowDy="1"
+                        android:textStyle="bold"
                         android:text="Graph of clicking frequency for Your best result"/>
 
 
@@ -235,36 +219,44 @@
                         chartview:gridLineWidth="1dp"
                         chartview:leftLabelWidth="20dp"/>
 
-                    <TextView
-                            android:id="@+id/textTitleOfChartSummary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/chartViewMaxResults"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:textSize="12dp"
-                            android:shadowColor="@color/clue_theme"
-                            android:shadowRadius="2"
-                            android:shadowDx="1"
-                            android:shadowDy="1"
-                            android:text="Graph of clicking for all Your results during all the period of time"/>
-
-                <com.fima.chartview.ChartView
-                        android:id="@+id/chartViewSummaryResults"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                <TextView
+                        android:id="@+id/textTitleOfChartSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/chartViewMaxResults"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
                         android:layout_centerHorizontal="true"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:text="Graph of clicking for all Your results during all the period of time"/>
+
+                <!--<com.fima.chartview.ChartView-->
+                <!--android:id="@+id/chartViewSummaryResults"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_below="@+id/textTitleOfChartSummary"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--chartview:bottomLabelHeight="40dp"-->
+                <!--chartview:gridLineColor="#E5E5E5"-->
+                <!--chartview:leftLabelWidth="20dp"/>-->
+
+                <Button
+                        android:id="@+id/buttonShowAllResults"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/textTitleOfChartSummary"
-                        android:layout_marginTop="8dp"
-                        chartview:bottomLabelHeight="40dp"
-                        chartview:gridLineColor="#E5E5E5"
-                        chartview:leftLabelWidth="20dp"/>
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/shapebutton_selector"
+                        android:text="Show chart for all results"/>
+
 
             </RelativeLayout>
 
-        </ScrollView>
 
+        </RelativeLayout>
 
     </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

@@ -52,18 +52,7 @@ public class ValueLabelAdapter extends LabelAdapter {
         labelTextView.setGravity(gravity);
         labelTextView.setPadding(8, 0, 8, 0);
         String value = String.format("%.0f", getItem(position));
-        if (value.length() > 6) {
-            if (position % 5 == 0) {
-                labelTextView.setTextSize(6);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
-                Date date = new Date();
-                date.setTime(Long.parseLong(value) * 1000);
-                String formattedDate = dateFormat.format(date);
-                labelTextView.setText(formattedDate);
-            }
-        } else {
-            labelTextView.setText(value);
-        }
+        labelTextView.setText(value);
 
         return convertView;
     }

@@ -2,6 +2,9 @@ package com.denyszaiats.myreactions;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import com.denyszaiats.myreactions.adapter.NavDrawerListAdapter;
 import com.denyszaiats.myreactions.model.NavDrawerItem;
 
@@ -24,10 +27,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 @SuppressLint("NewApi")
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -46,6 +50,7 @@ public class MainActivity extends Activity {
 
 	private ArrayList<com.denyszaiats.myreactions.model.NavDrawerItem> navDrawerItems;
 	private com.denyszaiats.myreactions.adapter.NavDrawerListAdapter adapter;
+	private GoogleApiClient mGoogleApiClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,7 @@ public class MainActivity extends Activity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// What's hot, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
-		
+
 
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -140,21 +145,58 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
- 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // toggle nav drawer on selecting action bar app icon/title
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle action bar actions click
-        switch (item.getItemId()) {
-        case R.id.action_settings:
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-    }
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// toggle nav drawer on selecting action bar app icon/title
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		// Handle action bar actions click
+		switch (item.getItemId()) {
+			case R.id.action_clean:
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+				builder.setTitle("Confirmation");
+				builder.setMessage("Do You really want to delete all results?");
+
+				builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						SharedPreferences.Editor editor = prefs.edit();
+						editor.clear();
+						editor.putBoolean("IS_LOGGED_IN",false);
+						editor.commit();
+						dialog.dismiss();
+						Intent i = new Intent(MainActivity.this, StartActivity.class);
+						startActivity(i);
+					}
+
+				});
+
+				builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+				AlertDialog alert = builder.create();
+				alert.show();
+
+				return true;
+			case R.id.action_logout:
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.putBoolean("IS_LOGGED_IN",false);
+				editor.commit();
+				Intent i = new Intent(MainActivity.this, StartActivity.class);
+				startActivity(i);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
  
     /***
      * Called when invalidateOptionsMenu() is triggered
@@ -163,7 +205,7 @@ public class MainActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_logout).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

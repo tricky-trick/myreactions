@@ -10,7 +10,8 @@
     <string name="title_activity_tasks">TasksActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="clean_results">Clean all results</string>
+    <string name="logout_menu">Logout</string>
     <string name="title_activity_task">TaskActivity</string>
     <string name="title_activity_main">MainActivity</string>
     

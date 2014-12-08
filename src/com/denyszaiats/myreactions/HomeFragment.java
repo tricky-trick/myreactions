@@ -3,6 +3,7 @@ package com.denyszaiats.myreactions;
 import java.sql.Date;
 import java.util.*;
 
+import android.content.Intent;
 import android.widget.*;
 import com.fima.chartview.ChartView;
 import com.fima.chartview.LinearSeries;
@@ -31,7 +32,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private Spinner dropMenuHand;
     private Spinner dropMenuFinger;
     private Button buttonShowResults;
-    private ScrollView resultsScrollView;
+    private Button buttonShowChartAllResults;
+    private RelativeLayout resultsScrollView;
     private ProgressBar progressBar;
 
     private SharedPreferences prefs;
@@ -65,11 +67,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         dropMenuHand = (Spinner) rootView.findViewById(R.id.dropMenuHand);
         dropMenuFinger = (Spinner) rootView.findViewById(R.id.dropMenuFinger);
         buttonShowResults = (Button) rootView.findViewById(R.id.buttonShowResults);
+        buttonShowChartAllResults = (Button) rootView.findViewById(R.id.buttonShowAllResults);
         textSummaryClicks = (TextView) rootView.findViewById(R.id.textSummaryClicksByHandAndFinger);
         textMaxClicks = (TextView) rootView.findViewById(R.id.textMaxClicksByHandAndFinger);
         textMinClicks = (TextView) rootView.findViewById(R.id.textMinClicksByHandAndFinger);
         textTitleResults = (TextView) rootView.findViewById(R.id.textTitleForStatisticsInScrollView);
-        resultsScrollView = (ScrollView) rootView.findViewById(R.id.scrollViewHome);
+        resultsScrollView = (RelativeLayout) rootView.findViewById(R.id.scrollViewHome);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressDialog);
 
         String[] fingers = new String[]{"Thumb", "Index", "Middle", "Ring", "Pinky"};
@@ -144,6 +147,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                     finger = Constants.PINKY_FINGER;
                 }
 
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("FILTER",hand + "-" + finger);
+                editor.commit();
+
                 resultsScrollView.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
                 resultsMaxClicks = getMaxValueOfClicks().toString();
@@ -161,46 +168,32 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 //http://javapapers.com/android/android-chart-using-androidplot/
 
                 // Find the chart view
-                ChartView chartViewSummaryResults = (ChartView) rootView.findViewById(R.id.chartViewSummaryResults);
                 ChartView chartViewMaxResult = (ChartView) rootView.findViewById(R.id.chartViewMaxResults);
 
-                chartViewSummaryResults.setVisibility(View.VISIBLE);
+                //chartViewSummaryResults.setVisibility(View.VISIBLE);
                 chartViewMaxResult.setVisibility(View.VISIBLE);
 
                 // Create the data points
-                series = new LinearSeries();
                 seriesSum = new LinearSeries();
 
                 int seconds = setSeriesForMaxResults();
-                setSeriesForAllResults();
 
                 //int amountOfDifferentResults = getAmountsOfDifferentResults();
 
+                ChartBuilder.buildChart(seriesSum, chartViewMaxResult, 2, seconds - 2, new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL), new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
+            }
+        });
 
-                ChartBuilder.buildChart(series, chartViewSummaryResults, 3, Integer.parseInt(resultsAmountOfTests) - 2, new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL), new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
-
-                ChartBuilder.buildChart(seriesSum, chartViewMaxResult, 2, seconds - 2, new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.VERTICAL), new ValueLabelAdapterGraphMax(context, ValueLabelAdapterGraphMax.LabelOrientation.HORIZONTAL));
+        buttonShowChartAllResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context,
+                        ChartFragment.class);
+                startActivity(i);
             }
         });
 
         return rootView;
-    }
-
-    private void setSeriesForAllResults() {
-        String filter = hand + "-" + finger;
-        Map<String, ?> allEntries = prefs.getAll();
-        int i = 0;
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            if (entry.getKey().startsWith(filter)) {
-                double date = Double.parseDouble(entry.getKey().split("-")[2]);
-                double amount = entry.getValue().toString().split(",").length;
-                i++;
-                series.addPoint(new LinearSeries.LinearPoint(date, amount));
-            }
-        }
-        if (i == 0) {
-            series.addPoint(new LinearSeries.LinearPoint(0, 0));
-        }
     }
 
     private int setSeriesForMaxResults() {

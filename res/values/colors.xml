@@ -1,6 +1,7 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
+    <color name="black">#000000</color>
     <color name="clue_theme">#BED55F</color>
     <color name="white">#FFFFFF</color>
     <color name="list_item_title">#fff</color>
@@ -12,4 +13,6 @@
     <color name="blue">#00BFFF</color>
     <color name="lime">#00FF00</color>
     <color name="red">#FF5454</color>
+    <color name="silver">#C0C0C0</color>
+
 </resources>
