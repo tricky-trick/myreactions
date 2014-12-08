@@ -82,10 +82,7 @@ public class ChartFragment extends Activity {
         if (mChart == null) {
             initChart();
             setSeriesForAllResults();
-            //mChart = ChartFactory.getCubeLineChartView(this, mDataset, mRenderer, 0.5f);
-            //mChart = ChartFactory.getBarChartView(this, mDataset, mRenderer, BarChart.Type.DEFAULT);
-            //mChart = ChartFactory.getLineChartView(this, mDataset, mRenderer);
-            mChart = ChartFactory.getTimeChartView(this, mDataset, mRenderer, "dd MMM, yy\nHH:mm");
+            mChart = ChartFactory.getTimeChartView(this, mDataset, mRenderer, "dd MMM yy\nHH:mm");
             mChart.setClickable(true);
             mChart.setBackgroundColor(getResources().getColor(R.color.white));
             mChart.setZoomRate(0.5f);
