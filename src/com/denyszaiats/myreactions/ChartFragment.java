@@ -42,10 +42,10 @@ public class ChartFragment extends Activity {
     private SharedPreferences prefs;
 
     private void initChart() {
-        mCurrentSeries = new XYSeries("Summary results");
+        mCurrentSeries = new XYSeries("Click to see more details");
         mDataset.addSeries(mCurrentSeries);
         mCurrentRenderer = new XYSeriesRenderer();
-        mCurrentRenderer.setLineWidth(5);
+        mCurrentRenderer.setLineWidth(8);
         //mCurrentRenderer.setDisplayBoundingPoints(true);
         //mCurrentRenderer.setPointStrokeWidth(15);
         mCurrentRenderer.setFillPoints(true);
@@ -60,7 +60,7 @@ public class ChartFragment extends Activity {
         mRenderer.setExternalZoomEnabled(true);
         mRenderer.setShowGrid(true);
         mRenderer.setMarginsColor(getResources().getColor(R.color.white));
-        mRenderer.setPointSize(10);
+        mRenderer.setPointSize(15);
         mRenderer.setYAxisAlign(Paint.Align.LEFT, 0);
         mRenderer.setYLabelsAlign(Paint.Align.RIGHT, 0);
         mRenderer.setMargins(new int[] { 20, 80, 100, 10 });
@@ -104,7 +104,7 @@ public class ChartFragment extends Activity {
                     date.setTime(Long.parseLong(s));
                     String formattedDate = dateFormat.format(date);
                     Toast.makeText(
-                            ChartFragment.this, String.format("Date: %s\nClicks: %s", formattedDate, String.valueOf(seriesSelection.getValue()).replace(".0","")), Toast.LENGTH_SHORT).show();
+                            ChartFragment.this, String.format("Date: %s\nClicks: %s", formattedDate, String.valueOf(seriesSelection.getValue()).replace(".0","")), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -117,7 +117,6 @@ public class ChartFragment extends Activity {
             @Override
             public void onClick(View v) {
                 mChart.zoomOut();
-
             }
         });
 
@@ -125,7 +124,6 @@ public class ChartFragment extends Activity {
             @Override
             public void onClick(View v) {
                 mChart.zoomIn();
-
             }
         });
 

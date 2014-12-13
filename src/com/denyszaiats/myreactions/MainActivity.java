@@ -225,7 +225,7 @@ public class MainActivity extends Activity{
 			fragment = new FastClickerFragment();
 			break;
 		case 2:
-			fragment = new PhotosFragment();
+			fragment = new ChooseColorFragment();
 			break;
 		case 3:
 			fragment = new CommunityFragment();

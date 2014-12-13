@@ -41,7 +41,9 @@
         <activity android:name=".ChartFragment"
                   android:theme="@android:style/Theme.Dialog"/>
     </application>
-
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
+    <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />

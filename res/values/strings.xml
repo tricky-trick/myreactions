@@ -22,7 +22,7 @@
     <string-array name="nav_drawer_items">
         <item >Home</item>
         <item >Fast clicker</item>
-        <item >Photos</item>
+        <item >Choose color</item>
         <item >Communities</item>
         <item >Pages</item>
         <item >What\'s Hot</item>
