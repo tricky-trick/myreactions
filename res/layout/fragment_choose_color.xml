@@ -10,8 +10,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp"
-            android:padding="10dp"
+            android:layout_marginBottom="2dp"
+            android:padding="5dp"
             android:text="You need to choose figure with correct color as fast as You are able to recognize it."
             android:textSize="16dp"
             android:gravity="center"
@@ -21,6 +21,21 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:textStyle="bold"/>
+        <TextView
+                android:id="@+id/textLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTitleChooseColor"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:shadowColor="#000000"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:visibility="invisible"/>
 
     <Button
             android:id="@+id/startButtonChooseColor"
@@ -42,7 +57,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:visibility="invisible">
 
                 <TextView
@@ -51,7 +66,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:textColor="@color/white"
-                        android:textSize="50dp"/>
+                        android:shadowColor="#000000"
+                        android:shadowRadius="4"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textStyle="bold"
+                        android:textSize="30dp"/>
 
                 <TextView
                         android:id="@+id/textScoreColor"
@@ -59,13 +79,18 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:textColor="@color/white"
-                        android:textSize="50dp"/>
+                        android:shadowColor="#000000"
+                        android:shadowRadius="4"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textStyle="bold"
+                        android:textSize="30dp"/>
 
         </RelativeLayout>
     <RelativeLayout
             android:id="@+id/areaColorAppear"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/startButtonChooseColor" android:layout_marginTop="10dp">
 
     </RelativeLayout>
@@ -102,5 +127,20 @@
             android:text="@string/try_again"
             android:textColor="@color/white"
             android:visibility="invisible"/>
+
+        <Button
+                android:id="@+id/nextLevelButtonChooseColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shapebutton_selector"
+                android:text="Next level"
+                android:textColor="@color/white"
+                android:visibility="invisible"/>
 
 </RelativeLayout>
