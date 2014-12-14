@@ -13,6 +13,6 @@
     
     <stroke
         android:width="4dp"
-        android:color="@color/white" />
+        android:color="@color/silver" />
 
 </shape>

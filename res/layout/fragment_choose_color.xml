@@ -1,31 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:chartview="http://schemas.android.com/apk/res/com.denyszaiats.myreactions"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
-    <TextView
-            android:id="@+id/txtTitleChooseColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="2dp"
-            android:padding="5dp"
-            android:text="You need to choose figure with correct color as fast as You are able to recognize it."
-            android:textSize="16dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:shadowColor="#000000"
-            android:shadowRadius="4"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:textStyle="bold"/>
         <TextView
                 android:id="@+id/textLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtTitleChooseColor"
                 android:textColor="@color/white"
                 android:textSize="30dp"
                 android:shadowColor="#000000"
@@ -41,23 +23,27 @@
             android:id="@+id/startButtonChooseColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTitleChooseColor"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/shapebutton_selector"
+            android:textSize="30dp"
             android:text="@string/start"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:shadowColor="#000000"
+            android:shadowRadius="4"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:textStyle="bold"/>
         <RelativeLayout
                 android:id="@+id/resultsArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtTitleChooseColor"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="30dp"
                 android:visibility="invisible">
 
                 <TextView
@@ -91,7 +77,21 @@
             android:id="@+id/areaColorAppear"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:layout_below="@+id/startButtonChooseColor" android:layout_marginTop="10dp">
+            android:layout_below="@+id/startButtonChooseColor" android:layout_marginTop="5dp">
+
+            <TextView
+                    android:id="@+id/textColorHighscores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="4"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:textStyle="bold"
+                    android:layout_marginRight="30dp"
+                    android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/areaColorAppear"
             android:background="@color/white"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:gravity="center">
 
         <RelativeLayout
@@ -113,6 +113,8 @@
 
     </RelativeLayout>
 
+
+
     <Button
             android:id="@+id/tryAgainButtonChooseColor"
             android:layout_width="match_parent"
@@ -121,11 +123,17 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="150dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/shapebutton_selector"
+            android:textSize="30dp"
             android:text="@string/try_again"
             android:textColor="@color/white"
+            android:shadowColor="#000000"
+            android:shadowRadius="4"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:textStyle="bold"
             android:visibility="invisible"/>
 
         <Button
@@ -136,11 +144,17 @@
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="150dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/shapebutton_selector"
+                android:textSize="30dp"
                 android:text="Next level"
                 android:textColor="@color/white"
+                android:shadowColor="#000000"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"
                 android:visibility="invisible"/>
 
 </RelativeLayout>

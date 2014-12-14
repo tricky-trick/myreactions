@@ -33,10 +33,11 @@ public class ChooseColorFragment extends Fragment {
     private RelativeLayout areaView;
     private RelativeLayout areaViewAppear;
     private RelativeLayout areaColorAppear;
-    private RelativeLayout resultsArea;
+    private RelativeLayout scoreArea;
     private TextView textColorTimer;
     private TextView textColorScore;
     private TextView textLevel;
+    private TextView textHighScore;
     private LinkedList<Integer> usedCoordinates;
     private LinkedList<DrawRect> listCreatedViews;
     private int rectSize;
@@ -45,12 +46,13 @@ public class ChooseColorFragment extends Fragment {
     private float rectY;
     private HashMap<Integer, Integer> colorMap;
     private Integer nominativeColor;
-    private int results;
+    private int score;
+    private  int highscore;
     private int genIndexColorRect;
     private int level = 1;
     private int timeAppearing = 4;
     private int countShapes = 2;
-    private int size = 100;
+    private int size = 105;
     private LinkedList<Integer> listColor;
     private HashMap<Integer, String> mapCoord;
     private SharedPreferences.Editor editor;
@@ -71,10 +73,11 @@ public class ChooseColorFragment extends Fragment {
         buttonStart = (Button) rootView.findViewById(R.id.startButtonChooseColor);
         nextLevelButton = (Button) rootView.findViewById(R.id.nextLevelButtonChooseColor);
         tryAgainButton = (Button) rootView.findViewById(R.id.tryAgainButtonChooseColor);
-        resultsArea = (RelativeLayout) rootView.findViewById(R.id.resultsArea);
+        scoreArea = (RelativeLayout) rootView.findViewById(R.id.resultsArea);
         textColorTimer = (TextView) rootView.findViewById(R.id.textTimerColor);
         textColorScore = (TextView) rootView.findViewById(R.id.textScoreColor);
         textLevel = (TextView) rootView.findViewById(R.id.textLevel);
+        textHighScore = (TextView) rootView.findViewById(R.id.textColorHighscores);
         colorMap = new HashMap<Integer, Integer>();
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +89,7 @@ public class ChooseColorFragment extends Fragment {
         tryAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                results = 0;
+                score = 0;
                 level = 1;
                 timeAppearing = 4;
                 countShapes = 2;
@@ -102,19 +105,43 @@ public class ChooseColorFragment extends Fragment {
             }
         });
 
+        highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
+        textHighScore.setText("High score: " + String.valueOf(highscore));
+
+        boolean isFinished = prefs.getBoolean(Constants.COLOR_IS_FINISHED, true);
+        if (!isFinished) {
+            int tempScore = prefs.getInt(Constants.COLOR_TEMP_SCORE, 0);
+            int tempLevel = prefs.getInt(Constants.COLOR_TEMP_LEVEL, 0);
+            tryAgainButton.setVisibility(View.INVISIBLE);
+            nextLevelButton.setVisibility(View.VISIBLE);
+            buttonStart.setVisibility(View.INVISIBLE);
+            scoreArea.setVisibility(View.VISIBLE);
+            areaColorAppear.setVisibility(View.VISIBLE);
+            textLevel.setVisibility(View.VISIBLE);
+            textColorScore.setVisibility(View.VISIBLE);
+            textColorTimer.setVisibility(View.VISIBLE);
+            textColorTimer.setText("Finish!");
+            textLevel.setText("Level " + String.valueOf(tempLevel));
+            textColorScore.setText("Score: " + String.valueOf(tempScore));
+            level = tempLevel;
+            score = tempScore;
+        }
         return rootView;
     }
 
     private void runGame(){
         removeView();
-        editor.putBoolean("IS_CLICKABLE", true);
+        editor.putBoolean(Constants.COLOR_IS_CLICKABLE, true);
         editor.commit();
         if(timeAppearing<=30) {
             timeAppearing = level + timeAppearing;
         }
         countShapes = level + countShapes;
-        if(size>=25) {
+        if((size - level * 5)>=30) {
             size = size - level * 5;
+        }
+        else {
+            size = 30;
         }
         colorMap.put(1, Color.BLACK);
         colorMap.put(2, Color.BLUE);
@@ -124,11 +151,11 @@ public class ChooseColorFragment extends Fragment {
         colorMap.put(6, Color.MAGENTA);
         colorMap.put(7, Color.CYAN);
         colorMap.put(8, Color.GRAY);
-        textColorScore.setText("Scores: " + String.valueOf(results));
+        textColorScore.setText("Score: " + String.valueOf(score));
         tryAgainButton.setVisibility(View.INVISIBLE);
         nextLevelButton.setVisibility(View.INVISIBLE);
         buttonStart.setVisibility(View.INVISIBLE);
-        resultsArea.setVisibility(View.VISIBLE);
+        scoreArea.setVisibility(View.VISIBLE);
         areaColorAppear.setVisibility(View.VISIBLE);
         textLevel.setVisibility(View.VISIBLE);
         textLevel.setText("Level " + String.valueOf(level));
@@ -144,24 +171,37 @@ public class ChooseColorFragment extends Fragment {
             public void onFinish() {
                 textColorTimer.setText("Finish!");
                 //areaColorAppear.setVisibility(View.INVISIBLE);
-                editor.putBoolean("IS_CLICKABLE",false);
-                editor.commit();
+                editor.putBoolean(Constants.COLOR_IS_CLICKABLE,false);
 
-                if(results >= 10*level){
+                if(score >= 10*level){
                     nextLevelButton.setVisibility(View.VISIBLE);
                     level++;
                     timeAppearing = 4;
                     countShapes = 2;
                     size = 100;
+                    editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
                 }
                 else {
                     tryAgainButton.setVisibility(View.VISIBLE);
+                    highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
+                    if(score > highscore){
+                        highscore = score;
+                    }
+                    textHighScore.setText("High score: " + String.valueOf(highscore));
+                    editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
+                    editor.putBoolean(Constants.COLOR_IS_FINISHED,true);
                     level = 1;
                     timeAppearing = 4;
                     countShapes = 2;
-                    results = 0;
+                    score = 0;
                     size = 100;
+                    AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
+                    animation.setDuration(500);
+                    areaViewAppear.startAnimation(animation);
                 }
+                editor.putInt(Constants.COLOR_TEMP_LEVEL, level);
+                editor.putInt(Constants.COLOR_TEMP_SCORE, score);
+                editor.commit();
             }
         };
         cT.start();
@@ -208,7 +248,7 @@ public class ChooseColorFragment extends Fragment {
             drawRect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean isClickable = prefs.getBoolean("IS_CLICKABLE", true);
+                    boolean isClickable = prefs.getBoolean(Constants.COLOR_IS_CLICKABLE, true);
                     if (isClickable)
                         calculateResults(v);
                 }
@@ -234,9 +274,9 @@ public class ChooseColorFragment extends Fragment {
     private void calculateResults(View v){
         ColorDrawable color = (ColorDrawable) v.getBackground();
         if (color.getColor() == colorMap.get(nominativeColor)){
-            results++;
+            score++;
         }
-        textColorScore.setText("Scores: " + String.valueOf(results));
+        textColorScore.setText("Score: " + String.valueOf(score));
         initShapes();
         System.gc();
     }

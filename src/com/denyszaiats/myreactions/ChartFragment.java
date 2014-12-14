@@ -52,7 +52,7 @@ public class ChartFragment extends Activity {
         mCurrentRenderer.setPointStyle(PointStyle.CIRCLE);
         mCurrentRenderer.setColor(getResources().getColor(R.color.blue));
         mRenderer.addSeriesRenderer(mCurrentRenderer);
-        mRenderer.setLabelsTextSize(30);
+        mRenderer.setLabelsTextSize(20);
         mRenderer.setLegendTextSize(30);
         mRenderer.setAxesColor(getResources().getColor(R.color.black));
         mRenderer.setGridColor(getResources().getColor(R.color.silver));

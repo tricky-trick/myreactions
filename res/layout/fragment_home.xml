@@ -133,6 +133,12 @@
                     android:layout_below="@+id/dropMenuFinger"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/shapebutton_selector"
+                    android:textColor="@color/white"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="4"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:textStyle="bold"
                     android:text="Show results"/>
 
             <ProgressBar
@@ -249,7 +255,13 @@
                         android:layout_below="@+id/textTitleOfChartSummary"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/shapebutton_selector"
-                        android:text="Show chart for all results"/>
+                        android:text="Show chart for all results"
+                        android:textColor="@color/white"
+                        android:shadowColor="#000000"
+                        android:shadowRadius="4"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textStyle="bold"/>
 
 
             </RelativeLayout>

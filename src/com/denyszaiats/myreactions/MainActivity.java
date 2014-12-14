@@ -77,10 +77,11 @@ public class MainActivity extends Activity{
 		// adding nav drawer items to array
 		// Home
 		navDrawerItems.add(new NavDrawerItem("Welcome, " + username, navMenuIcons.getResourceId(0, -1)));
-		// Find People
+		// Fast Clicker
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+		// Choose color
+		int highscore = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, String.valueOf(highscore)));
 		// Communities, Will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
 		// Pages
