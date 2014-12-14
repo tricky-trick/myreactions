@@ -202,6 +202,7 @@ public class ChooseColorFragment extends Fragment {
                 editor.putInt(Constants.COLOR_TEMP_LEVEL, level);
                 editor.putInt(Constants.COLOR_TEMP_SCORE, score);
                 editor.commit();
+
             }
         };
         cT.start();

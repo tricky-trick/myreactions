@@ -13,7 +13,7 @@
     <string name="clean_results">Clean all results</string>
     <string name="logout_menu">Logout</string>
     <string name="title_activity_task">TaskActivity</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">My Reactions</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
