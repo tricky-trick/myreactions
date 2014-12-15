@@ -39,6 +39,8 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="10dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
             android:text="@string/btn_logout_from_google"
             android:textColor="@color/white"
             android:background="@drawable/common_signin_btn_text_dark"

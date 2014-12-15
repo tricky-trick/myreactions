@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,14 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.denyszaiats.myreactions.drawer.DrawCircle;
+import com.denyszaiats.myreactions.drawer.DrawLine;
 import com.denyszaiats.myreactions.drawer.DrawRect;
 import com.denyszaiats.myreactions.drawer.DrawView;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Random;
 
 public class ChooseColorFragment extends Fragment {
@@ -38,8 +42,10 @@ public class ChooseColorFragment extends Fragment {
     private TextView textColorScore;
     private TextView textLevel;
     private TextView textHighScore;
+    private ImageView buttonRefresh;
     private LinkedList<Integer> usedCoordinates;
     private LinkedList<DrawRect> listCreatedViews;
+    private LinkedList<DrawLine> listCreatedLines;
     private int rectSize;
     private SharedPreferences prefs;
     private float rectX;
@@ -77,6 +83,7 @@ public class ChooseColorFragment extends Fragment {
         textColorTimer = (TextView) rootView.findViewById(R.id.textTimerColor);
         textColorScore = (TextView) rootView.findViewById(R.id.textScoreColor);
         textLevel = (TextView) rootView.findViewById(R.id.textLevel);
+        buttonRefresh = (ImageView) rootView.findViewById(R.id.buttomRefresh);
         textHighScore = (TextView) rootView.findViewById(R.id.textColorHighscores);
         colorMap = new HashMap<Integer, Integer>();
         buttonStart.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +108,18 @@ public class ChooseColorFragment extends Fragment {
         nextLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                runGame();
+            }
+        });
+
+        buttonRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                level = 1;
+                size = 105;
+                score = 0;
+                timeAppearing = 4;
+                countShapes = 2;
                 runGame();
             }
         });
@@ -130,6 +149,7 @@ public class ChooseColorFragment extends Fragment {
     }
 
     private void runGame(){
+        //setPaddingArea();
         removeView();
         editor.putBoolean(Constants.COLOR_IS_CLICKABLE, true);
         editor.commit();
@@ -158,6 +178,8 @@ public class ChooseColorFragment extends Fragment {
         scoreArea.setVisibility(View.VISIBLE);
         areaColorAppear.setVisibility(View.VISIBLE);
         textLevel.setVisibility(View.VISIBLE);
+        textHighScore.setVisibility(View.VISIBLE);
+        buttonRefresh.setVisibility(View.VISIBLE);
         textLevel.setText("Level " + String.valueOf(level));
         initShapes();
 
@@ -182,6 +204,7 @@ public class ChooseColorFragment extends Fragment {
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
                 }
                 else {
+                    buttonRefresh.setVisibility(View.INVISIBLE);
                     tryAgainButton.setVisibility(View.VISIBLE);
                     highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
                     if(score > highscore){
@@ -195,10 +218,10 @@ public class ChooseColorFragment extends Fragment {
                     countShapes = 2;
                     score = 0;
                     size = 100;
-                    AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
-                    animation.setDuration(500);
-                    areaViewAppear.startAnimation(animation);
                 }
+                AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
+                animation.setDuration(500);
+                areaViewAppear.startAnimation(animation);
                 editor.putInt(Constants.COLOR_TEMP_LEVEL, level);
                 editor.putInt(Constants.COLOR_TEMP_SCORE, score);
                 editor.commit();
@@ -293,6 +316,24 @@ public class ChooseColorFragment extends Fragment {
         drawShapes();
     }
 
+    private void setPaddingArea(){
+        int horisontalPadding;
+        int verticalPadding;
+        if(areaViewAppear.getWidth() % pxFromDp(size) != 0) {
+           horisontalPadding = (int) (Float.parseFloat(String.valueOf("0." + String.valueOf(areaViewAppear.getWidth() % pxFromDp(size)))) * areaViewAppear.getWidth()) / 2;
+        }
+        else {
+            horisontalPadding = pxFromDp(5);
+        }
+        if(areaViewAppear.getHeight() % pxFromDp(size) != 0) {
+            verticalPadding = (int) (Float.parseFloat(String.valueOf("0." + String.valueOf(areaViewAppear.getHeight() % pxFromDp(size)))) * areaViewAppear.getHeight()) / 2;
+        }
+        else {
+            verticalPadding = pxFromDp(5);
+        }
+        areaViewAppear.setPadding(horisontalPadding, verticalPadding, horisontalPadding, verticalPadding);
+    }
+
     private void generateMapCoordinates(){
         //Random random = new Random();
         int generatedSize = pxFromDp(size);//generateRandomInteger(150, 200, random);
@@ -310,6 +351,39 @@ public class ChooseColorFragment extends Fragment {
                 }
             }
         }
+
+
+/*        listCreatedLines = new LinkedList<DrawLine>();
+        for(Map.Entry<Integer, String> map: mapCoord.entrySet()){
+            if(map.getValue().toString().startsWith("0,")){
+                DrawLine lineView = new DrawLine(context);
+                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
+                int point = Integer.parseInt(map.getValue().split(",")[1]);
+                lineView.setStartPoint(new Point(0, point));
+                lineView.setEndPoint(new Point(areaViewAppear.getWidth(), point));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        areaViewAppear.getWidth(), 4
+                );
+                lineView.setLayoutParams(params);
+                listCreatedLines.add(lineView);
+            }
+            if(map.getValue().toString().endsWith(",0")){
+                DrawLine lineView = new DrawLine(context);
+                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
+                int point = Integer.parseInt(map.getValue().split(",")[0]);
+                lineView.setStartPoint(new Point(point, 0));
+                lineView.setEndPoint(new Point(point, areaViewAppear.getHeight()));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        4, areaViewAppear.getHeight()
+                );
+                lineView.setLayoutParams(params);
+                listCreatedLines.add(lineView);
+            }
+        }
+
+        for(DrawView line: listCreatedLines){
+            areaView.addView(line);
+        }*/
     }
 
     private void generateShapesParameters(){

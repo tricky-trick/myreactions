@@ -9,13 +9,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
                 android:shadowColor="#000000"
                 android:shadowRadius="4"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:textStyle="bold"
-                android:layout_centerHorizontal="true"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:visibility="invisible"/>
+
+        <TextView
+                android:id="@+id/textColorHighscores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:shadowColor="#000000"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:visibility="invisible"/>
 
@@ -77,21 +94,16 @@
             android:id="@+id/areaColorAppear"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
+            android:layout_margin="5dp"
             android:layout_below="@+id/startButtonChooseColor" android:layout_marginTop="5dp">
-
-            <TextView
-                    android:id="@+id/textColorHighscores"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="4"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:textStyle="bold"
-                    android:layout_marginRight="30dp"
-                    android:layout_alignParentRight="true"/>
+<ImageView
+        android:id="@+id/buttomRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/refresh"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="30dp"
+        android:visibility="invisible"/>
 
     </RelativeLayout>
 
@@ -107,8 +119,7 @@
         <RelativeLayout
                 android:id="@+id/areaChooseColorAppear"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                android:layout_height="match_parent">
         </RelativeLayout>
 
     </RelativeLayout>
