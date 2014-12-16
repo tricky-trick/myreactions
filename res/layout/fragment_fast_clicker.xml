@@ -211,7 +211,7 @@
                 android:visibility="invisible">
 
 
-            <com.fima.chartview.ChartView
+            <com.denyszaiats.myreactions.ChartView.ChartView
                     android:id="@+id/chartViewLatestResults"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"

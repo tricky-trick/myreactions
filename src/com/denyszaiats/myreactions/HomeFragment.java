@@ -5,8 +5,8 @@ import java.util.*;
 
 import android.content.Intent;
 import android.widget.*;
-import com.fima.chartview.ChartView;
-import com.fima.chartview.LinearSeries;
+import com.denyszaiats.myreactions.ChartView.ChartView;
+import com.denyszaiats.myreactions.ChartView.LinearSeries;
 import com.squareup.picasso.Picasso;
 
 import android.app.Fragment;

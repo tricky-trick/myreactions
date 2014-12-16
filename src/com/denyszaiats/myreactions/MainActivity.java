@@ -82,8 +82,8 @@ public class MainActivity extends Activity{
 		// Choose color
 		int highscore = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, String.valueOf(highscore)));
-		// Communities, Will add a counter here
-//		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
+		// Remember color
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
 //		// Pages
 //		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 //		// What's hot, We  will add a counter here
@@ -229,7 +229,7 @@ public class MainActivity extends Activity{
 			fragment = new ChooseColorFragment();
 			break;
 		case 3:
-			fragment = new CommunityFragment();
+			fragment = new RememberColorFragment();
 			break;
 		case 4:
 			fragment = new PagesFragment();

@@ -15,5 +15,6 @@ public class Constants {
 	public static final String COLOR_TEMP_LEVEL = "COLOR_TEMP_LEVEL";
 	public static final String COLOR_TEMP_SCORE = "COLOR_TEMP_SCORE";
 	public static final String COLOR_IS_FINISHED= "COLOR_IS_FINISHED";
+	public static final String COLOR_BAD_RESULTS= "COLOR_BAD_RESULTS";
 
 }

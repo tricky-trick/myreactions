@@ -5,10 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.fima.chartview.LabelAdapter;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.denyszaiats.myreactions.ChartView.LabelAdapter;
 
 public class ValueLabelAdapter extends LabelAdapter {
     public enum LabelOrientation {

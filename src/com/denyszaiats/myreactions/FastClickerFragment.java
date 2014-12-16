@@ -15,8 +15,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.ScaleAnimation;
 import android.widget.*;
-import com.fima.chartview.ChartView;
-import com.fima.chartview.LinearSeries;
+import com.denyszaiats.myreactions.ChartView.ChartView;
+import com.denyszaiats.myreactions.ChartView.LinearSeries;
 
 public class FastClickerFragment extends Fragment {
 

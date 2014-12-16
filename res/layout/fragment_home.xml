@@ -213,7 +213,7 @@
                         android:text="Graph of clicking frequency for Your best result"/>
 
 
-                <com.fima.chartview.ChartView
+                <com.denyszaiats.myreactions.ChartView.ChartView
                         android:id="@+id/chartViewMaxResults"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"

@@ -24,7 +24,6 @@ import com.denyszaiats.myreactions.drawer.DrawView;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Random;
 
 public class ChooseColorFragment extends Fragment {
@@ -139,7 +138,8 @@ public class ChooseColorFragment extends Fragment {
             textLevel.setVisibility(View.VISIBLE);
             textColorScore.setVisibility(View.VISIBLE);
             textColorTimer.setVisibility(View.VISIBLE);
-            textColorTimer.setText("Finish!");
+            textHighScore.setVisibility(View.VISIBLE);
+            textColorTimer.setText("Level done!");
             textLevel.setText("Level " + String.valueOf(tempLevel));
             textColorScore.setText("Score: " + String.valueOf(tempScore));
             level = tempLevel;
@@ -191,7 +191,6 @@ public class ChooseColorFragment extends Fragment {
             }
 
             public void onFinish() {
-                textColorTimer.setText("Finish!");
                 //areaColorAppear.setVisibility(View.INVISIBLE);
                 editor.putBoolean(Constants.COLOR_IS_CLICKABLE,false);
 
@@ -202,8 +201,10 @@ public class ChooseColorFragment extends Fragment {
                     countShapes = 2;
                     size = 100;
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
+                    textColorTimer.setText("Level done!");
                 }
                 else {
+                    textColorTimer.setText("Finish!");
                     buttonRefresh.setVisibility(View.INVISIBLE);
                     tryAgainButton.setVisibility(View.VISIBLE);
                     highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);

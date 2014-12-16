@@ -1,9 +1,8 @@
 package com.denyszaiats.myreactions;
 
-
-import com.fima.chartview.ChartView;
-import com.fima.chartview.LabelAdapter;
-import com.fima.chartview.LinearSeries;
+import com.denyszaiats.myreactions.ChartView.ChartView;
+import com.denyszaiats.myreactions.ChartView.LabelAdapter;
+import com.denyszaiats.myreactions.ChartView.LinearSeries;
 
 public class ChartBuilder {
 
