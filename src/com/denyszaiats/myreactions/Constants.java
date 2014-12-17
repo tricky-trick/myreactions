@@ -15,6 +15,10 @@ public class Constants {
 	public static final String COLOR_TEMP_LEVEL = "COLOR_TEMP_LEVEL";
 	public static final String COLOR_TEMP_SCORE = "COLOR_TEMP_SCORE";
 	public static final String COLOR_IS_FINISHED= "COLOR_IS_FINISHED";
-	public static final String COLOR_BAD_RESULTS= "COLOR_BAD_RESULTS";
+	public static final String REM_COLOR_IS_CLICKABLE = "REM_COLOR_IS_CLICKABLE";
+	public static final String REM_COLOR_HIGHSCORE = "REM_COLOR_HIGHSCORE";
+	public static final String REM_COLOR_TEMP_LEVEL = "REM_COLOR_TEMP_LEVEL";
+	public static final String REM_COLOR_TEMP_SCORE = "REM_COLOR_TEMP_SCORE";
+	public static final String REM_COLOR_IS_FINISHED= "REM_COLOR_IS_FINISHED";
 
 }

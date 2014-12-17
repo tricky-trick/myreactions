@@ -1,7 +1,10 @@
 package com.denyszaiats.myreactions;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -61,6 +64,7 @@ public class ChooseColorFragment extends Fragment {
     private LinkedList<Integer> listColor;
     private HashMap<Integer, String> mapCoord;
     private SharedPreferences.Editor editor;
+    private CountDownTimer cT;
 
     public ChooseColorFragment(){}
 
@@ -114,12 +118,35 @@ public class ChooseColorFragment extends Fragment {
         buttonRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                level = 1;
-                size = 105;
-                score = 0;
-                timeAppearing = 4;
-                countShapes = 2;
-                runGame();
+                cT.cancel();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("Confirmation");
+                builder.setMessage("Do You really want to start new game?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        level = 1;
+                        size = 105;
+                        score = 0;
+                        timeAppearing = 4;
+                        countShapes = 2;
+                        runGame();
+                    }
+
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
@@ -183,7 +210,7 @@ public class ChooseColorFragment extends Fragment {
         textLevel.setText("Level " + String.valueOf(level));
         initShapes();
 
-        CountDownTimer cT = new CountDownTimer(30000, 1000) {
+        cT = new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int va = (int) ((millisUntilFinished % 60000) / 1000);
@@ -284,7 +311,7 @@ public class ChooseColorFragment extends Fragment {
 
         drawCircleNominative= new DrawCircle(context);
         drawCircleNominative.setLayoutParams(new RelativeLayout.LayoutParams(pxFromDp(40), pxFromDp(40)));
-        drawCircleNominative.setRadius(pxFromDp(25));
+        drawCircleNominative.setSideSize(pxFromDp(40));
         drawCircleNominative.setX(areaColorAppear.getWidth()/2 - pxFromDp(25));
         drawCircleNominative.setY(0);
         drawCircleNominative.setBackgroundColor(colorMap.get(nominativeColor));
