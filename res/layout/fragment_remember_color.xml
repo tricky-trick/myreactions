@@ -103,15 +103,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/refresh"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:visibility="invisible"/>
             <Button
                     android:id="@+id/readyButtonRemColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="120dp"
-                    android:layout_marginRight="120dp"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginRight="130dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shapebutton_selector"
                     android:textSize="20dp"
@@ -124,6 +124,39 @@
                     android:textStyle="bold"
                     android:visibility="invisible"/>
 
+            <RelativeLayout
+                    android:id="@+id/areaLifeRemColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:visibility="invisible"
+                    android:paddingBottom="5dp">
+
+                    <ImageView
+                            android:id="@+id/iconLifeRemColor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/heart"/>
+
+                    <TextView
+                            android:id="@+id/textLifeRemColor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:textColor="@color/white"
+                            android:layout_marginRight="30dp"
+                            android:shadowColor="#000000"
+                            android:shadowRadius="4"
+                            android:shadowDx="2"
+                            android:shadowDy="2"
+                            android:textStyle="bold"
+                            android:textSize="30dp"/>
+
+            </RelativeLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -131,14 +164,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/areaRemColorAppear"
-            android:background="@color/white"
+            android:background="@color/clue_theme"
             android:layout_margin="5dp"
             android:gravity="center">
 
         <RelativeLayout
                 android:id="@+id/areaRemColorInternal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/white">
         </RelativeLayout>
 
     </RelativeLayout>

@@ -16,7 +16,7 @@ public class DrawLine extends DrawView {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        paint.setStyle(Paint.Style.STROKE);
+        //paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
 
         Point a = startPoint;

@@ -41,10 +41,12 @@ public class RememberColorFragment extends Fragment {
     private RelativeLayout areaViewAppear;
     private RelativeLayout areaColorAppear;
     private RelativeLayout scoreArea;
+    private RelativeLayout lifeArea;
     private TextView textColorTimer;
     private TextView textColorScore;
     private TextView textLevel;
     private TextView textHighScore;
+    private TextView textLife;
     private ImageView buttonRefresh;
     private LinkedList<Integer> usedCoordinates;
     private LinkedList<DrawRect> listCreatedViews;
@@ -62,10 +64,16 @@ public class RememberColorFragment extends Fragment {
     private int time = 10;
     private int countShapes = 2;
     private int size = 105;
+    private int life = 3;
     private LinkedList<Integer> listColor;
     private HashMap<Integer, String> mapCoord;
     private SharedPreferences.Editor editor;
     private CountDownTimer cT;
+    private int maxX;
+    private int maxY;
+    private int pointX;
+    private int pointY;
+    private int tempScore;
 
     public RememberColorFragment() {
     }
@@ -82,6 +90,7 @@ public class RememberColorFragment extends Fragment {
         areaView = (RelativeLayout) rootView.findViewById(R.id.areaRemColor);
         areaViewAppear = (RelativeLayout) rootView.findViewById(R.id.areaRemColorInternal);
         areaColorAppear = (RelativeLayout) rootView.findViewById(R.id.areaRemColorAppear);
+        lifeArea = (RelativeLayout) rootView.findViewById(R.id.areaLifeRemColor);
         buttonStart = (Button) rootView.findViewById(R.id.startButtonRemColor);
         nextLevelButton = (Button) rootView.findViewById(R.id.nextLevelButtonRemColor);
         tryAgainButton = (Button) rootView.findViewById(R.id.tryAgainButtonRemColor);
@@ -90,6 +99,7 @@ public class RememberColorFragment extends Fragment {
         textColorTimer = (TextView) rootView.findViewById(R.id.textTimerRemColor);
         textColorScore = (TextView) rootView.findViewById(R.id.textScoreRemColor);
         textLevel = (TextView) rootView.findViewById(R.id.textLevelRemColor);
+        textLife = (TextView) rootView.findViewById(R.id.textLifeRemColor);
         buttonRefresh = (ImageView) rootView.findViewById(R.id.buttomRefreshRemColor);
         textHighScore = (TextView) rootView.findViewById(R.id.textRemColorHighscores);
         colorMap = new HashMap<Integer, Integer>();
@@ -97,10 +107,6 @@ public class RememberColorFragment extends Fragment {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                score = 0;
-                level = 1;
-                countShapes = 2;
-                size = 100;
                 runGame();
             }
         });
@@ -111,7 +117,9 @@ public class RememberColorFragment extends Fragment {
                 score = 0;
                 level = 1;
                 countShapes = 2;
-                size = 100;
+                time = 10;
+                life = 3;
+                size = 105;
                 drawCircleNominative.setVisibility(View.INVISIBLE);
                 runGame();
             }
@@ -121,6 +129,7 @@ public class RememberColorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 drawCircleNominative.setVisibility(View.INVISIBLE);
+                time = 10;
                 runGame();
             }
         });
@@ -140,6 +149,7 @@ public class RememberColorFragment extends Fragment {
                         level = 1;
                         size = 105;
                         score = 0;
+                        time = 10;
                         countShapes = 2;
                         runGame();
                     }
@@ -165,43 +175,10 @@ public class RememberColorFragment extends Fragment {
                 cT.cancel();
                 readyButton.setVisibility(View.INVISIBLE);
                 drawNominativeColor();
-                areaViewAppear.setAlpha(0.0f);
-
-                listCreatedLines = new LinkedList<DrawLine>();
-                for(Map.Entry<Integer, String> map: mapCoord.entrySet()){
-                    if(map.getValue().toString().startsWith("0,")){
-                        DrawLine lineView = new DrawLine(context);
-                        lineView.setBackgroundColor(getResources().getColor(R.color.silver));
-                        int point = Integer.parseInt(map.getValue().split(",")[1]);
-                        lineView.setStartPoint(new Point(0, point));
-                        lineView.setEndPoint(new Point(areaViewAppear.getWidth(), point));
-                        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                                areaViewAppear.getWidth(), 4
-                        );
-                        lineView.setLayoutParams(params);
-                        lineView.setX(0);
-                        lineView.setY(point);
-                        listCreatedLines.add(lineView);
-                    }
-                    if(map.getValue().toString().endsWith(",0")){
-                        DrawLine lineView = new DrawLine(context);
-                        lineView.setBackgroundColor(getResources().getColor(R.color.silver));
-                        int point = Integer.parseInt(map.getValue().split(",")[0]);
-                        lineView.setStartPoint(new Point(point, 0));
-                        lineView.setEndPoint(new Point(point, areaViewAppear.getHeight()));
-                        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                                4, areaViewAppear.getHeight()
-                        );
-                        lineView.setLayoutParams(params);
-                        lineView.setY(0);
-                        lineView.setX(point);
-                        listCreatedLines.add(lineView);
-                    }
+                for(DrawView view: listCreatedViews) {
+                    view.setAlpha(0.0f);
                 }
-
-                for(DrawView line: listCreatedLines){
-                    areaViewAppear.addView(line);
-                }
+                unlockShapes();
             }
         });
 
@@ -232,7 +209,9 @@ public class RememberColorFragment extends Fragment {
     }
 
     private void runGame() {
+        countShapes = 2;
         removeView();
+        removeGrid();
         editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, true);
         editor.commit();
         countShapes = level + countShapes;
@@ -256,12 +235,14 @@ public class RememberColorFragment extends Fragment {
         scoreArea.setVisibility(View.VISIBLE);
         areaColorAppear.setVisibility(View.VISIBLE);
         textLevel.setVisibility(View.VISIBLE);
+        lifeArea.setVisibility(View.VISIBLE);
         textHighScore.setVisibility(View.VISIBLE);
         buttonRefresh.setVisibility(View.VISIBLE);
         readyButton.setVisibility(View.VISIBLE);
         textLevel.setText("Level " + String.valueOf(level));
+        textLife.setText(String.valueOf(life));
         initShapes();
-
+        lockShapes();
         cT = new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -272,7 +253,7 @@ public class RememberColorFragment extends Fragment {
 
             public void onFinish() {
                 //areaColorAppear.setVisibility(View.INVISIBLE);
-                editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, false);
+                /*editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, false);
 
                 if (score >= 10 * level) {
                     nextLevelButton.setVisibility(View.VISIBLE);
@@ -299,18 +280,112 @@ public class RememberColorFragment extends Fragment {
                 }
                 editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
                 editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
-                editor.commit();
+                editor.commit();*/
+
+                readyButton.setVisibility(View.INVISIBLE);
+                drawNominativeColor();
+                for(DrawView view: listCreatedViews) {
+                    view.setAlpha(0.0f);
+                }
+                unlockShapes();
 
             }
         };
         cT.start();
     }
 
+    private void lockShapes(){
+        editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, false);
+        editor.commit();
+    }
+
+    private void unlockShapes(){
+        editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, true);
+        editor.commit();
+    }
+
+    private void drawGrid(){
+        listCreatedLines = new LinkedList<DrawLine>();
+        for(Map.Entry<Integer, String> map: mapCoord.entrySet()){
+            if(map.getValue().toString().startsWith("0,")){
+                DrawLine lineView = new DrawLine(context);
+                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
+                int point = Integer.parseInt(map.getValue().split(",")[1]);
+                lineView.setStartPoint(new Point(0, point));
+                lineView.setEndPoint(new Point(areaView.getWidth(), point));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        areaView.getWidth(), 4
+                );
+                lineView.setLayoutParams(params);
+                lineView.setX(0);
+                lineView.setY(point);
+                listCreatedLines.add(lineView);
+            }
+            if(map.getValue().toString().endsWith(",0")){
+                DrawLine lineView = new DrawLine(context);
+                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
+                int point = Integer.parseInt(map.getValue().split(",")[0]);
+                lineView.setStartPoint(new Point(point, 0));
+                lineView.setEndPoint(new Point(point, areaView.getHeight()));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        4, areaView.getHeight()
+                );
+                lineView.setLayoutParams(params);
+                lineView.setY(0);
+                lineView.setX(point);
+                listCreatedLines.add(lineView);
+            }
+        }
+
+        DrawLine lineViewX = new DrawLine(context);
+        lineViewX.setBackgroundColor(getResources().getColor(R.color.silver));
+        lineViewX.setStartPoint(new Point(maxX, 0));
+        lineViewX.setEndPoint(new Point(maxX, areaView.getHeight()));
+        RelativeLayout.LayoutParams paramsX = new RelativeLayout.LayoutParams(
+                4, areaView.getHeight()
+        );
+        lineViewX.setLayoutParams(paramsX);
+        lineViewX.setY(0);
+        lineViewX.setX(maxX - 4);
+        listCreatedLines.add(lineViewX);
+
+        DrawLine lineViewY = new DrawLine(context);
+        lineViewY.setBackgroundColor(getResources().getColor(R.color.silver));
+        lineViewY.setStartPoint(new Point(maxY, 0));
+        lineViewY.setEndPoint(new Point(maxY, areaView.getWidth()));
+        RelativeLayout.LayoutParams paramsY = new RelativeLayout.LayoutParams(
+                areaView.getWidth(), 4
+        );
+        lineViewY.setLayoutParams(paramsY);
+        lineViewY.setY(maxY - 4);
+        lineViewY.setX(0);
+        listCreatedLines.add(lineViewY);
+
+
+        for(DrawView line: listCreatedLines){
+            areaViewAppear.addView(line);
+        }
+    }
+
+    private void removeGrid(){
+        if (listCreatedLines != null) {
+            for (DrawView line : listCreatedLines) {
+                if(line != null)
+                    areaViewAppear.removeView(line);
+            }
+        }
+        areaView.setPadding(0,0,0,0);
+    }
+
     private void drawShapes() {
+        if(drawCircleNominative!=null) {
+            areaColorAppear.removeView(drawCircleNominative);
+        }
         listCreatedViews = new LinkedList<DrawRect>();
         listColor = new LinkedList<Integer>();
         usedCoordinates = new LinkedList<Integer>();
         generateMapCoordinates();
+
         if (countShapes >= mapCoord.size()) {
             countShapes = mapCoord.size();
         }
@@ -339,6 +414,9 @@ public class RememberColorFragment extends Fragment {
             listCreatedViews.add(drawRect);
             listColor.add(genIndexColorRect);
         }
+        removeGrid();
+        setPaddings();
+        drawGrid();
 
         for (DrawRect drawRect : listCreatedViews) {
             do {
@@ -373,18 +451,46 @@ public class RememberColorFragment extends Fragment {
         areaColorAppear.addView(drawCircleNominative);
     }
 
+    public void setPaddings(){
+        int paddingX = (areaView.getWidth() - maxX)/2;
+        int paddingY = (areaView.getHeight()- maxY)/2;
+
+        areaView.setPadding(paddingX, paddingY, paddingX, paddingY);
+    }
+
     private void calculateResults(View v) {
+        tempScore = 0;
         ColorDrawable color = (ColorDrawable) v.getBackground();
         if (color.getColor() == colorMap.get(nominativeColor)) {
             score += time;
+            level++;
+            life++;
+            textLevel.setText("Level " + String.valueOf(level));
             textColorScore.setText("Score: " + String.valueOf(score));
+            nextLevelButton.setText("Next level");
             nextLevelButton.setVisibility(View.VISIBLE);
         }
         else {
-            tryAgainButton.setVisibility(View.VISIBLE);
-            textColorScore.setText("Score: " + String.valueOf(score));
+            if(life > 0){
+                life--;
+                textLevel.setText("Level " + String.valueOf(level));
+                textColorScore.setText("Score: " + String.valueOf(score));
+                textLife.setText(String.valueOf(life));
+                nextLevelButton.setText("Repeat level");
+                nextLevelButton.setVisibility(View.VISIBLE);
+            }
+            else {
+                tryAgainButton.setVisibility(View.VISIBLE);
+                textColorScore.setText("Score: " + String.valueOf(score));
+                textHighScore.setText("High score: " + String.valueOf(score));
+                highscore = score;
+                editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
+            }
         }
-        areaViewAppear.setAlpha(1.0f);
+        lockShapes();
+        for(DrawView view: listCreatedViews) {
+            view.setAlpha(1.0f);
+        }
         System.gc();
     }
 
@@ -394,6 +500,7 @@ public class RememberColorFragment extends Fragment {
 
     private void initShapes() {
         removeView();
+        removeGrid();
         drawShapes();
     }
 
@@ -401,13 +508,20 @@ public class RememberColorFragment extends Fragment {
         //Random random = new Random();
         int generatedSize = pxFromDp(size);//generateRandomInteger(150, 200, random);
         rectSize = generatedSize;
-
+        maxX = 0;
+        maxY = 0;
         int k = 1;
         mapCoord = new HashMap<Integer, String>();
-        for (int i = 0; i < areaViewAppear.getWidth(); i++) {
-            for (int j = 0; j < areaViewAppear.getHeight(); j++) {
+        for (int i = 0; i < areaView.getWidth(); i++) {
+            for (int j = 0; j < areaView.getHeight(); j++) {
                 if ((i % generatedSize == 0) && (j % generatedSize == 0)) {
-                    if (((i + generatedSize) < areaViewAppear.getWidth()) && ((j + generatedSize) < areaViewAppear.getHeight())) {
+                    if (((i + generatedSize) < areaView.getWidth()) && ((j + generatedSize) < areaView.getHeight())) {
+                        if((i+generatedSize) > maxX) {
+                            maxX = (i+generatedSize);
+                        }
+                        if((j+generatedSize) > maxY) {
+                            maxY = (j+generatedSize);
+                        }
                         mapCoord.put(k, i + "," + j);
                         k++;
                     }
