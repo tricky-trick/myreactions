@@ -166,6 +166,7 @@ public class ChooseColorFragment extends Fragment {
             textColorScore.setVisibility(View.VISIBLE);
             textColorTimer.setVisibility(View.VISIBLE);
             textHighScore.setVisibility(View.VISIBLE);
+            buttonRefresh.setVisibility(View.VISIBLE);
             textColorTimer.setText("Level done!");
             textLevel.setText("Level " + String.valueOf(tempLevel));
             textColorScore.setText("Score: " + String.valueOf(tempScore));

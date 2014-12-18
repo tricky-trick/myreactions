@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class RememberColorFragment extends Fragment {
 
@@ -128,7 +129,9 @@ public class RememberColorFragment extends Fragment {
         nextLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawCircleNominative.setVisibility(View.INVISIBLE);
+                if(drawCircleNominative != null) {
+                    drawCircleNominative.setVisibility(View.INVISIBLE);
+                }
                 time = 10;
                 runGame();
             }
@@ -189,6 +192,7 @@ public class RememberColorFragment extends Fragment {
         if (!isFinished) {
             int tempScore = prefs.getInt(Constants.REM_COLOR_TEMP_SCORE, 0);
             int tempLevel = prefs.getInt(Constants.REM_COLOR_TEMP_LEVEL, 0);
+            int tempLife  = prefs.getInt(Constants.REM_COLOR_TEMP_LIFE, 0);
             tryAgainButton.setVisibility(View.INVISIBLE);
             nextLevelButton.setVisibility(View.VISIBLE);
             buttonStart.setVisibility(View.INVISIBLE);
@@ -198,12 +202,17 @@ public class RememberColorFragment extends Fragment {
             textColorScore.setVisibility(View.VISIBLE);
             textColorTimer.setVisibility(View.VISIBLE);
             textHighScore.setVisibility(View.VISIBLE);
-            textColorTimer.setText("Level done!");
+            buttonRefresh.setVisibility(View.VISIBLE);
+            lifeArea.setVisibility(View.VISIBLE);
+            textColorTimer.setText("00:10");
             textLevel.setText("Level " + String.valueOf(tempLevel));
             textColorScore.setText("Score: " + String.valueOf(tempScore));
+            textLife.setText(String.valueOf(tempLife));
             level = tempLevel;
             score = tempScore;
+            life = tempLife;
         }
+
 
         return rootView;
     }
@@ -252,42 +261,13 @@ public class RememberColorFragment extends Fragment {
             }
 
             public void onFinish() {
-                //areaColorAppear.setVisibility(View.INVISIBLE);
-                /*editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, false);
-
-                if (score >= 10 * level) {
-                    nextLevelButton.setVisibility(View.VISIBLE);
-                    level++;
-                    countShapes = 2;
-                    size = 100;
-                    editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
-                    textColorTimer.setText("Level done!");
-                } else {
-                    textColorTimer.setText("Finish!");
-                    buttonRefresh.setVisibility(View.INVISIBLE);
-                    tryAgainButton.setVisibility(View.VISIBLE);
-                    highscore = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
-                    if (score > highscore) {
-                        highscore = score;
-                    }
-                    textHighScore.setText("High score: " + String.valueOf(highscore));
-                    editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
-                    editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
-                    level = 1;
-                    countShapes = 2;
-                    score = 0;
-                    size = 100;
-                }
-                editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
-                editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
-                editor.commit();*/
-
                 readyButton.setVisibility(View.INVISIBLE);
                 drawNominativeColor();
                 for(DrawView view: listCreatedViews) {
                     view.setAlpha(0.0f);
                 }
                 unlockShapes();
+                textColorTimer.setText("00:00");
 
             }
         };
@@ -314,7 +294,7 @@ public class RememberColorFragment extends Fragment {
                 lineView.setStartPoint(new Point(0, point));
                 lineView.setEndPoint(new Point(areaView.getWidth(), point));
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        areaView.getWidth(), 4
+                        areaView.getWidth(), 5
                 );
                 lineView.setLayoutParams(params);
                 lineView.setX(0);
@@ -328,7 +308,7 @@ public class RememberColorFragment extends Fragment {
                 lineView.setStartPoint(new Point(point, 0));
                 lineView.setEndPoint(new Point(point, areaView.getHeight()));
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        4, areaView.getHeight()
+                        5, areaView.getHeight()
                 );
                 lineView.setLayoutParams(params);
                 lineView.setY(0);
@@ -342,11 +322,11 @@ public class RememberColorFragment extends Fragment {
         lineViewX.setStartPoint(new Point(maxX, 0));
         lineViewX.setEndPoint(new Point(maxX, areaView.getHeight()));
         RelativeLayout.LayoutParams paramsX = new RelativeLayout.LayoutParams(
-                4, areaView.getHeight()
+                5, areaView.getHeight()
         );
         lineViewX.setLayoutParams(paramsX);
         lineViewX.setY(0);
-        lineViewX.setX(maxX - 4);
+        lineViewX.setX(maxX - 5);
         listCreatedLines.add(lineViewX);
 
         DrawLine lineViewY = new DrawLine(context);
@@ -354,10 +334,10 @@ public class RememberColorFragment extends Fragment {
         lineViewY.setStartPoint(new Point(maxY, 0));
         lineViewY.setEndPoint(new Point(maxY, areaView.getWidth()));
         RelativeLayout.LayoutParams paramsY = new RelativeLayout.LayoutParams(
-                areaView.getWidth(), 4
+                areaView.getWidth(), 5
         );
         lineViewY.setLayoutParams(paramsY);
-        lineViewY.setY(maxY - 4);
+        lineViewY.setY(maxY - 5);
         lineViewY.setX(0);
         listCreatedLines.add(lineViewY);
 
@@ -462,13 +442,22 @@ public class RememberColorFragment extends Fragment {
         tempScore = 0;
         ColorDrawable color = (ColorDrawable) v.getBackground();
         if (color.getColor() == colorMap.get(nominativeColor)) {
-            score += time;
+            if(time == 0) {
+                score += 10;
+            }
+            else{
+                score += 10 * time;
+            }
             level++;
             life++;
             textLevel.setText("Level " + String.valueOf(level));
             textColorScore.setText("Score: " + String.valueOf(score));
             nextLevelButton.setText("Next level");
             nextLevelButton.setVisibility(View.VISIBLE);
+            editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
+            editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
+            editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
+            editor.putInt(Constants.REM_COLOR_TEMP_LIFE, life);
         }
         else {
             if(life > 0){
@@ -478,6 +467,10 @@ public class RememberColorFragment extends Fragment {
                 textLife.setText(String.valueOf(life));
                 nextLevelButton.setText("Repeat level");
                 nextLevelButton.setVisibility(View.VISIBLE);
+                editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
+                editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
+                editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
+                editor.putInt(Constants.REM_COLOR_TEMP_LIFE, life);
             }
             else {
                 tryAgainButton.setVisibility(View.VISIBLE);
@@ -485,12 +478,14 @@ public class RememberColorFragment extends Fragment {
                 textHighScore.setText("High score: " + String.valueOf(score));
                 highscore = score;
                 editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
+                editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
             }
         }
         lockShapes();
         for(DrawView view: listCreatedViews) {
             view.setAlpha(1.0f);
         }
+        cT.cancel();
         System.gc();
     }
 

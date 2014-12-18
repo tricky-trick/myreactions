@@ -20,5 +20,6 @@ public class Constants {
 	public static final String REM_COLOR_TEMP_LEVEL = "REM_COLOR_TEMP_LEVEL";
 	public static final String REM_COLOR_TEMP_SCORE = "REM_COLOR_TEMP_SCORE";
 	public static final String REM_COLOR_IS_FINISHED= "REM_COLOR_IS_FINISHED";
+	public static final String REM_COLOR_TEMP_LIFE= "REM_COLOR_TEMP_LIFE";
 
 }
