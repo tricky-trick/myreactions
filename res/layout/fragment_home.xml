@@ -237,16 +237,6 @@
                         android:textStyle="bold"
                         android:text="Graph of clicking for all Your results during all the period of time"/>
 
-                <!--<com.fima.chartview.ChartView-->
-                <!--android:id="@+id/chartViewSummaryResults"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_below="@+id/textTitleOfChartSummary"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--chartview:bottomLabelHeight="40dp"-->
-                <!--chartview:gridLineColor="#E5E5E5"-->
-                <!--chartview:leftLabelWidth="20dp"/>-->
 
                 <Button
                         android:id="@+id/buttonShowAllResults"
@@ -262,6 +252,76 @@
                         android:shadowDx="2"
                         android:shadowDy="2"
                         android:textStyle="bold"/>
+
+
+                    <TextView
+                            android:id="@+id/textTitleChooseColor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/buttonShowAllResults"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:text="Results for Color recognizing"/>
+
+                    <TextView
+                            android:id="@+id/textChooseColorHighlevel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textTitleChooseColor"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="14dp"
+                            android:textStyle="bold"/>
+
+                    <TextView
+                            android:id="@+id/textChooseColorHighscore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textChooseColorHighlevel"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="14dp"
+                            android:textStyle="bold"/>
+
+
+                    <TextView
+                            android:id="@+id/textTitleRemColor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textChooseColorHighscore"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:text="Results for Color remembering"/>
+
+                    <TextView
+                            android:id="@+id/textRemColorHighlevel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textTitleRemColor"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="14dp"
+                            android:textStyle="bold"/>
+
+                    <TextView
+                            android:id="@+id/textRemColorHighscore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textRemColorHighlevel"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="14dp"
+                            android:textStyle="bold"/>
 
 
             </RelativeLayout>

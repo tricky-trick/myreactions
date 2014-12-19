@@ -241,6 +241,8 @@ public class ChooseColorFragment extends Fragment {
                     }
                     textHighScore.setText("High score: " + String.valueOf(highscore));
                     editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
+                    editor.putInt(Constants.COLOR_HIGHLEVEL, level);
+
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,true);
                     level = 1;
                     timeAppearing = 4;

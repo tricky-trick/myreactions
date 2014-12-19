@@ -28,6 +28,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private TextView textMaxClicks;
     private TextView textMinClicks;
     private TextView textTitleResults;
+    private TextView textChooseColorHighlevel;
+    private TextView textChooseColorHighscore;
+    private TextView textRemColorHighlevel;
+    private TextView textRemColorHighscore;
     private ImageView imgIcon;
     private Spinner dropMenuHand;
     private Spinner dropMenuFinger;
@@ -74,6 +78,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         textTitleResults = (TextView) rootView.findViewById(R.id.textTitleForStatisticsInScrollView);
         resultsScrollView = (RelativeLayout) rootView.findViewById(R.id.scrollViewHome);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressDialog);
+        textChooseColorHighlevel = (TextView) rootView.findViewById(R.id.textChooseColorHighlevel);
+        textChooseColorHighscore= (TextView) rootView.findViewById(R.id.textChooseColorHighscore);
+        textRemColorHighlevel = (TextView) rootView.findViewById(R.id.textRemColorHighlevel);
+        textRemColorHighscore= (TextView) rootView.findViewById(R.id.textRemColorHighscore);
 
         String[] fingers = new String[]{"Thumb", "Index", "Middle", "Ring", "Pinky"};
         setSpinnerAdapter(fingers, dropMenuFinger);
@@ -181,6 +189,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 //int amountOfDifferentResults = getAmountsOfDifferentResults();
 
                 ChartBuilder.buildChart(seriesSum, chartViewMaxResult, 2, seconds - 2, new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL), new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
+                int highlevelRemColor = prefs.getInt(Constants.REM_COLOR_HIGHLEVEL, 0);
+                int highscoreRemColor = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
+                int highlevelChooseColor = prefs.getInt(Constants.COLOR_HIGHLEVEL, 0);
+                int highscoreChooseColor = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
+                textChooseColorHighlevel.setText("High level: " + String.valueOf(highlevelChooseColor));
+                textChooseColorHighscore.setText("High score: " + String.valueOf(highscoreChooseColor));
+                textRemColorHighlevel.setText("High level: " + String.valueOf(highlevelRemColor));
+                textRemColorHighscore.setText("High score: " + String.valueOf(highscoreRemColor));
             }
         });
 

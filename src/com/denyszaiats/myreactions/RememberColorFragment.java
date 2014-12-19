@@ -478,6 +478,7 @@ public class RememberColorFragment extends Fragment {
                 textHighScore.setText("High score: " + String.valueOf(score));
                 highscore = score;
                 editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
+                editor.putInt(Constants.REM_COLOR_HIGHLEVEL, level);
                 editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
             }
         }
