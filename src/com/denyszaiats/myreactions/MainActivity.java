@@ -233,7 +233,7 @@ public class MainActivity extends Activity{
 			fragment = new RememberColorFragment();
 			break;
 		case 4:
-			fragment = new PagesFragment();
+			fragment = new AboutFragment();
 			break;
 		case 5:
 			fragment = new WhatsHotFragment();

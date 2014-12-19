@@ -476,7 +476,9 @@ public class RememberColorFragment extends Fragment {
                 tryAgainButton.setVisibility(View.VISIBLE);
                 textColorScore.setText("Score: " + String.valueOf(score));
                 textHighScore.setText("High score: " + String.valueOf(score));
-                highscore = score;
+                if(score>highscore) {
+                    highscore = score;
+                }
                 editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
                 editor.putInt(Constants.REM_COLOR_HIGHLEVEL, level);
                 editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
