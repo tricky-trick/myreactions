@@ -167,7 +167,7 @@ public class MainActivity extends Activity{
 					public void onClick(DialogInterface dialog, int which) {
 						SharedPreferences.Editor editor = prefs.edit();
 						editor.clear();
-						editor.putBoolean("IS_LOGGED_IN",false);
+						editor.putBoolean(Constants.IS_LOGGED_IN,false);
 						editor.commit();
 						dialog.dismiss();
 						Intent i = new Intent(MainActivity.this, StartActivity.class);
@@ -190,7 +190,7 @@ public class MainActivity extends Activity{
 				return true;
 			case R.id.action_logout:
 				SharedPreferences.Editor editor = prefs.edit();
-				editor.putBoolean("IS_LOGGED_IN",false);
+				editor.putBoolean(Constants.IS_LOGGED_IN,false);
 				editor.commit();
 				Intent i = new Intent(MainActivity.this, StartActivity.class);
 				startActivity(i);

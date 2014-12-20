@@ -2,6 +2,7 @@ package com.denyszaiats.myreactions;
 
 public class Constants {
 
+	public static  final String IS_LOGGED_IN = "IS_LOGGED_IN";
 	public static final String SUMMARY_CLICKS = "SUMMARY_CLICKS";
 	public static final String LEFT_HAND = "LH";
 	public static final String RIGHT_HAND = "RH";

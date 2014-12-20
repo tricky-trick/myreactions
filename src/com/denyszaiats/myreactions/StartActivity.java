@@ -69,9 +69,6 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 
 	private UiLifecycleHelper uiHelper;
 
-	private static final List<String> PERMISSIONS = Arrays
-			.asList("publish_actions");
-
 	// private static String message = "Sample status posted from android app";
 
 	@Override
@@ -116,12 +113,21 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 
 		loginBtn = (LoginButton) findViewById(R.id.fb_login_button);
 
+		loginBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Editor editor = prefs.edit();
+				editor.putBoolean(Constants.IS_LOGGED_IN, true);
+				editor.commit();
+			}
+		});
+
 		new LoginAsyncTask().execute();
 	}
 
 	protected void onStart() {
 		super.onStart();
-		boolean isLoggedIn = prefs.getBoolean("IS_LOGGED_IN", false);
+		boolean isLoggedIn = prefs.getBoolean(Constants.IS_LOGGED_IN, false);
 		if(isLoggedIn) {
 			mGoogleApiClient.connect();
 		}
@@ -158,7 +164,7 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	private void signInWithGplus() {
 		if (!mGoogleApiClient.isConnecting()) {
 			Editor editor = prefs.edit();
-			editor.putBoolean("IS_LOGGED_IN", true);
+			editor.putBoolean(Constants.IS_LOGGED_IN, true);
 			editor.commit();
 			mSignInClicked = true;
 
@@ -214,23 +220,27 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 			loginBtn.setUserInfoChangedCallback(new UserInfoChangedCallback() {
 				@Override
 				public void onUserInfoFetched(GraphUser user) {
-					if (user != null) {
-						Editor editor = prefs.edit();
-						editor.putString("USER_NAME", user.getFirstName());
-						editor.putString("FACEBOOK_ID", user.getId());
-						editor.putString("BIRTHDAY", user.getBirthday());
-						editor.putString("GENDER", user.asMap().get("gender").toString());
-						editor.commit();
-						Intent i = new Intent(StartActivity.this,
-								MainActivity.class);
-						startActivity(i);
-					} else {
-						Editor editor = prefs.edit();
-						editor.putString("USER_NAME", "Guest");
-						editor.putString("FACEBOOK_ID", "");
-						editor.putString("BIRTHDAY", "");
-						editor.putString("GENDER", "");
-						editor.commit();
+					boolean isLoggedIn = prefs.getBoolean(Constants.IS_LOGGED_IN, false);
+					if(isLoggedIn) {
+						if (user != null) {
+
+							Editor editor = prefs.edit();
+							editor.putString("USER_NAME", user.getFirstName());
+							editor.putString("FACEBOOK_ID", user.getId());
+							editor.putString("BIRTHDAY", user.getBirthday());
+							editor.putString("GENDER", user.asMap().get("gender").toString());
+							editor.commit();
+							Intent i = new Intent(StartActivity.this,
+									MainActivity.class);
+							startActivity(i);
+						} else {
+							Editor editor = prefs.edit();
+							editor.putString("USER_NAME", "Guest");
+							editor.putString("FACEBOOK_ID", "");
+							editor.putString("BIRTHDAY", "");
+							editor.putString("GENDER", "");
+							editor.commit();
+						}
 					}
 				}
 			});
@@ -291,39 +301,6 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	// }
 	// }
 	//
-	// public void postStatusMessage() {
-	// if (checkPermissions()) {
-	// Request request = Request.newStatusUpdateRequest(
-	// Session.getActiveSession(), message,
-	// new Request.Callback() {
-	// @Override
-	// public void onCompleted(Response response) {
-	// if (response.getError() == null)
-	// Toast.makeText(StartActivity.this,
-	// "Status updated successfully",
-	// Toast.LENGTH_LONG).show();
-	// }
-	// });
-	// request.executeAsync();
-	// } else {
-	// requestPermissions();
-	// }
-	// }
-
-	public boolean checkPermissions() {
-		Session s = Session.getActiveSession();
-		if (s != null) {
-			return s.getPermissions().contains("publish_actions");
-		} else
-			return false;
-	}
-
-	public void requestPermissions() {
-		Session s = Session.getActiveSession();
-		if (s != null)
-			s.requestNewPublishPermissions(new Session.NewPermissionsRequest(
-					this, PERMISSIONS));
-	}
 
 	@Override
 	public void onResume() {

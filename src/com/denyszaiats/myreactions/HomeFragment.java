@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.widget.*;
 import com.denyszaiats.myreactions.ChartView.ChartView;
 import com.denyszaiats.myreactions.ChartView.LinearSeries;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
 import com.squareup.picasso.Picasso;
 
 import android.app.Fragment;
@@ -37,6 +40,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private Spinner dropMenuFinger;
     private Button buttonShowResults;
     private Button buttonShowChartAllResults;
+    private Button buttonPostFacebook;
     private RelativeLayout resultsScrollView;
     private ProgressBar progressBar;
 
@@ -50,9 +54,11 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private String resultsSummaryClicks;
     private String resultsAmountOfTests;
     private String resultsMinClicks;
-    private LinearSeries series;
     private LinearSeries seriesSum;
     private int maxI = 0;
+
+    private static final List<String> PERMISSIONS = Arrays
+            .asList("publish_actions");
 
     public HomeFragment() {
     }
@@ -63,6 +69,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Monitor launch times and interval from installation
+        RateThisApp.onStart(context);
+        // Show a dialog if criteria is satisfied
+        RateThisApp.showRateDialogIfNeeded(context);
+
         summaryResults = (TextView) rootView.findViewById(R.id.textSummaryClicks);
         nameView = (TextView) rootView.findViewById(R.id.textViewName);
         genderView = (TextView) rootView.findViewById(R.id.textViewGender);
@@ -71,6 +83,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         dropMenuHand = (Spinner) rootView.findViewById(R.id.dropMenuHand);
         dropMenuFinger = (Spinner) rootView.findViewById(R.id.dropMenuFinger);
         buttonShowResults = (Button) rootView.findViewById(R.id.buttonShowResults);
+        buttonPostFacebook = (Button) rootView.findViewById(R.id.buttonPostResultsFacebook);
         buttonShowChartAllResults = (Button) rootView.findViewById(R.id.buttonShowAllResults);
         textSummaryClicks = (TextView) rootView.findViewById(R.id.textSummaryClicksByHandAndFinger);
         textMaxClicks = (TextView) rootView.findViewById(R.id.textMaxClicksByHandAndFinger);
@@ -206,6 +219,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 Intent i = new Intent(context,
                         ChartFragment.class);
                 startActivity(i);
+            }
+        });
+
+        buttonPostFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postStatusMessage();
             }
         });
 
@@ -359,5 +379,50 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    /*
+    Facebook post area
+     */
+
+    public boolean checkPermissions() {
+        Session s = Session.getActiveSession();
+        if (s != null) {
+            return s.getPermissions().contains("publish_actions");
+        } else
+            return false;
+    }
+
+    public void requestPermissions() {
+        Session s = Session.getActiveSession();
+        if (s != null) {
+            try {
+                s.requestNewPublishPermissions(new Session.NewPermissionsRequest(getActivity(), PERMISSIONS));
+            }
+            catch (UnsupportedOperationException ex){
+                Toast.makeText(context,
+                        "Please, login into application with Facebook account",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void postStatusMessage() {
+        if (checkPermissions()) {
+            Request request = Request.newStatusUpdateRequest(
+                    Session.getActiveSession(), "I have very good reaction! Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName() ,
+                    new Request.Callback() {
+                        @Override
+                        public void onCompleted(Response response) {
+                            if (response.getError() == null)
+                                Toast.makeText(context,
+                                        "Status updated successfully",
+                                        Toast.LENGTH_LONG).show();
+                        }
+                    });
+            request.executeAsync();
+        } else {
+            requestPermissions();
+        }
     }
 }
