@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import com.denyszaiats.myreactions.adapter.NavDrawerListAdapter;
 import com.denyszaiats.myreactions.model.NavDrawerItem;
 
@@ -78,7 +79,8 @@ public class MainActivity extends Activity{
 		// Home
 		navDrawerItems.add(new NavDrawerItem("Welcome, " + username, navMenuIcons.getResourceId(0, -1)));
 		// Fast Clicker
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+		String sumClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), true, sumClicks));
 		// Choose color
 		int highscore = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, String.valueOf(highscore)));
@@ -86,7 +88,12 @@ public class MainActivity extends Activity{
 		int highscoreRemColor = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, String.valueOf(highscoreRemColor)));
 		// About
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+		try {
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1), true, "v." + MainActivity.this.getPackageManager()
+                    .getPackageInfo(MainActivity.this.getPackageName(), 0).versionName));
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
 //		// What's hot, We  will add a counter here
 //		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
 

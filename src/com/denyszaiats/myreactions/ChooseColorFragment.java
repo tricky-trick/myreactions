@@ -118,7 +118,9 @@ public class ChooseColorFragment extends Fragment {
         buttonRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cT.cancel();
+                if(cT != null){
+                    cT.cancel();
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
                 builder.setTitle("Confirmation");

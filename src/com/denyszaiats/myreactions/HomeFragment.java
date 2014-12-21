@@ -3,6 +3,8 @@ package com.denyszaiats.myreactions;
 import java.sql.Date;
 import java.util.*;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.*;
 import com.denyszaiats.myreactions.ChartView.ChartView;
@@ -400,9 +402,34 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 s.requestNewPublishPermissions(new Session.NewPermissionsRequest(getActivity(), PERMISSIONS));
             }
             catch (UnsupportedOperationException ex){
-                Toast.makeText(context,
-                        "Please, login into application with Facebook account",
-                        Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("Login with Facebook");
+                builder.setMessage("You need to login with Facebook account. Do You want to do it right now?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean(Constants.IS_LOGGED_IN,false);
+                        editor.commit();
+                        dialog.dismiss();
+                        Intent i = new Intent(getActivity(), StartActivity.class);
+                        startActivity(i);
+                    }
+
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         }
     }
@@ -410,7 +437,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public void postStatusMessage() {
         if (checkPermissions()) {
             Request request = Request.newStatusUpdateRequest(
-                    Session.getActiveSession(), "I have very good reaction! Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName() ,
+                    Session.getActiveSession(), "I have very good reaction! Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName(),
                     new Request.Callback() {
                         @Override
                         public void onCompleted(Response response) {
