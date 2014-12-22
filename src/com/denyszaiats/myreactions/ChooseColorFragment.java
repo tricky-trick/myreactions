@@ -74,6 +74,17 @@ public class ChooseColorFragment extends Fragment {
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         editor = prefs.edit();
+
+        boolean isChecked = prefs.getBoolean(Constants.CHOOSE_COLOR_FRAGMENT + "_CHECKED", false);
+        if(!isChecked) {
+            editor.putString(Constants.FRAGMENT_NAME, Constants.CHOOSE_COLOR_FRAGMENT);
+            editor.commit();
+
+            Intent i = new Intent(context,
+                    GuideModalActivity.class);
+            startActivity(i);
+        }
+
         final View rootView = inflater.inflate(R.layout.fragment_choose_color, container, false);
 
         areaView = (RelativeLayout) rootView.findViewById(R.id.areaChooseColor);

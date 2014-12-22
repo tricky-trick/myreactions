@@ -1,10 +1,6 @@
 package com.denyszaiats.myreactions;
 
-import java.util.Arrays;
-import java.util.List;
-
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;

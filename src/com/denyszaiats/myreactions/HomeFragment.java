@@ -22,6 +22,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.SharedPreferences.Editor;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -61,6 +62,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     private static final List<String> PERMISSIONS = Arrays
             .asList("publish_actions");
+    private Editor editor;
 
     public HomeFragment() {
     }
@@ -70,8 +72,18 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                              Bundle savedInstanceState) {
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = prefs.edit();
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        boolean isChecked = prefs.getBoolean(Constants.USER_FRAGMENT + "_CHECKED", false);
+        if(!isChecked) {
+            editor.putString(Constants.FRAGMENT_NAME, Constants.USER_FRAGMENT);
+            editor.commit();
+
+            Intent i = new Intent(context,
+                    GuideModalActivity.class);
+            startActivity(i);
+        }
         // Monitor launch times and interval from installation
         RateThisApp.onStart(context);
         // Show a dialog if criteria is satisfied
@@ -170,7 +182,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                     finger = Constants.PINKY_FINGER;
                 }
 
-                SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("FILTER",hand + "-" + finger);
                 editor.commit();
 

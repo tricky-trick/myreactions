@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -16,9 +16,89 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_launcher"/>
 
+        <TextView
+                android:id="@+id/textAboutVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageAboutIcon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:shadowColor="@color/black_overlay"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"
+                android:text="Version 1.0"/>
+
+        <TextView
+                android:id="@+id/textFindInSocNet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textAboutVersion"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:shadowColor="@color/black_overlay"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"
+                android:text="Join us in social networks"/>
+
+        <RelativeLayout
+                android:id="@+id/aboutSocialImgArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textFindInSocNet"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp">
+
+
+            <ImageView
+                    android:id="@+id/imageAboutFacebook"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/facebook"
+                    android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
+
+            <ImageView
+                    android:id="@+id/imageAboutTwitter"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="70dp"
+                    android:src="@drawable/twitter"
+                    android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
+
+            <ImageView
+                    android:id="@+id/imageAboutGoogle"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/gmail"
+                    android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
+
+            <ImageView
+                    android:id="@+id/imageAboutVk"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="70dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/vkontakte"
+                    android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
+        </RelativeLayout>
 
 
     </RelativeLayout>
-    
+
 
 </RelativeLayout>

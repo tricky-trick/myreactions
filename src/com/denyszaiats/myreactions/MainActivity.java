@@ -80,6 +80,9 @@ public class MainActivity extends Activity{
 		navDrawerItems.add(new NavDrawerItem("Welcome, " + username, navMenuIcons.getResourceId(0, -1)));
 		// Fast Clicker
 		String sumClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
+		if (sumClicks.equals(""))
+			sumClicks = "0";
+
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), true, sumClicks));
 		// Choose color
 		int highscore = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);

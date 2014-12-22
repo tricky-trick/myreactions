@@ -24,5 +24,10 @@ public class Constants {
 	public static final String REM_COLOR_IS_FINISHED= "REM_COLOR_IS_FINISHED";
 	public static final String REM_COLOR_TEMP_LIFE= "REM_COLOR_TEMP_LIFE";
 	public static final String REM_COLOR_HIGHLEVEL= "REM_COLOR_HIGHLEVEL";
+	public static final String USER_FRAGMENT= "USER_FRAGMENT";
+	public static final String FAST_CLICKER_FRAGMENT= "FAST_CLICKER_FRAGMENT";
+	public static final String CHOOSE_COLOR_FRAGMENT= "CHOOSE_COLOR_FRAGMENT";
+	public static final String REMEMBER_COLOR_FRAGMENT= "REMEMBER_COLOR_FRAGMENT";
+	public static final String FRAGMENT_NAME= "";
 
 }

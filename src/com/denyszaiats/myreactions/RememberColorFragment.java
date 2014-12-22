@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -85,6 +86,16 @@ public class RememberColorFragment extends Fragment {
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         editor = prefs.edit();
+
+        boolean isChecked = prefs.getBoolean(Constants.REMEMBER_COLOR_FRAGMENT + "_CHECKED", false);
+        if(!isChecked) {
+            editor.putString(Constants.FRAGMENT_NAME, Constants.REMEMBER_COLOR_FRAGMENT);
+            editor.commit();
+
+            Intent i = new Intent(context,
+                    GuideModalActivity.class);
+            startActivity(i);
+        }
 
         View rootView = inflater.inflate(R.layout.fragment_remember_color, container, false);
 

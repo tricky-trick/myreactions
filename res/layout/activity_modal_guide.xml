@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/abc_menu_dropdown_panel_holo_light">
+
+
+        <ImageView
+                android:id="@+id/imageAboutIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_launcher"/>
+
+        <TextView
+                android:id="@+id/textGuideTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageAboutIcon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:shadowColor="@color/black_overlay"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"
+                android:text="Game guide"/>
+
+        <TextView
+                android:id="@+id/textGuide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textGuideTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:shadowColor="@color/black_overlay"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="normal"
+                android:text="Version 1.0"/>
+
+        <CheckBox
+                android:id="@+id/dontShowAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textGuide"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:text="Don't show this window again"
+                android:layout_centerHorizontal="true"
+                android:textStyle="italic"/>
+
+        <Button
+                android:id="@+id/buttonGuideOk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dontShowAgain"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:padding="5dp"
+                android:text="OK"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:shadowColor="@color/black_overlay"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="bold"
+                android:background="@drawable/shapebutton_selector"/>
+
+
+</RelativeLayout>

@@ -4,6 +4,7 @@ import java.util.*;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -60,6 +61,18 @@ public class FastClickerFragment extends Fragment {
                 container, false);
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        editor = prefs.edit();
+        boolean isChecked = prefs.getBoolean(Constants.FAST_CLICKER_FRAGMENT + "_CHECKED", false);
+        if(!isChecked) {
+            editor.putString(Constants.FRAGMENT_NAME, Constants.FAST_CLICKER_FRAGMENT);
+            editor.commit();
+
+            Intent i = new Intent(context,
+                    GuideModalActivity.class);
+            startActivity(i);
+        }
+
         summaryClicks = Integer.valueOf(prefs.getString(Constants.SUMMARY_CLICKS, "0"));
         chronometer = (TextView) rootView
                 .findViewById(R.id.chronometerFasterClicker);
@@ -111,7 +124,6 @@ public class FastClickerFragment extends Fragment {
                             resultsView.setVisibility(View.VISIBLE);
                             tryAgain.setVisibility(View.VISIBLE);
                             summaryClicks += results.size();
-                            editor = prefs.edit();
                             editor.putString(Constants.SUMMARY_CLICKS, String.valueOf(summaryClicks));
                             editor.putString(String.format("%s-%s-%s", hand, finger, String.valueOf(System.currentTimeMillis() / 1000)), results.toString());
                             editor.commit();
