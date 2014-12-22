@@ -43,10 +43,21 @@ public class GuideModalActivity extends Activity{
                     "   You will see the chart of Your clicks during Your last session. You will be able to see how much clicks per each seconds You did.";
         }
         else if(parentFragmentName.equals(Constants.CHOOSE_COLOR_FRAGMENT)){
-            guideText = "This is the activity with Choose Color";
+            guideText = "   In this game You need to recognize and click on rectangle with appropriate color as soon as You possible. Faster You will do it - more score You will have.\n" +
+                    "   With each level amount of rectangles will be increased and time of appearing will be decreased.\n" +
+                    "   So, You need to earn a lot of scores in the beginning levels.\n" +
+                    "   You need to collect not less than 10 scores per 1 level.\n" +
+                    "   Good luck!";
         }
         else if(parentFragmentName.equals(Constants.REMEMBER_COLOR_FRAGMENT)){
-            guideText = "This is the activity with Remembering Color";
+            guideText = "In this game You have 10 seconds to remember colors and their places on the screen. After this 10 seconds rectangles will be disappeared" +
+                    "and You need to click on correct place where this shape was located. If You click on correct place - You will earn 10 points +1 life.\n" +
+                    "   You can click button 'Ready' and not to wait 10 seconds. Then You will earn 10 x points from left seconds and +1 life.\n" +
+                    "   If You will click on incorrect place - Your life will be decreased -1.\n" +
+                    "   When life will be left - game is finished.\n" +
+                    "   Each levels amount of rectangles will be increased.\n" +
+                    "   Good luck!";
+
         }
 
         closeGuide.setOnClickListener(new View.OnClickListener() {
