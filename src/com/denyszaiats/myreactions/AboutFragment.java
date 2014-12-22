@@ -34,7 +34,7 @@ public class AboutFragment extends Fragment {
         areaAboutSocial = (RelativeLayout) rootView.findViewById(R.id.aboutSocialImgArea);
 
         AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
-        animation.setDuration(2000);
+        animation.setDuration(1000);
         areaAboutSocial.startAnimation(animation);
 
         facebook.setOnClickListener(new View.OnClickListener() {
