@@ -40,7 +40,7 @@ public class AboutFragment extends Fragment {
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openUrl("https://www.facebook.com/myreact");
             }
         });
 
@@ -61,7 +61,7 @@ public class AboutFragment extends Fragment {
         vkontakte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openUrl("https://vk.com/club83382802");
             }
         });
 

@@ -252,9 +252,6 @@ public class ChooseColorFragment extends Fragment {
                     if(score > highscore){
                         highscore = score;
                     }
-                    textHighScore.setText("High score: " + String.valueOf(highscore));
-                    editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
-                    editor.putInt(Constants.COLOR_HIGHLEVEL, level);
 
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,true);
                     level = 1;
@@ -263,6 +260,12 @@ public class ChooseColorFragment extends Fragment {
                     score = 0;
                     size = 100;
                 }
+                if(score>highscore) {
+                    highscore = score;
+                    textHighScore.setText("High score: " + String.valueOf(score));
+                }
+                editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
+                editor.putInt(Constants.COLOR_HIGHLEVEL, level);
                 AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
                 animation.setDuration(500);
                 areaViewAppear.startAnimation(animation);
@@ -395,39 +398,6 @@ public class ChooseColorFragment extends Fragment {
                 }
             }
         }
-
-
-/*        listCreatedLines = new LinkedList<DrawLine>();
-        for(Map.Entry<Integer, String> map: mapCoord.entrySet()){
-            if(map.getValue().toString().startsWith("0,")){
-                DrawLine lineView = new DrawLine(context);
-                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
-                int point = Integer.parseInt(map.getValue().split(",")[1]);
-                lineView.setStartPoint(new Point(0, point));
-                lineView.setEndPoint(new Point(areaViewAppear.getWidth(), point));
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        areaViewAppear.getWidth(), 4
-                );
-                lineView.setLayoutParams(params);
-                listCreatedLines.add(lineView);
-            }
-            if(map.getValue().toString().endsWith(",0")){
-                DrawLine lineView = new DrawLine(context);
-                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
-                int point = Integer.parseInt(map.getValue().split(",")[0]);
-                lineView.setStartPoint(new Point(point, 0));
-                lineView.setEndPoint(new Point(point, areaViewAppear.getHeight()));
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        4, areaViewAppear.getHeight()
-                );
-                lineView.setLayoutParams(params);
-                listCreatedLines.add(lineView);
-            }
-        }
-
-        for(DrawView line: listCreatedLines){
-            areaView.addView(line);
-        }*/
     }
 
     private void generateShapesParameters(){
