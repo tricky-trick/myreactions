@@ -10,10 +10,12 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.*;
 import com.denyszaiats.myreactions.ChartView.ChartView;
@@ -40,6 +42,7 @@ public class FastClickerFragment extends Fragment {
     private ImageView fingerRing;
     private ImageView fingerPinky;
     private RelativeLayout scrollView;
+    private RelativeLayout mainArea;
     private Context context;
     private LinkedList<String> results;
     private SharedPreferences prefs;
@@ -86,6 +89,7 @@ public class FastClickerFragment extends Fragment {
         fingerButton = (Button) rootView.findViewById(R.id.fingerButton);
         tapButton = (ImageView) rootView.findViewById(R.id.imageTapButton);
         scrollView = (RelativeLayout) rootView.findViewById(R.id.scrollViewResults);
+        mainArea = (RelativeLayout) rootView.findViewById(R.id.areaMainFastClicker);
         // Hands
         leftHand = (ImageView) rootView.findViewById(R.id.imageHandLeft);
         rightHand = (ImageView) rootView.findViewById(R.id.imageRightHand);
@@ -96,6 +100,21 @@ public class FastClickerFragment extends Fragment {
         fingerRing = (ImageView) rootView.findViewById(R.id.imageRingFinger);
         fingerPinky = (ImageView) rootView.findViewById(R.id.imagePinkyFinger);
         final ChartView chartViewLatestResults = (ChartView) rootView.findViewById(R.id.chartViewLatestResults);
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int width = displaymetrics.widthPixels;
+        int height = displaymetrics.heightPixels;
+        int size;
+        if (height < width){
+            size = height;
+        }
+        else {
+            size = width;
+        }
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(size, size);
+        layoutParams.addRule(RelativeLayout.BELOW, R.id.chronometerFasterClicker);
+        tapButton.setLayoutParams(layoutParams);
 
         results = new LinkedList<String>();
         startTimer.setOnClickListener(new OnClickListener() {
@@ -178,6 +197,9 @@ public class FastClickerFragment extends Fragment {
                     doAnimation(leftHand);
                     doAnimation(rightHand);
                 }
+                else {
+                    doAnimation(tryAgain);
+                }
             }
         });
 
@@ -214,6 +236,9 @@ public class FastClickerFragment extends Fragment {
                     doAnimation(fingerMiddle);
                     doAnimation(fingerRing);
                     doAnimation(fingerPinky);
+                }
+                else {
+                    doAnimation(tryAgain);
                 }
             }
         });
@@ -311,9 +336,9 @@ public class FastClickerFragment extends Fragment {
         return map.size();
     }
 
-    private void doAnimation(ImageView image) {
+    private void doAnimation(View image) {
         image.setVisibility(View.VISIBLE);
-        ScaleAnimation animation = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f);
+        AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
         animation.setDuration(1000);
         image.setAnimation(animation);
     }

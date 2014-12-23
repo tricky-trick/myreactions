@@ -4,31 +4,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
     <RelativeLayout
+            android:id="@+id/areaMainFastClicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-        <TextView
-                android:id="@+id/txtLabeFasterClicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="10dp"
-                android:padding="10dp"
-                android:text="@string/you_have_10_seconds_how_much_taps_you_can_make"
-                android:textSize="16dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:shadowColor="#000000"
-                android:shadowRadius="4"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:textStyle="bold"/>
 
         <Button
                 android:id="@+id/handButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtLabeFasterClicker"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
@@ -47,7 +30,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/txtLabeFasterClicker"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
@@ -97,8 +79,8 @@
 
         <ImageView
                 android:id="@+id/imageTapButton"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/startButton"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="20dp"

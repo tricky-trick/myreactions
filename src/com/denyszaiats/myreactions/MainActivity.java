@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
+import android.view.Gravity;
 import com.denyszaiats.myreactions.adapter.NavDrawerListAdapter;
 import com.denyszaiats.myreactions.model.NavDrawerItem;
 
@@ -134,10 +136,22 @@ public class MainActivity extends Activity{
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+		new Handler().post(openDrawerRunnable());
+
 		if (savedInstanceState == null) {
 			// on first time display view for first nav item
 			displayView(0);
 		}
+	}
+
+	private Runnable openDrawerRunnable() {
+		return new Runnable() {
+
+			@Override
+			public void run() {
+				mDrawerLayout.openDrawer(Gravity.LEFT);
+			}
+		};
 	}
 
 	/**
@@ -293,6 +307,11 @@ public class MainActivity extends Activity{
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public void onBackPressed() {
+		// do nothing.
 	}
 
 }

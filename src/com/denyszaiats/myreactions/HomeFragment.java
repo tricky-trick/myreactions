@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private static final List<String> PERMISSIONS = Arrays
             .asList("publish_actions");
     private Editor editor;
+    private String summaryClicks;
 
     public HomeFragment() {
     }
@@ -155,7 +156,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
         }
 
-        String summaryClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
+        summaryClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
         if (summaryClicks.equals("")) {
             summaryResults.setText("You made no one clicks. Just do it!");
         } else {
@@ -448,7 +449,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public void postStatusMessage() {
         if (checkPermissions()) {
             Request request = Request.newStatusUpdateRequest(
-                    Session.getActiveSession(), "I have very good reaction! Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName(),
+                    Session.getActiveSession(), "I have very good reaction! I did " + summaryClicks + " clicks. Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName(),
                     new Request.Callback() {
                         @Override
                         public void onCompleted(Response response) {

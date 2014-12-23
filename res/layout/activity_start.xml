@@ -53,7 +53,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="@drawable/shapebutton"
-            android:text="NEXT"
+            android:text="Skip login"
             android:onClick="goToApp"
             android:textColor="@color/clue_theme"
             android:textSize="20sp"/>

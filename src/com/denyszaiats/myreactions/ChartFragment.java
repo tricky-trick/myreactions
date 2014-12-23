@@ -94,6 +94,9 @@ public class ChartFragment extends Activity {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy HH:mm");
                     Date date = new Date();
                     String s = String.valueOf(seriesSelection.getXValue()).replace(".","").replace("E","") + "0";
+                    if(s.length() == 12) {
+                        s += "0";
+                    }
                     date.setTime(Long.parseLong(s));
                     String formattedDate = dateFormat.format(date);
                     Toast.makeText(
