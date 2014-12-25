@@ -4,12 +4,29 @@
     android:layout_height="fill_parent"
         android:orientation="vertical">
 
+        <TextView
+                android:id="@+id/textTitleRemColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:shadowColor="#000000"
+                android:shadowRadius="4"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textStyle="italic"
+                android:text="You need to remember colors as soon as it possible and after You need to choose correct color from table."/>
+
     <TextView
             android:id="@+id/textLevelRemColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textTitleRemColor"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:layout_marginLeft="30dp"
             android:shadowColor="#000000"
             android:shadowRadius="4"
@@ -24,8 +41,9 @@
             android:id="@+id/textRemColorHighscores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textTitleRemColor"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:shadowColor="#000000"
             android:shadowRadius="4"
             android:shadowDx="2"
@@ -43,7 +61,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/textTitleRemColor"
             android:background="@drawable/shapebutton_selector"
             android:textSize="30dp"
             android:text="@string/start"
@@ -58,10 +76,11 @@
             android:id="@+id/resultsAreaRemColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textRemColorHighscores"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="0dp"
             android:visibility="invisible">
 
         <TextView
@@ -75,7 +94,7 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="16dp"/>
 
         <TextView
                 android:id="@+id/textScoreRemColor"
@@ -88,7 +107,7 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="16dp"/>
 
     </RelativeLayout>
 
@@ -96,8 +115,8 @@
             android:id="@+id/areaRemColorAppear"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:layout_below="@+id/startButtonRemColor"
-            android:layout_marginTop="10dp">
+            android:layout_below="@+id/resultsAreaRemColor"
+            android:layout_marginTop="5dp">
         <ImageView
                 android:id="@+id/buttomRefreshRemColor"
                 android:layout_width="wrap_content"
@@ -171,7 +190,7 @@
 
     <RelativeLayout
             android:id="@+id/areaRemColor"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/areaRemColorAppear"
             android:background="@color/clue_theme"

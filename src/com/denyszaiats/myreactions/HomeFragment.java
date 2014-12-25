@@ -6,6 +6,7 @@ import java.util.*;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.Gravity;
 import android.widget.*;
 import com.denyszaiats.myreactions.ChartView.ChartView;
 import com.denyszaiats.myreactions.ChartView.LinearSeries;
@@ -414,10 +415,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 s.requestNewPublishPermissions(new Session.NewPermissionsRequest(getActivity(), PERMISSIONS));
             }
             catch (UnsupportedOperationException ex){
+                TextView msg = new TextView(getActivity());
+                msg.setText("You need to login with Facebook account. Do You want to do it right now?");
+                msg.setPadding(20, 10, 20, 10);
+                msg.setGravity(Gravity.CENTER);
+                msg.setTextSize(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 builder.setTitle("Login with Facebook");
-                builder.setMessage("You need to login with Facebook account. Do You want to do it right now?");
+                builder.setView(msg);
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 

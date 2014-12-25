@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.view.Gravity;
+import android.widget.TextView;
 import com.denyszaiats.myreactions.adapter.NavDrawerListAdapter;
 import com.denyszaiats.myreactions.model.NavDrawerItem;
 
@@ -99,8 +100,6 @@ public class MainActivity extends Activity{
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
-//		// What's hot, We  will add a counter here
-//		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
 
 
 		// Recycle the typed array
@@ -181,10 +180,15 @@ public class MainActivity extends Activity{
 		// Handle action bar actions click
 		switch (item.getItemId()) {
 			case R.id.action_clean:
+				TextView msg = new TextView(this);
+				msg.setText("Do You really want to delete all results?");
+				msg.setPadding(20, 10, 20, 10);
+				msg.setGravity(Gravity.CENTER);
+				msg.setTextSize(20);
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 				builder.setTitle("Confirmation");
-				builder.setMessage("Do You really want to delete all results?");
+				builder.setView(msg);
 
 				builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
@@ -259,10 +263,6 @@ public class MainActivity extends Activity{
 		case 4:
 			fragment = new AboutFragment();
 			break;
-		case 5:
-			fragment = new WhatsHotFragment();
-			break;
-
 		default:
 			break;
 		}

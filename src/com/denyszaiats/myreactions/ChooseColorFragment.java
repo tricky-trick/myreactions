@@ -7,11 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +31,7 @@ import java.util.Random;
 
 public class ChooseColorFragment extends Fragment {
 
+    private Helper helper;
     private Context context;
     private Button buttonStart;
     private Button tryAgainButton;
@@ -74,7 +75,7 @@ public class ChooseColorFragment extends Fragment {
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         editor = prefs.edit();
-
+        helper = new Helper();
         boolean isChecked = prefs.getBoolean(Constants.CHOOSE_COLOR_FRAGMENT + "_CHECKED", false);
         if(!isChecked) {
             editor.putString(Constants.FRAGMENT_NAME, Constants.CHOOSE_COLOR_FRAGMENT);
@@ -107,6 +108,7 @@ public class ChooseColorFragment extends Fragment {
             }
         });
 
+        size = helper.getShapeStartSize(context);
         tryAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +116,7 @@ public class ChooseColorFragment extends Fragment {
                 level = 1;
                 timeAppearing = 4;
                 countShapes = 2;
-                size = 100;
+                size = helper.getShapeStartSize(context);
                 runGame();
             }
         });
@@ -132,16 +134,20 @@ public class ChooseColorFragment extends Fragment {
                 if(cT != null){
                     cT.cancel();
                 }
+                TextView msg = new TextView(getActivity());
+                msg.setText("Do You really want to start new game?");
+                msg.setPadding(20, 10, 20, 10);
+                msg.setGravity(Gravity.CENTER);
+                msg.setTextSize(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
                 builder.setTitle("Confirmation");
-                builder.setMessage("Do You really want to start new game?");
+                builder.setView(msg);
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         level = 1;
-                        size = 105;
+                        size = helper.getShapeStartSize(context);
                         score = 0;
                         timeAppearing = 4;
                         countShapes = 2;
@@ -198,12 +204,7 @@ public class ChooseColorFragment extends Fragment {
             timeAppearing = level + timeAppearing;
         }
         countShapes = level + countShapes;
-        if((size - level * 5)>=30) {
-            size = size - level * 5;
-        }
-        else {
-            size = 30;
-        }
+        size = helper.getShapeSize(level, size, context);
         colorMap.put(1, Color.BLACK);
         colorMap.put(2, Color.BLUE);
         colorMap.put(3, Color.RED);
@@ -240,7 +241,7 @@ public class ChooseColorFragment extends Fragment {
                     level++;
                     timeAppearing = 4;
                     countShapes = 2;
-                    size = 100;
+                    size = helper.getShapeStartSize(context);
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
                     textColorTimer.setText("Level done!");
                 }
@@ -258,7 +259,7 @@ public class ChooseColorFragment extends Fragment {
                     timeAppearing = 4;
                     countShapes = 2;
                     score = 0;
-                    size = 100;
+                    size = helper.getShapeStartSize(context);
                 }
                 if(score>highscore) {
                     highscore = score;

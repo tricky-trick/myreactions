@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 public class RememberColorFragment extends Fragment {
 
+    private Helper helper;
     private Context context;
     private Button buttonStart;
     private Button tryAgainButton;
@@ -85,6 +87,8 @@ public class RememberColorFragment extends Fragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         editor = prefs.edit();
 
+        helper = new Helper();
+
         boolean isChecked = prefs.getBoolean(Constants.REMEMBER_COLOR_FRAGMENT + "_CHECKED", false);
         if(!isChecked) {
             editor.putString(Constants.FRAGMENT_NAME, Constants.REMEMBER_COLOR_FRAGMENT);
@@ -114,7 +118,7 @@ public class RememberColorFragment extends Fragment {
         buttonHelp = (ImageView) rootView.findViewById(R.id.buttomHelpRemColor);
         textHighScore = (TextView) rootView.findViewById(R.id.textRemColorHighscores);
         colorMap = new HashMap<Integer, Integer>();
-
+        size = helper.getShapeStartSize(context);
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +134,7 @@ public class RememberColorFragment extends Fragment {
                 countShapes = 2;
                 time = 10;
                 life = 3;
-                size = 105;
+                size = helper.getShapeStartSize(context);
                 drawCircleNominative.setVisibility(View.INVISIBLE);
                 runGame();
             }
@@ -153,16 +157,21 @@ public class RememberColorFragment extends Fragment {
                 if(cT != null){
                     cT.cancel();
                 }
+                TextView msg = new TextView(getActivity());
+                msg.setText("Do You really want to start new game?");
+                msg.setPadding(20, 10, 20, 10);
+                msg.setGravity(Gravity.CENTER);
+                msg.setTextSize(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
                 builder.setTitle("Confirmation");
-                builder.setMessage("Do You really want to start new game?");
+                builder.setView(msg);
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         level = 1;
-                        size = 105;
+                        size = helper.getShapeStartSize(context);
                         score = 0;
                         time = 10;
                         countShapes = 2;
@@ -233,9 +242,34 @@ public class RememberColorFragment extends Fragment {
                     if (listCreatedViews != null) {
                         if (life > 0) {
                             life--;
+                            score -= 25;
+
+                            lockShapes();
+                            textColorScore.setText("Score: " + String.valueOf(score));
+                            textLife.setText(String.valueOf(life));
+                            cT = new CountDownTimer(300, 100) {
+
+                                public void onTick(long millisUntilFinished) {
+                                    for (DrawView view : listCreatedViews) {
+                                        view.setAlpha(0.2f);
+                                    }
+                                }
+
+                                public void onFinish() {
+                                    for (DrawView view : listCreatedViews) {
+                                        view.setAlpha(0.0f);
+                                    }
+                                    unlockShapes();
+                                }
+                            };
+                            cT.start();
+
                         } else {
                             lockShapes();
                             tryAgainButton.setVisibility(View.VISIBLE);
+                            for (DrawView view : listCreatedViews) {
+                                view.setAlpha(1.0f);
+                            }
                             textColorScore.setText("Score: " + String.valueOf(score));
                             textHighScore.setText("High score: " + String.valueOf(score));
                             if (score > highscore) {
@@ -245,24 +279,6 @@ public class RememberColorFragment extends Fragment {
                             editor.putInt(Constants.REM_COLOR_HIGHLEVEL, level);
                             editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
                         }
-                        lockShapes();
-                        textLife.setText(String.valueOf(life));
-                        cT = new CountDownTimer(300, 100) {
-
-                            public void onTick(long millisUntilFinished) {
-                                for (DrawView view : listCreatedViews) {
-                                    view.setAlpha(0.2f);
-                                }
-                            }
-
-                            public void onFinish() {
-                                for (DrawView view : listCreatedViews) {
-                                    view.setAlpha(0.0f);
-                                }
-                                unlockShapes();
-                            }
-                        };
-                        cT.start();
                     } else {
                         Toast.makeText(context, "You need to continue level firstly", Toast.LENGTH_LONG).show();
                     }
@@ -281,11 +297,7 @@ public class RememberColorFragment extends Fragment {
         editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, true);
         editor.commit();
         countShapes = level + countShapes;
-        if ((size - level * 5) >= 40) {
-            size = size - level * 5;
-        } else {
-            size = 40;
-        }
+        size  = helper.getShapeSize(level, size, context);
         colorMap.put(1, Color.BLACK);
         colorMap.put(2, Color.BLUE);
         colorMap.put(3, Color.RED);

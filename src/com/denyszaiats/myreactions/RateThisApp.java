@@ -13,6 +13,8 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.TextView;
 
 
 public class RateThisApp {
@@ -106,13 +108,17 @@ public class RateThisApp {
 	 * @param context
 	 */
 	public static void showRateDialog(final Context context) {
+		TextView msg = new TextView(context);
+		msg.setText("Your feedback is very important for us");
+		msg.setPadding(20, 10, 20, 10);
+		msg.setGravity(Gravity.CENTER);
+		msg.setTextSize(20);
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		prefix = prefs.getString("prefix", "");
-
 		builder.setTitle("Rate us");
-		builder.setMessage("Your feedback is very important for us");
+		builder.setView(msg);
 		builder.setPositiveButton("Rate now", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

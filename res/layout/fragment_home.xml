@@ -116,7 +116,9 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textTitleStatistics"
-                    android:spinnerMode="dropdown"/>
+                    android:spinnerMode="dropdown"
+                    android:paddingLeft="20dp"
+                    android:gravity="center"/>
 
             <Spinner
                     android:id="@+id/dropMenuFinger"
@@ -124,7 +126,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textTitleStatistics"
                     android:spinnerMode="dropdown"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:paddingLeft="20dp"
+                    android:gravity="center"/>
 
             <Button
                     android:id="@+id/buttonShowResults"

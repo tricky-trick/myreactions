@@ -104,7 +104,7 @@ public class FastClickerFragment extends Fragment {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int width = displaymetrics.widthPixels;
-        int height = displaymetrics.heightPixels;
+        final int height = displaymetrics.heightPixels;
         int size;
         if (height < width){
             size = height;
@@ -112,10 +112,10 @@ public class FastClickerFragment extends Fragment {
         else {
             size = width;
         }
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(size, size);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(size - pxFromDp(20), size - pxFromDp(20));
+        layoutParams.setMargins(pxFromDp(10), pxFromDp(0), pxFromDp(10), pxFromDp(10));
         layoutParams.addRule(RelativeLayout.BELOW, R.id.chronometerFasterClicker);
         tapButton.setLayoutParams(layoutParams);
-
         results = new LinkedList<String>();
         startTimer.setOnClickListener(new OnClickListener() {
 
@@ -152,7 +152,10 @@ public class FastClickerFragment extends Fragment {
                             series = new LinearSeries();
 
                             int seconds = setSeriesForLatestResults();
-
+                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, height/4);
+                            params.setMargins(pxFromDp(5), pxFromDp(8), pxFromDp(5), pxFromDp(10));
+                            params.addRule(RelativeLayout.BELOW, R.id.resultsFasterClicker);
+                            chartViewLatestResults.setLayoutParams(params);
                             ChartBuilder.buildChart(series, chartViewLatestResults, 3, seconds - 2, new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL), new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
 
 
@@ -357,5 +360,10 @@ public class FastClickerFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private int pxFromDp(float dp)
+    {
+        return Math.round(dp * context.getResources().getDisplayMetrics().density);
     }
 }
