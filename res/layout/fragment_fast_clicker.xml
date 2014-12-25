@@ -22,7 +22,7 @@
                     android:shadowRadius="4"
                     android:shadowDx="2"
                     android:shadowDy="2"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:text="You need to do so many clicks per 10 seconds as You can."/>
 
         <Button

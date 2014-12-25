@@ -57,6 +57,7 @@
                 android:layout_below="@+id/textFindInSocNet"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="30dp"
+                android:gravity="center"
                 android:paddingRight="30dp">
 
 
@@ -73,7 +74,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="70dp"
+                    android:layout_toRightOf="@+id/imageAboutFacebook"
                     android:src="@drawable/twitter"
                     android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
 
@@ -82,7 +83,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="10dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/imageAboutTwitter"
                     android:src="@drawable/gmail"
                     android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
 
@@ -91,8 +92,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="70dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/imageAboutGoogle"
                     android:src="@drawable/vkontakte"
                     android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
         </RelativeLayout>

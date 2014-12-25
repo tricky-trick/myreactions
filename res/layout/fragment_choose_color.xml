@@ -18,7 +18,7 @@
                 android:shadowRadius="4"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:textStyle="italic"
+                android:textStyle="bold"
                 android:text="You need to recognize and choose color as soon as it possible."/>
 
         <TextView

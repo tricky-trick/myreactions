@@ -54,9 +54,10 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/shapebutton"
             android:text="Skip login"
+            android:textStyle="bold"
             android:onClick="goToApp"
             android:textColor="@color/clue_theme"
-            android:textSize="20sp"/>
+            android:textSize="14dp"/>
 
     <ProgressBar
             android:id="@+id/spinner"

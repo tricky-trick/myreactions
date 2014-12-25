@@ -238,7 +238,7 @@ public class RememberColorFragment extends Fragment {
         buttonHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (readyButton.getVisibility() != View.VISIBLE) {
+                if ((readyButton.getVisibility() != View.VISIBLE) && (nextLevelButton.getVisibility() != View.VISIBLE)) {
                     if (listCreatedViews != null) {
                         if (life > 0) {
                             life--;
