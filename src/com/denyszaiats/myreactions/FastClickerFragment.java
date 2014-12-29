@@ -112,7 +112,7 @@ public class FastClickerFragment extends Fragment {
         else {
             size = width;
         }
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(size - pxFromDp(20), size - pxFromDp(20));
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(size - pxFromDp(30), size - pxFromDp(30));
         layoutParams.setMargins(pxFromDp(10), pxFromDp(0), pxFromDp(10), pxFromDp(10));
         layoutParams.addRule(RelativeLayout.BELOW, R.id.chronometerFasterClicker);
         tapButton.setLayoutParams(layoutParams);
@@ -125,7 +125,7 @@ public class FastClickerFragment extends Fragment {
                     v.setVisibility(View.INVISIBLE);
                     doAnimation(tapButton);
                     chronometer.setVisibility(View.VISIBLE);
-                    CountDownTimer cT = new CountDownTimer(10200, 1000) {
+                    CountDownTimer cT = new CountDownTimer(10100, 1000) {
 
                         public void onTick(long millisUntilFinished) {
                             int va = (int) ((millisUntilFinished % 60000) / 1000);

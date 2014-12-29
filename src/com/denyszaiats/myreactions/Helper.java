@@ -10,34 +10,34 @@ public class Helper{
         int type = getTypeDisplay(context);
 
         if (type == 1) {
-            if ((size - level * 5) >= 30) {
-                size = size - level * 5;
+            if ((size - level * 4) >= 40) {
+                size = size - level * 4;
             } else {
-                size = 30;
+                size = 40;
             }
         }
 
         if (type == 2) {
-            if ((size - level * 5) >= 35) {
-                size = size - level * 5;
-            } else {
-                size = 35;
-            }
-        }
-
-        if (type == 3) {
-            if ((size - level * 5) >= 50) {
-                size = size - level * 5;
+            if ((size - level * 4) >= 50) {
+                size = size - level * 4;
             } else {
                 size = 50;
             }
         }
 
-        if (type == 4) {
-            if ((size - level * 5) >= 100) {
+        if (type == 3) {
+            if ((size - level * 5) >= 40) {
                 size = size - level * 5;
             } else {
-                size = 100;
+                size = 40;
+            }
+        }
+
+        if (type == 4) {
+            if ((size - level * 5) >= 70) {
+                size = size - level * 5;
+            } else {
+                size = 70;
             }
         }
 

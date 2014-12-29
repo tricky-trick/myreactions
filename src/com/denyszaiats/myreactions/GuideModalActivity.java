@@ -50,13 +50,15 @@ public class GuideModalActivity extends Activity{
                     "   Good luck!";
         }
         else if(parentFragmentName.equals(Constants.REMEMBER_COLOR_FRAGMENT)){
-            guideText = "In this game You have 10 seconds to remember colors and their places on the screen. After this 10 seconds rectangles will be disappeared" +
-                    "and You need to click on correct place where this shape was located. If You click on correct place - You will earn 10 points +1 life.\n" +
-                    "   You can click button 'Ready' and not to wait 10 seconds. Then You will earn 10 x points from left seconds and +1 life.\n" +
-                    "   If You will click on incorrect place - Your life will be decreased -1.\n" +
-                    "   When life will be left - game is finished.\n" +
-                    "   Each levels amount of rectangles will be increased.\n" +
-                    "   Good luck!";
+            guideText = "In this game You have 10 seconds to remember colors of rectangles and their places on the screen. After this 10 seconds rectangles will be disappeared" +
+                    " and You need to click on the place where this rectangle with appropriate color was located. If You click on correct place - You will earn 10 points +1 life.\n" +
+                    "You can click button 'Ready' and not to wait 10 seconds. Then You will earn 10 x points from left seconds and +1 life.\n" +
+                    "If You will click on incorrect place - Your life will be decreased -1.\n" +
+                    "You can click button Ready when You are ready to choose color. In this case You will earn 10 x (Your saved time) points.\n" +
+                    "You can choose the hint by clicking on the icon of lamp. But You will loose 2 life automatically.\n" +
+                    "When life will be left - game is finished.\n" +
+                    "Each levels amount of rectangles will be increased.\n" +
+                    "Good luck!";
 
         }
 

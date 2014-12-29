@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.zip.CheckedOutputStream;
 
 public class RememberColorFragment extends Fragment {
 
@@ -73,9 +73,6 @@ public class RememberColorFragment extends Fragment {
     private CountDownTimer cT;
     private int maxX;
     private int maxY;
-    private int pointX;
-    private int pointY;
-    private int tempScore;
 
     public RememberColorFragment() {
     }
@@ -175,6 +172,7 @@ public class RememberColorFragment extends Fragment {
                         score = 0;
                         time = 10;
                         countShapes = 2;
+                        life = 3;
                         runGame();
                     }
 
@@ -206,6 +204,47 @@ public class RememberColorFragment extends Fragment {
             }
         });
 
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((readyButton.getVisibility() != View.VISIBLE) && (nextLevelButton.getVisibility() != View.VISIBLE)) {
+                    if (listCreatedViews != null) {
+                        if (life >= 2) {
+                            life -= 2;
+                            //life--;
+                            //score -= 25;
+
+                            lockShapes();
+                            textColorScore.setText("Score: " + String.valueOf(score));
+                            textLife.setText(String.valueOf(life));
+                            cT = new CountDownTimer(1000, 100) {
+
+                                public void onTick(long millisUntilFinished) {
+                                    for (DrawView view : listCreatedViews) {
+                                        view.setAlpha(0.6f);
+                                    }
+                                }
+
+                                public void onFinish() {
+                                    for (DrawView view : listCreatedViews) {
+                                        view.setAlpha(0.0f);
+                                    }
+                                    unlockShapes();
+                                }
+                            };
+                            cT.start();
+
+                        }
+                        else {
+                            textLife.setTextColor(Color.RED);
+                        }
+                    } else {
+                        Toast.makeText(context, "You need to continue level firstly", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
         highscore = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
         textHighScore.setText("High score: " + String.valueOf(highscore));
 
@@ -230,61 +269,16 @@ public class RememberColorFragment extends Fragment {
             textLevel.setText("Level " + String.valueOf(tempLevel));
             textColorScore.setText("Score: " + String.valueOf(tempScore));
             textLife.setText(String.valueOf(tempLife));
+            if(tempLife<2){
+                textLife.setTextColor(Color.RED);
+            }
+            else {
+                textLife.setTextColor(Color.WHITE);
+            }
             level = tempLevel;
             score = tempScore;
             life = tempLife;
         }
-
-        buttonHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ((readyButton.getVisibility() != View.VISIBLE) && (nextLevelButton.getVisibility() != View.VISIBLE)) {
-                    if (listCreatedViews != null) {
-                        if (life > 0) {
-                            life--;
-                            score -= 25;
-
-                            lockShapes();
-                            textColorScore.setText("Score: " + String.valueOf(score));
-                            textLife.setText(String.valueOf(life));
-                            cT = new CountDownTimer(300, 100) {
-
-                                public void onTick(long millisUntilFinished) {
-                                    for (DrawView view : listCreatedViews) {
-                                        view.setAlpha(0.2f);
-                                    }
-                                }
-
-                                public void onFinish() {
-                                    for (DrawView view : listCreatedViews) {
-                                        view.setAlpha(0.0f);
-                                    }
-                                    unlockShapes();
-                                }
-                            };
-                            cT.start();
-
-                        } else {
-                            lockShapes();
-                            tryAgainButton.setVisibility(View.VISIBLE);
-                            for (DrawView view : listCreatedViews) {
-                                view.setAlpha(1.0f);
-                            }
-                            textColorScore.setText("Score: " + String.valueOf(score));
-                            textHighScore.setText("High score: " + String.valueOf(score));
-                            if (score > highscore) {
-                                highscore = score;
-                            }
-                            editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
-                            editor.putInt(Constants.REM_COLOR_HIGHLEVEL, level);
-                            editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
-                        }
-                    } else {
-                        Toast.makeText(context, "You need to continue level firstly", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });
 
 
         return rootView;
@@ -297,7 +291,11 @@ public class RememberColorFragment extends Fragment {
         editor.putBoolean(Constants.REM_COLOR_IS_CLICKABLE, true);
         editor.commit();
         countShapes = level + countShapes;
-        size  = helper.getShapeSize(level, size, context);
+        boolean isSuccessPrevResults = prefs.getBoolean(Constants.IS_SUCCESS_RESULT_REM_COLOR, true);
+        if(isSuccessPrevResults) {
+            size = helper.getShapeStartSize(context);
+            size = helper.getShapeSize(level, size, context);
+        }
         colorMap.put(1, Color.BLACK);
         colorMap.put(2, Color.BLUE);
         colorMap.put(3, Color.RED);
@@ -320,6 +318,12 @@ public class RememberColorFragment extends Fragment {
         readyButton.setVisibility(View.VISIBLE);
         textLevel.setText("Level " + String.valueOf(level));
         textLife.setText(String.valueOf(life));
+        if(life<2){
+            textLife.setTextColor(Color.RED);
+        }
+        else {
+            textLife.setTextColor(Color.WHITE);
+        }
         initShapes();
         lockShapes();
         cT = new CountDownTimer(10000, 1000) {
@@ -444,9 +448,9 @@ public class RememberColorFragment extends Fragment {
             DrawRect drawRect = new DrawRect(context);
             //drawRect.setLayoutParams(new ViewGroup.LayoutParams(rectSize, rectSize), );
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    rectSize, rectSize
+                    rectSize - pxFromDp(2f), rectSize - pxFromDp(2f)
             );
-            params.setMargins(5, 5, 5, 5);
+            params.setMargins(pxFromDp(2f), pxFromDp(2f), pxFromDp(2f), pxFromDp(2f));
             drawRect.setLayoutParams(params);
             drawRect.setSideSize(rectSize);
             Random randColorRect = new Random();
@@ -509,7 +513,6 @@ public class RememberColorFragment extends Fragment {
     }
 
     private void calculateResults(View v) {
-        tempScore = 0;
         ColorDrawable color = (ColorDrawable) v.getBackground();
         if (color.getColor() == colorMap.get(nominativeColor)) {
             if(time == 0) {
@@ -523,11 +526,13 @@ public class RememberColorFragment extends Fragment {
             textLevel.setText("Level " + String.valueOf(level));
             textColorScore.setText("Score: " + String.valueOf(score));
             nextLevelButton.setText("Next level");
+            nextLevelButton.setTextColor(Color.WHITE);
             nextLevelButton.setVisibility(View.VISIBLE);
             editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
             editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
             editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
             editor.putInt(Constants.REM_COLOR_TEMP_LIFE, life);
+            editor.putBoolean(Constants.IS_SUCCESS_RESULT_REM_COLOR, true);
         }
         else {
             if(life > 0){
@@ -535,15 +540,24 @@ public class RememberColorFragment extends Fragment {
                 textLevel.setText("Level " + String.valueOf(level));
                 textColorScore.setText("Score: " + String.valueOf(score));
                 textLife.setText(String.valueOf(life));
+                if(life<2){
+                    textLife.setTextColor(Color.RED);
+                }
+                else {
+                    textLife.setTextColor(Color.WHITE);
+                }
                 nextLevelButton.setText("Repeat level");
+                nextLevelButton.setTextColor(Color.RED);
                 nextLevelButton.setVisibility(View.VISIBLE);
                 editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
                 editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
                 editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
                 editor.putInt(Constants.REM_COLOR_TEMP_LIFE, life);
+                editor.putBoolean(Constants.IS_SUCCESS_RESULT_REM_COLOR, false);
             }
             else {
                 tryAgainButton.setVisibility(View.VISIBLE);
+                tryAgainButton.setTextColor(Color.YELLOW);
                 textColorScore.setText("Score: " + String.valueOf(score));
                 textHighScore.setText("High score: " + String.valueOf(score));
                 editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
