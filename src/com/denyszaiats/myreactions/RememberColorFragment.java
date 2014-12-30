@@ -210,6 +210,9 @@ public class RememberColorFragment extends Fragment {
                 if ((readyButton.getVisibility() != View.VISIBLE) && (nextLevelButton.getVisibility() != View.VISIBLE)) {
                     if (listCreatedViews != null) {
                         if (life >= 2) {
+                            if(life == 2){
+                                textLife.setTextColor(Color.RED);
+                            }
                             life -= 2;
                             //life--;
                             //score -= 25;

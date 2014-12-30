@@ -1,4 +1,5 @@
-bin/
+/bin/*
+!/bin/classes/MyReactions.apk
 gen/
 a.settings/
 .classpath

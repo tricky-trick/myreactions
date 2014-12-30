@@ -31,23 +31,23 @@ public class GuideModalActivity extends Activity{
         final String parentFragmentName = prefs.getString(Constants.FRAGMENT_NAME, "");
 
         if(parentFragmentName.equals(Constants.USER_FRAGMENT)){
-            guideText = "   This is main window where user could monitor all results and activity of this application.\n" +
-                    "   User is able to choose Finger and Hand to look at results of clicking.\n" +
-                    "   It's possible to monitor best, worth results and clicking results during long period of time.\n" +
-                    "   It will help user to understand  - are results better or worth with each game.\n" +
-                    "   Also it's possible to see high score results for another game-test of this application and publish results on Facebook";
+            guideText = "In this window You are able to monitor all results and activities of this application.\n" +
+                    "You are able to choose Finger and Hand to see the results of You clicking.\n" +
+                    "It's possible to monitor best, worth results and clicking results during long period of time.\n" +
+                    "It will help user to understand  - are results better or worth with each game.\n" +
+                    "Also it's possible to see high score results for another game-test of this application and publish results on Facebook";
         }
         else if(parentFragmentName.equals(Constants.FAST_CLICKER_FRAGMENT)){
-            guideText = "   Fast clicker game. You need to so many clicks as You can per 10 seconds.\n" +
-                    "   For this You need to choose Finger and Hand and click START.\n" +
-                    "   You will see the chart of Your clicks during Your last session. You will be able to see how much clicks per each seconds You did.";
+            guideText = "In this game You need to do so many clicks as You can per 10 seconds.\n" +
+                    "For this You need to choose Finger and Hand and click START.\n" +
+                    "You will see the chart of Your clicking activity during Your last game. You will be able to see how many clicks per each seconds (in range from 0 - 10 seconds) You did.";
         }
         else if(parentFragmentName.equals(Constants.CHOOSE_COLOR_FRAGMENT)){
-            guideText = "   In this game You need to recognize and click on rectangle with appropriate color as soon as You possible. Faster You will do it - more score You will have.\n" +
-                    "   With each level amount of rectangles will be increased and time of appearing will be decreased.\n" +
-                    "   So, You need to earn a lot of scores in the beginning levels.\n" +
-                    "   You need to collect not less than 10 scores per 1 level.\n" +
-                    "   Good luck!";
+            guideText = "In this game You have 30 seconds per level and You need to recognize and click on rectangle with appropriate color as soon as possible. Faster You will do it - more scores You will earn.\n" +
+                    "With each level amount of rectangles will be increased and time of appearing will be decreased.\n" +
+                    "So, You need to earn a lot of scores in the first levels.\n" +
+                    "You need to collect not less than 10 scores per 1 level.\n" +
+                    "Good luck!";
         }
         else if(parentFragmentName.equals(Constants.REMEMBER_COLOR_FRAGMENT)){
             guideText = "In this game You have 10 seconds to remember colors of rectangles and their places on the screen. After this 10 seconds rectangles will be disappeared" +
