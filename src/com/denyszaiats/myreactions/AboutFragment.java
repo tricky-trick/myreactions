@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class AboutFragment extends Fragment {
 
     private ImageView facebook;
-    private ImageView twitter;
+    //private ImageView twitter;
     private ImageView gmail;
     private ImageView vkontakte;
     private RelativeLayout areaAboutSocial;
@@ -28,7 +29,7 @@ public class AboutFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
 
         facebook = (ImageView) rootView.findViewById(R.id.imageAboutFacebook);
-        twitter = (ImageView) rootView.findViewById(R.id.imageAboutTwitter);
+        //twitter = (ImageView) rootView.findViewById(R.id.imageAboutTwitter);
         gmail = (ImageView) rootView.findViewById(R.id.imageAboutGoogle);
         vkontakte = (ImageView) rootView.findViewById(R.id.imageAboutVk);
         areaAboutSocial = (RelativeLayout) rootView.findViewById(R.id.aboutSocialImgArea);
@@ -44,17 +45,26 @@ public class AboutFragment extends Fragment {
             }
         });
 
-        twitter.setOnClickListener(new View.OnClickListener() {
+        /*twitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
         gmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:" + "myreaction2014@gmail.com"));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "My feedback about MyReaction");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "");
 
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send email using..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(getActivity(), "No email clients installed.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

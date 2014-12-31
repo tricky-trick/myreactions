@@ -40,7 +40,7 @@ public class GuideModalActivity extends Activity{
         else if(parentFragmentName.equals(Constants.FAST_CLICKER_FRAGMENT)){
             guideText = "In this game You need to do so many clicks as You can per 10 seconds.\n" +
                     "For this You need to choose Finger and Hand and click START.\n" +
-                    "You will see the chart of Your clicking activity during Your last game. You will be able to see how many clicks per each seconds (in range from 0 - 10 seconds) You did.";
+                    "After 10-seconds game You will see the chart of Your clicking activity during Your last game. You will be able to see how many clicks per each seconds (in range from 0 - 10 seconds) You did.";
         }
         else if(parentFragmentName.equals(Constants.CHOOSE_COLOR_FRAGMENT)){
             guideText = "In this game You have 30 seconds per level and You need to recognize and click on rectangle with appropriate color as soon as possible. Faster You will do it - more scores You will earn.\n" +

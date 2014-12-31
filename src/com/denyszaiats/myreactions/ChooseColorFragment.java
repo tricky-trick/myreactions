@@ -131,9 +131,6 @@ public class ChooseColorFragment extends Fragment {
         buttonRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cT != null){
-                    cT.cancel();
-                }
                 TextView msg = new TextView(getActivity());
                 msg.setText("Do You really want to start new game?");
                 msg.setPadding(20, 10, 20, 10);

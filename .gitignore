@@ -24,3 +24,9 @@ a.settings/
 *.iml
 
 *.class
+
+*.class
+
+*.class
+
+classes/production/google-play-services_lib/com/google/android/gms/BuildConfig.class

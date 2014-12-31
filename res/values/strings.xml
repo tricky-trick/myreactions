@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">My Reactions</string>
+    <string name="app_name">My Reaction</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="app_id">715404325209319</string>
@@ -12,7 +12,7 @@
     <string name="clean_results">Clean all results</string>
     <string name="logout_menu">Logout</string>
     <string name="title_activity_task">TaskActivity</string>
-    <string name="title_activity_main">My Reactions</string>
+    <string name="title_activity_main">My Reaction</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>

@@ -69,21 +69,21 @@
                     android:src="@drawable/facebook"
                     android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
 
-            <ImageView
-                    android:id="@+id/imageAboutTwitter"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@+id/imageAboutFacebook"
-                    android:src="@drawable/twitter"
-                    android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
+            <!--<ImageView-->
+                    <!--android:id="@+id/imageAboutTwitter"-->
+                    <!--android:layout_width="70dp"-->
+                    <!--android:layout_height="70dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_toRightOf="@+id/imageAboutFacebook"-->
+                    <!--android:src="@drawable/twitter"-->
+                    <!--android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>-->
 
             <ImageView
                     android:id="@+id/imageAboutGoogle"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@+id/imageAboutTwitter"
+                    android:layout_toRightOf="@+id/imageAboutFacebook"
                     android:src="@drawable/gmail"
                     android:background="@drawable/abc_menu_dropdown_panel_holo_dark"/>
 

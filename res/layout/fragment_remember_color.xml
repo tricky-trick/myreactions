@@ -18,7 +18,7 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:textStyle="bold"
-                android:text="You need to remember colors as soon as it possible and after You need to choose correct color from table."/>
+                android:text="You need to remember colors as soon as possible and after You need to choose correct color from grid."/>
 
     <TextView
             android:id="@+id/textLevelRemColor"
