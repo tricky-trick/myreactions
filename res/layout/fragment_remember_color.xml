@@ -143,7 +143,7 @@
                     android:layout_marginRight="130dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shapebutton_selector"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:text="Ready"
                     android:textColor="@color/white"
                     android:shadowColor="#000000"

@@ -2,15 +2,20 @@ package com.denyszaiats.myreactions;
 
 import java.util.*;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -121,7 +126,24 @@ public class FastClickerFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if (leftHand.getVisibility() == View.INVISIBLE && fingerThumb.getVisibility() == View.INVISIBLE) {
+                if(fingerButton.getText().toString().contains("Choose") || handButton.getText().toString().contains("Choose")){
+                    TextView msg = new TextView(getActivity());
+                    msg.setText("Please, choose hand and finger!");
+                    msg.setPadding(20, 10, 20, 10);
+                    msg.setGravity(Gravity.CENTER);
+                    msg.setTextSize(20);
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Alert")
+                            .setView(msg)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+               else if (leftHand.getVisibility() == View.INVISIBLE && fingerThumb.getVisibility() == View.INVISIBLE) {
                     v.setVisibility(View.INVISIBLE);
                     doAnimation(tapButton);
                     chronometer.setVisibility(View.VISIBLE);

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:chartview="http://schemas.android.com/apk/res/com.denyszaiats.myreactions"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:clickable="true">
 
     <RelativeLayout
+            android:id="@+id/mainHomeView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
         <RelativeLayout
@@ -229,24 +231,11 @@
                         chartview:gridLineWidth="1dp"
                         chartview:leftLabelWidth="20dp"/>
 
-                <TextView
-                        android:id="@+id/textTitleOfChartSummary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/chartViewMaxResults"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:text="Graph of clicking for all Your results during all the period of time"/>
-
-
                 <Button
                         android:id="@+id/buttonShowAllResults"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/textTitleOfChartSummary"
+                        android:layout_below="@+id/chartViewMaxResults"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/shapebutton_selector"
                         android:text="Show chart for all results"
@@ -268,7 +257,7 @@
                             android:layout_centerHorizontal="true"
                             android:textSize="16dp"
                             android:textStyle="bold"
-                            android:text="Results for Color recognizing"/>
+                            android:text="Results for Color recognising"/>
 
                     <TextView
                             android:id="@+id/textChooseColorHighlevel"

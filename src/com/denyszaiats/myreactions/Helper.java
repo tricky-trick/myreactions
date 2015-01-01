@@ -61,7 +61,7 @@ public class Helper{
         }
 
         if (type == 4) {
-            size = 200;
+            size = 140;
         }
 
         return size;

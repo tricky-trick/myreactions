@@ -14,5 +14,6 @@
     <color name="lime">#00FF00</color>
     <color name="red">#FF5454</color>
     <color name="silver">#C0C0C0</color>
+    <color name="light_gray">#FCFBFB</color>
 
 </resources>

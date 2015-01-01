@@ -559,7 +559,6 @@ public class RememberColorFragment extends Fragment {
                 tryAgainButton.setVisibility(View.VISIBLE);
                 tryAgainButton.setTextColor(Color.YELLOW);
                 textColorScore.setText("Score: " + String.valueOf(score));
-                textHighScore.setText("High score: " + String.valueOf(score));
                 editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
             }
         }

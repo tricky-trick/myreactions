@@ -128,7 +128,7 @@ public class RateThisApp {
 				setOptOut(context, true);
 			}
 		});
-		builder.setNeutralButton("Now now", new OnClickListener() {
+		builder.setNeutralButton("Not now", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				clearSharedPreferences(context);

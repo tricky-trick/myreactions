@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -24,9 +25,11 @@ import com.denyszaiats.myreactions.drawer.DrawCircle;
 import com.denyszaiats.myreactions.drawer.DrawLine;
 import com.denyszaiats.myreactions.drawer.DrawRect;
 import com.denyszaiats.myreactions.drawer.DrawView;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Random;
 
 public class ChooseColorFragment extends Fragment {
@@ -66,6 +69,8 @@ public class ChooseColorFragment extends Fragment {
     private HashMap<Integer, String> mapCoord;
     private SharedPreferences.Editor editor;
     private CountDownTimer cT;
+    private int maxX;
+    private int maxY;
 
     public ChooseColorFragment(){}
 
@@ -233,7 +238,7 @@ public class ChooseColorFragment extends Fragment {
                 //areaColorAppear.setVisibility(View.INVISIBLE);
                 editor.putBoolean(Constants.COLOR_IS_CLICKABLE,false);
 
-                if(score >= 10*level){
+                if(score >= 100*level){
                     nextLevelButton.setVisibility(View.VISIBLE);
                     level++;
                     timeAppearing = 4;
@@ -243,7 +248,7 @@ public class ChooseColorFragment extends Fragment {
                     textColorTimer.setText("Level done!");
                 }
                 else {
-                    textColorTimer.setText("Finish!");
+                    textColorTimer.setText("Game over");
                     buttonRefresh.setVisibility(View.INVISIBLE);
                     tryAgainButton.setVisibility(View.VISIBLE);
                     highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
@@ -277,6 +282,7 @@ public class ChooseColorFragment extends Fragment {
     }
 
     private void drawShapes(){
+        //removeGrid();
         listCreatedViews = new LinkedList<DrawRect>();
         listColor = new LinkedList<Integer>();
         usedCoordinates = new LinkedList<Integer>();
@@ -287,9 +293,8 @@ public class ChooseColorFragment extends Fragment {
         for (int i = 0; i < countShapes; i++) {
             generateShapesParameters();
             DrawRect drawRect = new DrawRect(context);
-            //drawRect.setLayoutParams(new ViewGroup.LayoutParams(rectSize, rectSize), );
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    rectSize, rectSize
+                    rectSize - pxFromDp(2), rectSize - pxFromDp(2)
             );
             params.setMargins(5,5,5,5);
             drawRect.setLayoutParams(params);
@@ -310,6 +315,11 @@ public class ChooseColorFragment extends Fragment {
             listCreatedViews.add(drawRect);
             listColor.add(genIndexColorRect);
         }
+
+        //removeGrid();
+        setPaddingArea();
+        //drawGrid();
+
 
         for (DrawRect drawRect: listCreatedViews) {
             do{areaViewAppear.addView(drawRect);}
@@ -343,7 +353,7 @@ public class ChooseColorFragment extends Fragment {
     private void calculateResults(View v){
         ColorDrawable color = (ColorDrawable) v.getBackground();
         if (color.getColor() == colorMap.get(nominativeColor)){
-            score++;
+            score += 10;
         }
         textColorScore.setText("Score: " + String.valueOf(score));
         initShapes();
@@ -357,39 +367,33 @@ public class ChooseColorFragment extends Fragment {
 
     private void initShapes(){
         removeView();
-        //generateShapesParameters();
         drawShapes();
     }
 
     private void setPaddingArea(){
-        int horisontalPadding;
-        int verticalPadding;
-        if(areaViewAppear.getWidth() % pxFromDp(size) != 0) {
-           horisontalPadding = (int) (Float.parseFloat(String.valueOf("0." + String.valueOf(areaViewAppear.getWidth() % pxFromDp(size)))) * areaViewAppear.getWidth()) / 2;
-        }
-        else {
-            horisontalPadding = pxFromDp(5);
-        }
-        if(areaViewAppear.getHeight() % pxFromDp(size) != 0) {
-            verticalPadding = (int) (Float.parseFloat(String.valueOf("0." + String.valueOf(areaViewAppear.getHeight() % pxFromDp(size)))) * areaViewAppear.getHeight()) / 2;
-        }
-        else {
-            verticalPadding = pxFromDp(5);
-        }
-        areaViewAppear.setPadding(horisontalPadding, verticalPadding, horisontalPadding, verticalPadding);
+        int paddingX = (areaViewAppear.getWidth() - maxX)/2;
+        int paddingY = (areaViewAppear.getHeight()- maxY)/2;
+
+        areaViewAppear.setPadding(paddingX, paddingY, paddingX, paddingY);
     }
 
     private void generateMapCoordinates(){
-        //Random random = new Random();
-        int generatedSize = pxFromDp(size);//generateRandomInteger(150, 200, random);
+        int generatedSize = pxFromDp(size);
         rectSize = generatedSize;
-
+        maxX = 0;
+        maxY = 0;
         int k = 1;
         mapCoord = new HashMap<Integer, String>();
         for (int i = 0; i< areaViewAppear.getWidth(); i++){
             for (int j = 0; j< areaViewAppear.getHeight(); j++){
                 if ((i%generatedSize == 0) && (j%generatedSize==0)){
                     if (((i + generatedSize) < areaViewAppear.getWidth()) && ((j + generatedSize) < areaViewAppear.getHeight())) {
+                        if((i+generatedSize) > maxX) {
+                            maxX = (i+generatedSize);
+                        }
+                        if((j+generatedSize) > maxY) {
+                            maxY = (j+generatedSize);
+                        }
                         mapCoord.put(k, i + "," + j);
                         k++;
                     }
@@ -432,6 +436,79 @@ public class ChooseColorFragment extends Fragment {
                 }
             }
         }
+    }
+
+    private void drawGrid(){
+        listCreatedLines = new LinkedList<DrawLine>();
+        for(Map.Entry<Integer, String> map: mapCoord.entrySet()){
+            if(map.getValue().toString().startsWith("0,")){
+                DrawLine lineView = new DrawLine(context);
+                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
+                int point = Integer.parseInt(map.getValue().split(",")[1]);
+                lineView.setStartPoint(new Point(0, point));
+                lineView.setEndPoint(new Point(areaView.getWidth(), point));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        areaView.getWidth(), 5
+                );
+                lineView.setLayoutParams(params);
+                lineView.setX(0);
+                lineView.setY(point);
+                listCreatedLines.add(lineView);
+            }
+            if(map.getValue().toString().endsWith(",0")){
+                DrawLine lineView = new DrawLine(context);
+                lineView.setBackgroundColor(getResources().getColor(R.color.silver));
+                int point = Integer.parseInt(map.getValue().split(",")[0]);
+                lineView.setStartPoint(new Point(point, 0));
+                lineView.setEndPoint(new Point(point, areaView.getHeight()));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        5, areaView.getHeight()
+                );
+                lineView.setLayoutParams(params);
+                lineView.setY(0);
+                lineView.setX(point);
+                listCreatedLines.add(lineView);
+            }
+        }
+
+        DrawLine lineViewX = new DrawLine(context);
+        lineViewX.setBackgroundColor(getResources().getColor(R.color.silver));
+        lineViewX.setStartPoint(new Point(maxX, 0));
+        lineViewX.setEndPoint(new Point(maxX, areaView.getHeight()));
+        RelativeLayout.LayoutParams paramsX = new RelativeLayout.LayoutParams(
+                5, areaView.getHeight()
+        );
+        lineViewX.setLayoutParams(paramsX);
+        lineViewX.setY(0);
+        lineViewX.setX(maxX - 3);
+        listCreatedLines.add(lineViewX);
+
+        DrawLine lineViewY = new DrawLine(context);
+        lineViewY.setBackgroundColor(getResources().getColor(R.color.silver));
+        lineViewY.setStartPoint(new Point(maxY, 0));
+        lineViewY.setEndPoint(new Point(maxY, areaView.getWidth()));
+        RelativeLayout.LayoutParams paramsY = new RelativeLayout.LayoutParams(
+                areaView.getWidth(), 5
+        );
+        lineViewY.setLayoutParams(paramsY);
+        lineViewY.setY(maxY - 3);
+        lineViewY.setX(0);
+        listCreatedLines.add(lineViewY);
+
+
+        for(DrawView line: listCreatedLines){
+            areaViewAppear.addView(line);
+        }
+    }
+
+    private void removeGrid(){
+        if (listCreatedLines != null) {
+            for (DrawView line : listCreatedLines) {
+                if(line != null)
+                    areaViewAppear.removeView(line);
+            }
+        }
+        areaView.setPadding(0,0,0,0);
     }
 
 

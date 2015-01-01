@@ -86,13 +86,13 @@ public class MainActivity extends Activity{
 		if (sumClicks.equals(""))
 			sumClicks = "0";
 
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), true, sumClicks));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), false, sumClicks));
 		// Choose color
 		int highscore = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), true, String.valueOf(highscore)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), false, String.valueOf(highscore)));
 		// Remember color
 		int highscoreRemColor = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, String.valueOf(highscoreRemColor)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), false, String.valueOf(highscoreRemColor)));
 		// About
 		try {
 			navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1), true, "v." + MainActivity.this.getPackageManager()
