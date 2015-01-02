@@ -80,10 +80,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         boolean isChecked = prefs.getBoolean(Constants.USER_FRAGMENT + "_CHECKED", false);
+        editor.putString(Constants.FRAGMENT_NAME, Constants.USER_FRAGMENT);
+        editor.commit();
         if(!isChecked) {
-            editor.putString(Constants.FRAGMENT_NAME, Constants.USER_FRAGMENT);
-            editor.commit();
-
             Intent i = new Intent(context,
                     GuideModalActivity.class);
             startActivity(i);

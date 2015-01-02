@@ -67,6 +67,7 @@ public class RememberColorFragment extends Fragment {
     private int countShapes = 2;
     private int size = 105;
     private int life = 3;
+    private int failClicks = 10;
     private LinkedList<Integer> listColor;
     private HashMap<Integer, String> mapCoord;
     private SharedPreferences.Editor editor;
@@ -87,10 +88,9 @@ public class RememberColorFragment extends Fragment {
         helper = new Helper();
 
         boolean isChecked = prefs.getBoolean(Constants.REMEMBER_COLOR_FRAGMENT + "_CHECKED", false);
+        editor.putString(Constants.FRAGMENT_NAME, Constants.REMEMBER_COLOR_FRAGMENT);
+        editor.commit();
         if(!isChecked) {
-            editor.putString(Constants.FRAGMENT_NAME, Constants.REMEMBER_COLOR_FRAGMENT);
-            editor.commit();
-
             Intent i = new Intent(context,
                     GuideModalActivity.class);
             startActivity(i);
@@ -116,6 +116,38 @@ public class RememberColorFragment extends Fragment {
         textHighScore = (TextView) rootView.findViewById(R.id.textRemColorHighscores);
         colorMap = new HashMap<Integer, Integer>();
         size = helper.getShapeStartSize(context);
+
+        areaViewAppear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                failClicks --;
+                if(failClicks == 0) {
+                    lockShapes();
+                    for(DrawView view: listCreatedViews) {
+                        view.setAlpha(1.0f);
+                    }
+                    repeatLeve();
+                }
+                else if (failClicks <= 3){
+                    TextView msg = new TextView(getActivity());
+                    msg.setText("You have " + String.valueOf(failClicks) + " attempts. Click on lamp to take hint");
+                    msg.setPadding(20, 10, 20, 10);
+                    msg.setGravity(Gravity.CENTER);
+                    msg.setTextSize(20);
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Alert")
+                            .setView(msg)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    }
+                }
+        });
+
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -285,6 +317,7 @@ public class RememberColorFragment extends Fragment {
     }
 
     private void runGame() {
+        failClicks = 10;
         countShapes = 2;
         removeView();
         removeGrid();
@@ -536,24 +569,7 @@ public class RememberColorFragment extends Fragment {
         }
         else {
             if(life > 0){
-                life--;
-                textLevel.setText("Level " + String.valueOf(level));
-                textColorScore.setText("Score: " + String.valueOf(score));
-                textLife.setText(String.valueOf(life));
-                if(life<2){
-                    textLife.setTextColor(Color.RED);
-                }
-                else {
-                    textLife.setTextColor(Color.WHITE);
-                }
-                nextLevelButton.setText("Repeat level");
-                nextLevelButton.setTextColor(Color.RED);
-                nextLevelButton.setVisibility(View.VISIBLE);
-                editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
-                editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
-                editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
-                editor.putInt(Constants.REM_COLOR_TEMP_LIFE, life);
-                editor.putBoolean(Constants.IS_SUCCESS_RESULT_REM_COLOR, false);
+                repeatLeve();
             }
             else {
                 tryAgainButton.setVisibility(View.VISIBLE);
@@ -574,6 +590,27 @@ public class RememberColorFragment extends Fragment {
         }
         cT.cancel();
         System.gc();
+    }
+
+    private void repeatLeve(){
+        life--;
+        textLevel.setText("Level " + String.valueOf(level));
+        textColorScore.setText("Score: " + String.valueOf(score));
+        textLife.setText(String.valueOf(life));
+        if(life<2){
+            textLife.setTextColor(Color.RED);
+        }
+        else {
+            textLife.setTextColor(Color.WHITE);
+        }
+        nextLevelButton.setText("Repeat level");
+        nextLevelButton.setTextColor(Color.RED);
+        nextLevelButton.setVisibility(View.VISIBLE);
+        editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
+        editor.putInt(Constants.REM_COLOR_TEMP_LEVEL, level);
+        editor.putInt(Constants.REM_COLOR_TEMP_SCORE, score);
+        editor.putInt(Constants.REM_COLOR_TEMP_LIFE, life);
+        editor.putBoolean(Constants.IS_SUCCESS_RESULT_REM_COLOR, false);
     }
 
     private int pxFromDp(float dp) {

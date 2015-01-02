@@ -64,6 +64,7 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	private LoginButton loginBtn;
 
 	private UiLifecycleHelper uiHelper;
+	private Editor editor;
 
 	// private static String message = "Sample status posted from android app";
 
@@ -92,7 +93,6 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 				.addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build())
 				.addScope(Plus.SCOPE_PLUS_LOGIN).build();
 
-
 		logo.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -112,11 +112,12 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Editor editor = prefs.edit();
+				editor = prefs.edit();
 				editor.putBoolean(Constants.IS_LOGGED_IN, true);
 				editor.commit();
 			}
 		});
+		
 
 		new LoginAsyncTask().execute();
 	}
@@ -341,6 +342,7 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	}
 
 	public void goToApp(View v) {
+		mGoogleApiClient.disconnect();
 		Intent i = new Intent(this, MainActivity.class);
 		startActivity(i);
 	}

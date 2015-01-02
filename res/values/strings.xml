@@ -2,16 +2,12 @@
 <resources>
 
     <string name="app_name">My Reaction</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
     <string name="app_id">715404325209319</string>
     <string name="btn_logout_from_google">Sign out</string>
-    <string name="title_activity_tasks">TasksActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="clean_results">Clean all results</string>
     <string name="logout_menu">Logout</string>
-    <string name="title_activity_task">TaskActivity</string>
     <string name="title_activity_main">My Reaction</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
@@ -23,6 +19,7 @@
         <item >Fast clicker</item>
         <item >Choose color</item>
         <item >Remember color</item>
+        <item >Help</item>
         <item >About</item>
     </string-array>
     
@@ -33,6 +30,7 @@
         <item>@drawable/ic_time_tap</item>
         <item>@drawable/choosecolor</item>
         <item>@drawable/remcolor</item>
+        <item>@drawable/helpicon</item>
         <item>@drawable/about</item>
     </array>
     

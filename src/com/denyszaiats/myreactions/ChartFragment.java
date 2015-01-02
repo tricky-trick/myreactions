@@ -56,7 +56,7 @@ public class ChartFragment extends Activity {
         mRenderer.setPointSize(15);
         mRenderer.setYAxisAlign(Paint.Align.LEFT, 0);
         mRenderer.setYLabelsAlign(Paint.Align.RIGHT, 0);
-        mRenderer.setMargins(new int[] { 20, 80, 100, 10 });
+        mRenderer.setMargins(new int[] { 20, 40, 100, 10 });
         mRenderer.setYLabelsColor(0, getResources().getColor(R.color.black));
         mRenderer.setXLabelsColor(getResources().getColor(R.color.black));
         mRenderer.setClickEnabled(true);

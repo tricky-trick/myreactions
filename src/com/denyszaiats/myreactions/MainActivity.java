@@ -93,9 +93,12 @@ public class MainActivity extends Activity{
 		// Remember color
 		int highscoreRemColor = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), false, String.valueOf(highscoreRemColor)));
+
+		// Home
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// About
 		try {
-			navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1), true, "v." + MainActivity.this.getPackageManager()
+			navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "v." + MainActivity.this.getPackageManager()
                     .getPackageInfo(MainActivity.this.getPackageName(), 0).versionName));
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
@@ -248,22 +251,27 @@ public class MainActivity extends Activity{
 		// update the main content by replacing fragments
 		Fragment fragment = null;
 		switch (position) {
-		case 0:
-			fragment = new HomeFragment();
-			break;
-		case 1:
-			fragment = new FastClickerFragment();
-			break;
-		case 2:
-			fragment = new ChooseColorFragment();
-			break;
-		case 3:
-			fragment = new RememberColorFragment();
-			break;
-		case 4:
-			fragment = new AboutFragment();
-			break;
-		default:
+			case 0:
+				fragment = new HomeFragment();
+				break;
+			case 1:
+				fragment = new FastClickerFragment();
+				break;
+			case 2:
+				fragment = new ChooseColorFragment();
+				break;
+			case 3:
+				fragment = new RememberColorFragment();
+				break;
+			case 4:
+				Intent i = new Intent(this,
+						GuideModalActivity.class);
+				startActivity(i);
+				break;
+			case 5:
+				fragment = new AboutFragment();
+				break;
+			default:
 			break;
 		}
 

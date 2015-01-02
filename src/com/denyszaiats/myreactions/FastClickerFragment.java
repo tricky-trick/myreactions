@@ -72,10 +72,10 @@ public class FastClickerFragment extends Fragment {
 
         editor = prefs.edit();
         boolean isChecked = prefs.getBoolean(Constants.FAST_CLICKER_FRAGMENT + "_CHECKED", false);
-        if(!isChecked) {
-            editor.putString(Constants.FRAGMENT_NAME, Constants.FAST_CLICKER_FRAGMENT);
-            editor.commit();
+        editor.putString(Constants.FRAGMENT_NAME, Constants.FAST_CLICKER_FRAGMENT);
+        editor.commit();
 
+        if(!isChecked) {
             Intent i = new Intent(context,
                     GuideModalActivity.class);
             startActivity(i);

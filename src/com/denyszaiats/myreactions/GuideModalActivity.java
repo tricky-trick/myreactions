@@ -31,33 +31,29 @@ public class GuideModalActivity extends Activity{
         final String parentFragmentName = prefs.getString(Constants.FRAGMENT_NAME, "");
 
         if(parentFragmentName.equals(Constants.USER_FRAGMENT)){
-            guideText = "In this window You are able to monitor all results and activities of this application.\n" +
-                    "You are able to choose Finger and Hand to see the results of You clicking.\n" +
-                    "It's possible to monitor best, worth results and clicking results during long period of time.\n" +
-                    "It will help user to understand  - are results better or worth with each game.\n" +
-                    "Also it's possible to see high score results for another game-test of this application and publish results on Facebook";
+            guideText = "Here You can monitor all results and activities of this application.\n" +
+                    "You are able to choose a Finger and a Hand to see all results of Your clicking.\n" +
+                    "It's possible to monitor the best and the worst results and results of whole clicking.\n" +
+                    "Also You can see high score results for all games of this application.  All results can be published on Facebook.";
         }
         else if(parentFragmentName.equals(Constants.FAST_CLICKER_FRAGMENT)){
-            guideText = "In this game You need to do so many clicks as You can per 10 seconds.\n" +
-                    "For this You need to choose Finger and Hand and click START.\n" +
-                    "After 10-seconds game You will see the chart of Your clicking activity during Your last game. You will be able to see how many clicks per each seconds (in range from 0 - 10 seconds) You did.";
+            guideText = "You have to do so many clicks as You can do per 10 seconds.\n" +
+                    "You have possibility to choose a Hand and a Finger for every game to try each of them.\n" +
+                    "After the end of 10-second game You can see the chart of Your clicking activity during the last game and see how many clicks per each second (in range from 0 to 10 seconds) You did. Good luck!";
         }
         else if(parentFragmentName.equals(Constants.CHOOSE_COLOR_FRAGMENT)){
-            guideText = "In this game You have 30 seconds per level and You need to recognize and click on rectangle with appropriate color as soon as possible. Faster You will do it - more scores You will earn.\n" +
-                    "With each level amount of rectangles will be increased and time of appearing will be decreased.\n" +
-                    "So, You need to earn a lot of scores in the first levels.\n" +
-                    "You need to collect not less than 10 scores per 1 level.\n" +
+            guideText =  "You have to recognize a rectangle with appropriate color and click on it as soon as possible while it's appearing. You have 30 seconds per level.\n" +
+                    "The number of rectangles and time of their appearance increase with each level.\n" +
+                    "You need to collect not less than 100 points per each level.\n" +
                     "Good luck!";
         }
         else if(parentFragmentName.equals(Constants.REMEMBER_COLOR_FRAGMENT)){
-            guideText = "In this game You have 10 seconds to remember colors of rectangles and their places on the screen. After this 10 seconds rectangles will be disappeared" +
-                    " and You need to click on the place where this rectangle with appropriate color was located. If You click on correct place - You will earn 10 points +1 life.\n" +
-                    "You can click button 'Ready' and not to wait 10 seconds. Then You will earn 10 x points from left seconds and +1 life.\n" +
-                    "If You will click on incorrect place - Your life will be decreased -1.\n" +
-                    "You can click button Ready when You are ready to choose color. In this case You will earn 10 x (Your saved time) points.\n" +
-                    "You can choose the hint by clicking on the icon of lamp. But You will loose 2 life automatically.\n" +
-                    "When life will be left - game is finished.\n" +
-                    "Each levels amount of rectangles will be increased.\n" +
+            guideText = "You have to memorise colors of rectangles and their position on the screen. You have 10 seconds for this. Then You need to click on the place where the rectangle with appropriate color was located." +
+                    "You get 10 points and +1 life by clicking on the correct place.\n" +
+                    "When you are ready and time has not finished (10 seconds) You can click button 'Ready'. In case of correct click You win additional points from seconds left and +1 life.\n" +
+                    "You decrease Your lives  (-1) by clicking on incorrect places.\n" +
+                    "You can choose the hint by clicking on the lamp icon and in this case You lose 2 lives automatically.\n" +
+                    "The number of rectangles increases with each level.\n" +
                     "Good luck!";
 
         }

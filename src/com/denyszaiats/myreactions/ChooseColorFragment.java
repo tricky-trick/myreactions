@@ -82,10 +82,9 @@ public class ChooseColorFragment extends Fragment {
         editor = prefs.edit();
         helper = new Helper();
         boolean isChecked = prefs.getBoolean(Constants.CHOOSE_COLOR_FRAGMENT + "_CHECKED", false);
+        editor.putString(Constants.FRAGMENT_NAME, Constants.CHOOSE_COLOR_FRAGMENT);
+        editor.commit();
         if(!isChecked) {
-            editor.putString(Constants.FRAGMENT_NAME, Constants.CHOOSE_COLOR_FRAGMENT);
-            editor.commit();
-
             Intent i = new Intent(context,
                     GuideModalActivity.class);
             startActivity(i);
