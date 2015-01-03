@@ -39,14 +39,30 @@ public class ChartFragment extends Activity {
         mDataset.addSeries(mCurrentSeries);
         mCurrentRenderer = new XYSeriesRenderer();
         mCurrentRenderer.setLineWidth(8);
-        //mCurrentRenderer.setDisplayBoundingPoints(true);
-        //mCurrentRenderer.setPointStrokeWidth(15);
         mCurrentRenderer.setFillPoints(true);
         mCurrentRenderer.setPointStyle(PointStyle.CIRCLE);
         mCurrentRenderer.setColor(getResources().getColor(R.color.blue));
         mRenderer.addSeriesRenderer(mCurrentRenderer);
-        mRenderer.setLabelsTextSize(20);
+        Helper helper = new Helper();
+        int type = helper.getTypeDisplay(this);
+        int labelTextSize = 20;
+        if(type == 1){
+            labelTextSize = 15;
+        }
+        else if(type == 2){
+            labelTextSize = 20;
+        }
+        else if(type == 3){
+            labelTextSize = 25;
+        }
+        else if(type == 4){
+            labelTextSize = 30;
+        }
+        mRenderer.setLabelsTextSize(labelTextSize);
         mRenderer.setLegendTextSize(30);
+        mRenderer.setXTitle("\n\n\n\n\n\nDate/Time");
+        mRenderer.setYTitle("Clicks");
+        mRenderer.setAxisTitleTextSize(labelTextSize);
         mRenderer.setAxesColor(getResources().getColor(R.color.black));
         mRenderer.setGridColor(getResources().getColor(R.color.silver));
         mRenderer.setLabelsColor(getResources().getColor(R.color.black));
@@ -56,7 +72,7 @@ public class ChartFragment extends Activity {
         mRenderer.setPointSize(15);
         mRenderer.setYAxisAlign(Paint.Align.LEFT, 0);
         mRenderer.setYLabelsAlign(Paint.Align.RIGHT, 0);
-        mRenderer.setMargins(new int[] { 20, 40, 100, 10 });
+        mRenderer.setMargins(new int[] { 20, 60, 100, 10 });
         mRenderer.setYLabelsColor(0, getResources().getColor(R.color.black));
         mRenderer.setXLabelsColor(getResources().getColor(R.color.black));
         mRenderer.setClickEnabled(true);

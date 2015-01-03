@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:chartview="http://schemas.android.com/apk/res/com.denyszaiats.myreactions"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:clickable="true">
+        xmlns:chartview="http://schemas.android.com/apk/res/com.denyszaiats.myreactions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:clickable="true">
 
     <RelativeLayout
             android:id="@+id/mainHomeView"
@@ -158,7 +158,7 @@
             <RelativeLayout
                     android:id="@+id/scrollViewHome"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="1dp"
                     android:layout_marginTop="5dp"
                     android:layout_below="@+id/buttonShowResults"
                     android:visibility="invisible">
@@ -218,11 +218,21 @@
                         android:textStyle="bold"
                         android:text="Graph of clicking frequency for Your best result"/>
 
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textTitleOfChartTemp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="10dp"
+                            android:text="C\nl\ni\nc\nk\ns\n"/>
+
 
                 <com.denyszaiats.myreactions.ChartView.ChartView
                         android:id="@+id/chartViewMaxResults"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="150dp"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@+id/textTitleOfChartTemp"
                         android:layout_marginTop="8dp"
@@ -231,14 +241,24 @@
                         chartview:gridLineWidth="1dp"
                         chartview:leftLabelWidth="20dp"/>
 
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/chartViewMaxResults"
+                        android:layout_marginTop="-5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10dp"
+                        android:text="Seconds"/>
+
                 <Button
                         android:id="@+id/buttonShowAllResults"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/chartViewMaxResults"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/shapebutton_selector"
-                        android:text="Show chart for all results"
+                        android:text="Show detailed chart"
                         android:textColor="@color/white"
                         android:shadowColor="#000000"
                         android:shadowRadius="4"
@@ -247,91 +267,96 @@
                         android:textStyle="bold"/>
 
 
-                    <TextView
-                            android:id="@+id/textTitleChooseColor"
-                            android:layout_width="wrap_content"
+            </RelativeLayout>
+
+            <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/buttonShowAllResults"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:textSize="16dp"
-                            android:textStyle="bold"
-                            android:text="Results for Color recognising"/>
+                            android:layout_below="@+id/scrollViewHome"
+                            android:layout_marginTop="10dp">
+                <TextView
+                        android:id="@+id/textTitleChooseColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:text="Results for Color recognising"/>
 
-                    <TextView
-                            android:id="@+id/textChooseColorHighlevel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/textTitleChooseColor"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:textSize="14dp"
-                            android:textStyle="bold"/>
+                <TextView
+                        android:id="@+id/textChooseColorHighlevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textTitleChooseColor"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"/>
 
-                    <TextView
-                            android:id="@+id/textChooseColorHighscore"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/textChooseColorHighlevel"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:textSize="14dp"
-                            android:textStyle="bold"/>
-
-
-                    <TextView
-                            android:id="@+id/textTitleRemColor"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/textChooseColorHighscore"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:textSize="16dp"
-                            android:textStyle="bold"
-                            android:text="Results for Color remembering"/>
-
-                    <TextView
-                            android:id="@+id/textRemColorHighlevel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/textTitleRemColor"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:textSize="14dp"
-                            android:textStyle="bold"/>
-
-                    <TextView
-                            android:id="@+id/textRemColorHighscore"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/textRemColorHighlevel"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:layout_centerHorizontal="true"
-                            android:textSize="14dp"
-                            android:textStyle="bold"/>
-
-                    <Button
-                            android:id="@+id/buttonPostResultsFacebook"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/textRemColorHighscore"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/com_facebook_button_blue_normal"
-                            android:text="Post on Facebook"
-                            android:textColor="@color/white"
-                            android:shadowColor="#000000"
-                            android:shadowRadius="4"
-                            android:shadowDx="2"
-                            android:shadowDy="2"
-                            android:textStyle="bold"/>
+                <TextView
+                        android:id="@+id/textChooseColorHighscore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textChooseColorHighlevel"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"/>
 
 
+                <TextView
+                        android:id="@+id/textTitleRemColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textChooseColorHighscore"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:text="Results for Color remembering"/>
+
+                <TextView
+                        android:id="@+id/textRemColorHighlevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textTitleRemColor"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/textRemColorHighscore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textRemColorHighlevel"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"/>
+
+
+                <Button
+                        android:id="@+id/buttonPostResultsFacebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textRemColorHighscore"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/com_facebook_button_blue_normal"
+                        android:text="Post on Facebook"
+                        android:textColor="@color/white"
+                        android:shadowColor="#000000"
+                        android:shadowRadius="4"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textStyle="bold"/>
             </RelativeLayout>
 
 

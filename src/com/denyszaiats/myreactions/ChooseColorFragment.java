@@ -245,6 +245,15 @@ public class ChooseColorFragment extends Fragment {
                     size = helper.getShapeStartSize(context);
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
                     textColorTimer.setText("Level done!");
+                    editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
+                    editor.putInt(Constants.COLOR_HIGHLEVEL, level);
+                    editor.putInt(Constants.COLOR_TEMP_LEVEL, level);
+                    editor.putInt(Constants.COLOR_TEMP_SCORE, score);
+
+                    if(score>highscore) {
+                        highscore = score;
+                        textHighScore.setText("High score: " + String.valueOf(score));
+                    }
                 }
                 else {
                     textColorTimer.setText("Game over");
@@ -255,6 +264,14 @@ public class ChooseColorFragment extends Fragment {
                         highscore = score;
                     }
 
+                    if(score>highscore) {
+                        highscore = score;
+                        textHighScore.setText("High score: " + String.valueOf(score));
+                    }
+
+                    editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
+                    editor.putInt(Constants.COLOR_HIGHLEVEL, level);
+
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,true);
                     level = 1;
                     timeAppearing = 4;
@@ -262,17 +279,9 @@ public class ChooseColorFragment extends Fragment {
                     score = 0;
                     size = helper.getShapeStartSize(context);
                 }
-                if(score>highscore) {
-                    highscore = score;
-                    textHighScore.setText("High score: " + String.valueOf(score));
-                }
-                editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
-                editor.putInt(Constants.COLOR_HIGHLEVEL, level);
                 AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
                 animation.setDuration(500);
                 areaViewAppear.startAnimation(animation);
-                editor.putInt(Constants.COLOR_TEMP_LEVEL, level);
-                editor.putInt(Constants.COLOR_TEMP_SCORE, score);
                 editor.commit();
 
             }

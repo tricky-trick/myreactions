@@ -45,7 +45,25 @@ public class ValueLabelAdapter extends LabelAdapter {
                 gravity = Gravity.CENTER | Gravity.RIGHT;
             }
         }
-        labelTextView.setTextSize(8);
+        Helper helper = new Helper();
+        int type = helper.getTypeDisplay(mContext);
+        int labelTextSize;
+        if(type == 1){
+            labelTextSize = 6;
+        }
+        else if(type == 2){
+            labelTextSize = 8;
+        }
+        else if(type == 3){
+            labelTextSize = 10;
+        }
+        else if(type == 4){
+            labelTextSize = 12;
+        }
+        else {
+            labelTextSize = 8;
+        }
+        labelTextView.setTextSize(labelTextSize);
         labelTextView.setGravity(gravity);
         labelTextView.setPadding(8, 0, 8, 0);
         String value = String.format("%.0f", getItem(position));

@@ -210,6 +210,14 @@
                 android:background="@drawable/abc_menu_dropdown_panel_holo_light"
                 android:visibility="invisible">
 
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="10dp"
+                        android:text="C\nl\ni\nc\nk\ns\n"/>
 
             <com.denyszaiats.myreactions.ChartView.ChartView
                     android:id="@+id/chartViewLatestResults"
@@ -218,10 +226,19 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     chartview:bottomLabelHeight="20dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     chartview:gridLineColor="#E5E5E5"
                     chartview:leftLabelWidth="20dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/chartViewLatestResults"
+                        android:layout_marginTop="-5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10dp"
+                        android:text="Seconds"/>
 
             <Button
                     android:id="@+id/tryAgainButton"
@@ -230,7 +247,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/shapebutton_selector"
                     android:layout_below="@+id/chartViewLatestResults"
                     android:text="@string/try_again"

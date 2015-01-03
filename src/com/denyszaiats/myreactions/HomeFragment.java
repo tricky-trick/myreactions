@@ -172,6 +172,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             summaryResults.setText("You already made " + summaryClicks + " clicks");
         }
 
+        int highlevelRemColor = prefs.getInt(Constants.REM_COLOR_HIGHLEVEL, 0);
+        int highscoreRemColor = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
+        int highlevelChooseColor = prefs.getInt(Constants.COLOR_HIGHLEVEL, 0);
+        int highscoreChooseColor = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
+        textChooseColorHighlevel.setText("High level: " + String.valueOf(highlevelChooseColor));
+        textChooseColorHighscore.setText("High score: " + String.valueOf(highscoreChooseColor));
+        textRemColorHighlevel.setText("High level: " + String.valueOf(highlevelRemColor));
+        textRemColorHighscore.setText("High score: " + String.valueOf(highscoreRemColor));
+
         buttonShowResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,6 +204,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 editor.putString("FILTER",hand + "-" + finger);
                 editor.commit();
 
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(0,5,0,0);
+                params.addRule(RelativeLayout.BELOW, R.id.buttonShowResults);
+                resultsScrollView.setLayoutParams(params);
                 resultsScrollView.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
                 resultsMaxClicks = getMaxValueOfClicks().toString();
@@ -225,14 +238,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 //int amountOfDifferentResults = getAmountsOfDifferentResults();
 
                 ChartBuilder.buildChart(seriesSum, chartViewMaxResult, 2, seconds - 2, new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.VERTICAL), new ValueLabelAdapter(context, ValueLabelAdapter.LabelOrientation.HORIZONTAL));
-                int highlevelRemColor = prefs.getInt(Constants.REM_COLOR_HIGHLEVEL, 0);
-                int highscoreRemColor = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
-                int highlevelChooseColor = prefs.getInt(Constants.COLOR_HIGHLEVEL, 0);
-                int highscoreChooseColor = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
-                textChooseColorHighlevel.setText("High level: " + String.valueOf(highlevelChooseColor));
-                textChooseColorHighscore.setText("High score: " + String.valueOf(highscoreChooseColor));
-                textRemColorHighlevel.setText("High level: " + String.valueOf(highlevelRemColor));
-                textRemColorHighscore.setText("High score: " + String.valueOf(highscoreRemColor));
             }
         });
 

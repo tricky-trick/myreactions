@@ -3,9 +3,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
     <RelativeLayout
+            android:id="@+id/mainLayoutGuide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/abc_menu_dropdown_panel_holo_light">
+            android:background="@color/white">
 
 
         <ImageView
@@ -24,7 +25,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:textSize="20dp"
                 android:textColor="@color/black"
                 android:shadowColor="@color/black_overlay"
                 android:shadowRadius="4"
@@ -33,29 +34,23 @@
                 android:textStyle="bold"
                 android:text="Game guide"/>
 
-        <TextView
-                android:id="@+id/textGuide"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textGuideTitle"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:gravity="left"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textSize="14dp"
-                android:textColor="@color/black"
-                android:shadowColor="@color/black_overlay"
-                android:shadowRadius="4"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:textStyle="normal"
-                android:text="Version 1.0"/>
+
+            <WebView android:id="@+id/textGuide"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@+id/textGuideTitle"
+                     android:layout_centerHorizontal="true"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+                     android:background="@color/white">
+
+            </WebView>
 
         <CheckBox
                 android:id="@+id/dontShowAgain"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_below="@id/textGuide"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
@@ -67,16 +62,16 @@
                 android:id="@+id/buttonGuideOk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dontShowAgain"
+                android:layout_below="@id/textGuide"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="45dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:padding="5dp"
                 android:text="OK"
                 android:textSize="18dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:shadowColor="@color/black_overlay"
                 android:shadowRadius="4"
                 android:shadowDx="2"

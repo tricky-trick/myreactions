@@ -80,7 +80,7 @@ public class MainActivity extends Activity{
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem("Welcome, " + username, navMenuIcons.getResourceId(0, -1)));
+		navDrawerItems.add(new NavDrawerItem("Home", navMenuIcons.getResourceId(0, -1)));
 		// Fast Clicker
 		String sumClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
 		if (sumClicks.equals(""))
@@ -264,6 +264,9 @@ public class MainActivity extends Activity{
 				fragment = new RememberColorFragment();
 				break;
 			case 4:
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.putString(Constants.FRAGMENT_NAME, Constants.HELP_FRAGMENT);
+				editor.commit();
 				Intent i = new Intent(this,
 						GuideModalActivity.class);
 				startActivity(i);

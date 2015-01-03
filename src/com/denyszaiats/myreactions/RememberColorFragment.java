@@ -120,32 +120,33 @@ public class RememberColorFragment extends Fragment {
         areaViewAppear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                failClicks --;
-                if(failClicks == 0) {
-                    lockShapes();
-                    for(DrawView view: listCreatedViews) {
-                        view.setAlpha(1.0f);
+                if (nextLevelButton.getVisibility() == View.INVISIBLE && tryAgainButton.getVisibility() == View.INVISIBLE) {
+                    failClicks--;
+                    if (failClicks == 0) {
+                        lockShapes();
+                        for (DrawView view : listCreatedViews) {
+                            view.setAlpha(1.0f);
+                        }
+                        repeatLeve();
+                    } else if (failClicks == 3) {
+                        TextView msg = new TextView(getActivity());
+                        msg.setText("You have " + String.valueOf(failClicks) + " attempts. Click on lamp to take hint");
+                        msg.setPadding(20, 10, 20, 10);
+                        msg.setGravity(Gravity.CENTER);
+                        msg.setTextSize(20);
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Alert")
+                                .setView(msg)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
                     }
-                    repeatLeve();
                 }
-                else if (failClicks <= 3){
-                    TextView msg = new TextView(getActivity());
-                    msg.setText("You have " + String.valueOf(failClicks) + " attempts. Click on lamp to take hint");
-                    msg.setPadding(20, 10, 20, 10);
-                    msg.setGravity(Gravity.CENTER);
-                    msg.setTextSize(20);
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("Alert")
-                            .setView(msg)
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    }
-                }
+            }
         });
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
@@ -329,14 +330,18 @@ public class RememberColorFragment extends Fragment {
             size = helper.getShapeStartSize(context);
             size = helper.getShapeSize(level, size, context);
         }
-        colorMap.put(1, Color.BLACK);
-        colorMap.put(2, Color.BLUE);
-        colorMap.put(3, Color.RED);
-        colorMap.put(4, Color.GREEN);
-        colorMap.put(5, Color.YELLOW);
-        colorMap.put(6, Color.MAGENTA);
-        colorMap.put(7, Color.CYAN);
-        colorMap.put(8, Color.GRAY);
+        colorMap.put(1, R.color.black);
+        colorMap.put(2, R.color.dark_blue);
+        colorMap.put(3, R.color.hot_red);
+        colorMap.put(4, R.color.lime);
+        colorMap.put(5, R.color.yellow);
+        colorMap.put(6, R.color.pink);
+        colorMap.put(7, R.color.cyan);
+        colorMap.put(8, R.color.gray);
+        colorMap.put(9, R.color.orange);
+        colorMap.put(10, R.color.indigo);
+        colorMap.put(11, R.color.dark_green);
+        colorMap.put(12, R.color.brown);
         textColorScore.setText("Score: " + String.valueOf(score));
         tryAgainButton.setVisibility(View.INVISIBLE);
         nextLevelButton.setVisibility(View.INVISIBLE);
@@ -495,7 +500,7 @@ public class RememberColorFragment extends Fragment {
             } else {
                 genIndexColorRect = generateRandomInteger(1, colorMap.size(), randColorRect);
             }
-            drawRect.setBackgroundColor(colorMap.get(genIndexColorRect));
+            drawRect.setBackgroundColor(getResources().getColor(colorMap.get(genIndexColorRect)));
             drawRect.setX(rectX);
             drawRect.setY(rectY);
             listCreatedViews.add(drawRect);
@@ -534,7 +539,7 @@ public class RememberColorFragment extends Fragment {
         drawCircleNominative.setSideSize(pxFromDp(40));
         drawCircleNominative.setX(areaColorAppear.getWidth() / 2 - pxFromDp(25));
         drawCircleNominative.setY(0);
-        drawCircleNominative.setBackgroundColor(colorMap.get(nominativeColor));
+        drawCircleNominative.setBackgroundColor(getResources().getColor(colorMap.get(nominativeColor)));
         areaColorAppear.addView(drawCircleNominative);
     }
 
@@ -547,7 +552,7 @@ public class RememberColorFragment extends Fragment {
 
     private void calculateResults(View v) {
         ColorDrawable color = (ColorDrawable) v.getBackground();
-        if (color.getColor() == colorMap.get(nominativeColor)) {
+        if (color.getColor() == getResources().getColor(colorMap.get(nominativeColor))) {
             if(time == 0) {
                 score += 10;
             }
@@ -576,6 +581,7 @@ public class RememberColorFragment extends Fragment {
                 tryAgainButton.setTextColor(Color.YELLOW);
                 textColorScore.setText("Score: " + String.valueOf(score));
                 editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
+                textColorTimer.setText("Game over");
             }
         }
         if(score>highscore) {

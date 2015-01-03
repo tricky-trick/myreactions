@@ -28,6 +28,7 @@ public class Constants {
 	public static final String FAST_CLICKER_FRAGMENT= "FAST_CLICKER_FRAGMENT";
 	public static final String CHOOSE_COLOR_FRAGMENT= "CHOOSE_COLOR_FRAGMENT";
 	public static final String REMEMBER_COLOR_FRAGMENT= "REMEMBER_COLOR_FRAGMENT";
+	public static final String HELP_FRAGMENT= "HELP_FRAGMENT";
 	public static final String FRAGMENT_NAME= "";
 	public static final String IS_SUCCESS_RESULT_REM_COLOR= "IS_SUCCESS_RESULT_REM_COLOR";
 }

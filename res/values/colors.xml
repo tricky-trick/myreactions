@@ -4,7 +4,6 @@
     <color name="black">#000000</color>
     <color name="clue_theme">#BED55F</color>
     <color name="white">#FFFFFF</color>
-    <color name="list_item_title">#fff</color>
     <color name="list_background">#303030</color>
     <color name="list_background_pressed">#992416</color>
     <color name="list_divider">#272727</color>
@@ -13,7 +12,16 @@
     <color name="blue">#00BFFF</color>
     <color name="lime">#00FF00</color>
     <color name="red">#FF5454</color>
+    <color name="hot_red">#FF0000</color>
     <color name="silver">#C0C0C0</color>
     <color name="light_gray">#FCFBFB</color>
-
+    <color name="orange">#FF8C00</color>
+    <color name="dark_green">#006400</color>
+    <color name="indigo">#4B0082</color>
+    <color name="brown">#8B4513</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="gray">#808080</color>
+    <color name="pink">#FF00FF</color>
+    <color name="cyan">#00FFFF</color>
+    <color name="dark_blue">#0000FF</color>
 </resources>

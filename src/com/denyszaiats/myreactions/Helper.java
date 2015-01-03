@@ -18,10 +18,10 @@ public class Helper{
         }
 
         if (type == 2) {
-            if ((size - level * 4) >= 50) {
+            if ((size - level * 4) >= 40) {
                 size = size - level * 4;
             } else {
-                size = 50;
+                size = 40;
             }
         }
 
@@ -34,10 +34,10 @@ public class Helper{
         }
 
         if (type == 4) {
-            if ((size - level * 5) >= 70) {
+            if ((size - level * 5) >= 55) {
                 size = size - level * 5;
             } else {
-                size = 70;
+                size = 55;
             }
         }
 
@@ -67,7 +67,7 @@ public class Helper{
         return size;
     }
 
-    private int getTypeDisplay(Context context){
+    public int getTypeDisplay(Context context){
         int type = 0;
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
