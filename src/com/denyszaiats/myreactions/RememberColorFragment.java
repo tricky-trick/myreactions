@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -532,15 +533,20 @@ public class RememberColorFragment extends Fragment {
     }
 
     private void drawNominativeColor(){
-        nominativeColor = listColor.get(generateRandomInteger(0, listColor.size() - 1, new Random()));
+        try {
+            nominativeColor = listColor.get(generateRandomInteger(0, listColor.size() - 1, new Random()));
 
-        drawCircleNominative = new DrawCircle(context);
-        drawCircleNominative.setLayoutParams(new RelativeLayout.LayoutParams(pxFromDp(40), pxFromDp(40)));
-        drawCircleNominative.setSideSize(pxFromDp(40));
-        drawCircleNominative.setX(areaColorAppear.getWidth() / 2 - pxFromDp(25));
-        drawCircleNominative.setY(0);
-        drawCircleNominative.setBackgroundColor(getResources().getColor(colorMap.get(nominativeColor)));
-        areaColorAppear.addView(drawCircleNominative);
+            drawCircleNominative = new DrawCircle(context);
+            drawCircleNominative.setLayoutParams(new RelativeLayout.LayoutParams(pxFromDp(40), pxFromDp(40)));
+            drawCircleNominative.setSideSize(pxFromDp(40));
+            drawCircleNominative.setX(areaColorAppear.getWidth() / 2 - pxFromDp(25));
+            drawCircleNominative.setY(0);
+            drawCircleNominative.setBackgroundColor(getResources().getColor(colorMap.get(nominativeColor)));
+            areaColorAppear.addView(drawCircleNominative);
+        }
+        catch (IllegalStateException ex){
+            Log.d("[Exception]", ex.toString());
+        }
     }
 
     public void setPaddings(){
