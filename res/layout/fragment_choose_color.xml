@@ -19,7 +19,7 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:textStyle="bold"
-                android:text="You need to recognise and choose color as soon as possible."/>
+                android:text="You have to recognize and choose a color as soon as possible"/>
 
         <TextView
                 android:id="@+id/textLevel"

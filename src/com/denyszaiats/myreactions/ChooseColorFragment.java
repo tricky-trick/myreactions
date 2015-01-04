@@ -190,6 +190,7 @@ public class ChooseColorFragment extends Fragment {
             textColorTimer.setText("Level done!");
             textLevel.setText("Level " + String.valueOf(tempLevel));
             textColorScore.setText("Score: " + String.valueOf(tempScore));
+            textHighScore.setText("High score: " + String.valueOf(highscore));
             level = tempLevel;
             score = tempScore;
         }
@@ -245,15 +246,15 @@ public class ChooseColorFragment extends Fragment {
                     size = helper.getShapeStartSize(context);
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
                     textColorTimer.setText("Level done!");
+                    if(score>highscore) {
+                        highscore = score;
+                        textHighScore.setText("High score: " + String.valueOf(score));
+                    }
                     editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
                     editor.putInt(Constants.COLOR_HIGHLEVEL, level);
                     editor.putInt(Constants.COLOR_TEMP_LEVEL, level);
                     editor.putInt(Constants.COLOR_TEMP_SCORE, score);
 
-                    if(score>highscore) {
-                        highscore = score;
-                        textHighScore.setText("High score: " + String.valueOf(score));
-                    }
                 }
                 else {
                     textColorTimer.setText("Game over");
@@ -362,6 +363,10 @@ public class ChooseColorFragment extends Fragment {
         ColorDrawable color = (ColorDrawable) v.getBackground();
         if (color.getColor() == colorMap.get(nominativeColor)){
             score += 10;
+            if(score>highscore) {
+                highscore = score;
+                textHighScore.setText("High score: " + String.valueOf(score));
+            }
         }
         textColorScore.setText("Score: " + String.valueOf(score));
         initShapes();

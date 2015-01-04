@@ -32,25 +32,25 @@ public class GuideModalActivity extends Activity{
         String guideText = "";
 
         String userFragmentText = "Here You can monitor all results and activities of this application.<br>" +
-                "You are able to choose a Finger and a Hand to see all results of Your clicking.<br>" +
-                "It's possible to monitor the best and the worst results and results of whole clicking.<br>" +
-                "Also You can see high score results for all games of this application.  All results can be published on Facebook.";
+                "You can choose a Hand and a Finger and see all results of Your clicking.<br>" +
+                "It's possible to monitor the best and the worst results and the results of whole clicking.<br>" +
+                "Also You can see the high score results for all games of this application.";
 
         String fastClickerFragmentText = "You have to do so many clicks as You can do per 10 seconds.<br>" +
                 "You have possibility to choose a Hand and a Finger for every game to try each of them.<br>" +
                 "After the end of 10-second game You can see the chart of Your clicking activity during the last game and see how many clicks per each second " +
                 "(in range from 0 to 10 seconds) You did.";
 
-        String chooseColorFragmentText =  "You have to recognize a rectangle with appropriate color and click on it as soon as possible while it's appearing. You have 30 seconds per level.<br>" +
+        String chooseColorFragmentText = "You have to recognize the rectangle with appropriate color and click on it as soon as possible while it appears. You have 30 seconds per level.<br>" +
                 "The number of rectangles and time of their appearance increase with each level.<br>" +
-                "You need to collect not less than 100 points per each level.";
+                "You need to collect not less than 10 points per each level.";
 
-        String remColorFragmentText = "You have to memorise colors of rectangles and their position on the screen. You have 10 seconds for this. Then You need to click on the place where the rectangle with appropriate color was located." +
-                "You get 10 points and +1 life by clicking on the correct place.<br>" +
-                "When you are ready and time has not finished (10 seconds) You can click button 'Ready'. In case of correct click You win additional points from seconds left and +1 life.<br>" +
-                "You decrease Your lives  (-1) by clicking on incorrect places.<br>" +
-                "You can choose the hint by clicking on the lamp icon and in this case You lose 2 lives automatically." +
-                "The number of rectangles increases with each level.";
+        String remColorFragmentText = "You have to memorize colors of rectangles and their location on the screen. You have 10 seconds for this. " +
+                "Then You have to click on the place where the rectangle with appropriate color was located.<br>" +
+                "You get 10 points and +1 life for clicking on the correct place.<br>" +
+                "When you are ready and time has not finished yet you can click on the button 'Ready'. In case of correct click You win additional points from seconds left and +1 life.<br>" +
+                "You decrease Your lives (-1) by clicking on incorrect places.<br>" +
+                "You can choose a hint by clicking on the lamp icon and in this case You lose 2 lives automatically.";
 
 
         final String parentFragmentName = prefs.getString(Constants.FRAGMENT_NAME, "");
@@ -71,9 +71,9 @@ public class GuideModalActivity extends Activity{
 
         else if(parentFragmentName.equals(Constants.HELP_FRAGMENT)){
             guideText = "<h3>Home page</h3>" + userFragmentText +
-                        "<br><h3>Fast clicker game</h3>" + fastClickerFragmentText +
-                        "<br><h3>Recognise color game</h3>" + chooseColorFragmentText +
-                        "<br><h3>Remember colors game</h3>" + remColorFragmentText;
+                        "<br><h3>Fast clicker</h3>" + fastClickerFragmentText +
+                        "<br><h3>Recognise color</h3>" + chooseColorFragmentText +
+                        "<br><h3>Remember colors</h3>" + remColorFragmentText;
             mainLayout.removeView(dontShowAgain);
         }
 

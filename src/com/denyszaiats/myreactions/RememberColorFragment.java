@@ -130,7 +130,7 @@ public class RememberColorFragment extends Fragment {
                         repeatLeve();
                     } else if (failClicks == 3) {
                         TextView msg = new TextView(getActivity());
-                        msg.setText("You have " + String.valueOf(failClicks) + " attempts. Click on lamp to take hint");
+                        msg.setText("You have " + String.valueOf(failClicks) + " attempts. Click on the lamp to take a hint");
                         msg.setPadding(20, 10, 20, 10);
                         msg.setGravity(Gravity.CENTER);
                         msg.setTextSize(20);
@@ -406,7 +406,7 @@ public class RememberColorFragment extends Fragment {
                 lineView.setStartPoint(new Point(0, point));
                 lineView.setEndPoint(new Point(areaView.getWidth(), point));
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        areaView.getWidth(), 5
+                        areaView.getWidth(), 3
                 );
                 lineView.setLayoutParams(params);
                 lineView.setX(0);
@@ -420,7 +420,7 @@ public class RememberColorFragment extends Fragment {
                 lineView.setStartPoint(new Point(point, 0));
                 lineView.setEndPoint(new Point(point, areaView.getHeight()));
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        5, areaView.getHeight()
+                        3, areaView.getHeight()
                 );
                 lineView.setLayoutParams(params);
                 lineView.setY(0);
@@ -434,11 +434,11 @@ public class RememberColorFragment extends Fragment {
         lineViewX.setStartPoint(new Point(maxX, 0));
         lineViewX.setEndPoint(new Point(maxX, areaView.getHeight()));
         RelativeLayout.LayoutParams paramsX = new RelativeLayout.LayoutParams(
-                5, areaView.getHeight()
+                3, areaView.getHeight()
         );
         lineViewX.setLayoutParams(paramsX);
         lineViewX.setY(0);
-        lineViewX.setX(maxX - 3);
+        lineViewX.setX(maxX - 2);
         listCreatedLines.add(lineViewX);
 
         DrawLine lineViewY = new DrawLine(context);
@@ -446,10 +446,10 @@ public class RememberColorFragment extends Fragment {
         lineViewY.setStartPoint(new Point(maxY, 0));
         lineViewY.setEndPoint(new Point(maxY, areaView.getWidth()));
         RelativeLayout.LayoutParams paramsY = new RelativeLayout.LayoutParams(
-                areaView.getWidth(), 5
+                areaView.getWidth(), 3
         );
         lineViewY.setLayoutParams(paramsY);
-        lineViewY.setY(maxY - 3);
+        lineViewY.setY(maxY - 2);
         lineViewY.setX(0);
         listCreatedLines.add(lineViewY);
 
@@ -486,9 +486,9 @@ public class RememberColorFragment extends Fragment {
             DrawRect drawRect = new DrawRect(context);
             //drawRect.setLayoutParams(new ViewGroup.LayoutParams(rectSize, rectSize), );
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    rectSize - pxFromDp(2f), rectSize - pxFromDp(2f)
+                    rectSize - pxFromDp(1.5f), rectSize - pxFromDp(1.5f)
             );
-            params.setMargins(pxFromDp(2f), pxFromDp(2f), pxFromDp(2f), pxFromDp(2f));
+            params.setMargins(pxFromDp(1.25f), pxFromDp(1.25f), pxFromDp(1.5f), pxFromDp(1.5f));
             drawRect.setLayoutParams(params);
             drawRect.setSideSize(rectSize);
             Random randColorRect = new Random();

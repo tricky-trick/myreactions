@@ -128,7 +128,7 @@ public class FastClickerFragment extends Fragment {
             public void onClick(View v) {
                 if(fingerButton.getText().toString().contains("Choose") || handButton.getText().toString().contains("Choose")){
                     TextView msg = new TextView(getActivity());
-                    msg.setText("Please, choose hand and finger!");
+                    msg.setText("Please, choose a hand and a finger!");
                     msg.setPadding(20, 10, 20, 10);
                     msg.setGravity(Gravity.CENTER);
                     msg.setTextSize(20);
@@ -147,7 +147,7 @@ public class FastClickerFragment extends Fragment {
                     v.setVisibility(View.INVISIBLE);
                     doAnimation(tapButton);
                     chronometer.setVisibility(View.VISIBLE);
-                    CountDownTimer cT = new CountDownTimer(10050, 1000) {
+                    CountDownTimer cT = new CountDownTimer(10020, 1000) {
 
                         public void onTick(long millisUntilFinished) {
                             int va = (int) ((millisUntilFinished % 60000) / 1000);
@@ -364,7 +364,7 @@ public class FastClickerFragment extends Fragment {
     private void doAnimation(View image) {
         image.setVisibility(View.VISIBLE);
         AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
-        animation.setDuration(1000);
+        animation.setDuration(500);
         image.setAnimation(animation);
     }
 

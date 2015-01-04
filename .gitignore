@@ -30,3 +30,7 @@ a.settings/
 *.class
 
 classes/production/google-play-services_lib/com/google/android/gms/BuildConfig.class
+
+classes/production/google-play-services_lib/com/google/android/gms/BuildConfig.class
+
+*.class

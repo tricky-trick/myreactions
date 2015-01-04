@@ -80,7 +80,7 @@ public class MainActivity extends Activity{
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem("Home", navMenuIcons.getResourceId(0, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
 		// Fast Clicker
 		String sumClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
 		if (sumClicks.equals(""))

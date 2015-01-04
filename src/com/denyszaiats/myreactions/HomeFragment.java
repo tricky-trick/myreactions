@@ -167,7 +167,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         summaryClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
         if (summaryClicks.equals("")) {
-            summaryResults.setText("You made no one clicks. Just do it!");
+            summaryResults.setText("You made no clicks. Just do it!");
         } else {
             summaryResults.setText("You already made " + summaryClicks + " clicks");
         }
@@ -216,7 +216,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 resultsAmountOfTests = getAmountOfTests().toString();
                 progressBar.setVisibility(View.INVISIBLE);
                 resultsScrollView.setVisibility(View.VISIBLE);
-                textTitleResults.setText(String.format("Results are showed for %s hand and %s finger:", dropMenuHand.getSelectedItem(), dropMenuFinger.getSelectedItem()));
+                textTitleResults.setText(String.format("Results are showed for the %s hand and the %s finger:", dropMenuHand.getSelectedItem(), dropMenuFinger.getSelectedItem()));
                 textSummaryClicks.setText(String.format("Summary clicks after %s tests: %s", resultsAmountOfTests, resultsSummaryClicks));
                 textMaxClicks.setText("Max clicks per 10 seconds: " + resultsMaxClicks);
                 textMinClicks.setText("Min clicks per 10 seconds: " + resultsMinClicks);
