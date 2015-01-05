@@ -43,7 +43,7 @@ public class GuideModalActivity extends Activity{
 
         String chooseColorFragmentText = "You have to recognize the rectangle with appropriate color and click on it as soon as possible while it appears. You have 30 seconds per level.<br>" +
                 "The number of rectangles and time of their appearance increase with each level.<br>" +
-                "You need to collect not less than 10 points per each level.";
+                "You need to collect not less than 100 points per each level.";
 
         String remColorFragmentText = "You have to memorize colors of rectangles and their location on the screen. You have 10 seconds for this. " +
                 "Then You have to click on the place where the rectangle with appropriate color was located.<br>" +
@@ -73,7 +73,7 @@ public class GuideModalActivity extends Activity{
             guideText = "<h3>Home page</h3>" + userFragmentText +
                         "<br><h3>Fast clicker</h3>" + fastClickerFragmentText +
                         "<br><h3>Recognise color</h3>" + chooseColorFragmentText +
-                        "<br><h3>Remember colors</h3>" + remColorFragmentText;
+                        "<br><h3>Memorize colors</h3>" + remColorFragmentText;
             mainLayout.removeView(dontShowAgain);
         }
 
