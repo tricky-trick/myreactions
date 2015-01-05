@@ -75,6 +75,7 @@ public class RememberColorFragment extends Fragment {
     private CountDownTimer cT;
     private int maxX;
     private int maxY;
+    private int highlevel;
 
     public RememberColorFragment() {
     }
@@ -280,6 +281,7 @@ public class RememberColorFragment extends Fragment {
         });
 
         highscore = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
+        highlevel = prefs.getInt(Constants.REM_COLOR_HIGHLEVEL, 0);
         textHighScore.setText("High score: " + String.valueOf(highscore));
 
         boolean isFinished = prefs.getBoolean(Constants.REM_COLOR_IS_FINISHED, true);
@@ -592,10 +594,13 @@ public class RememberColorFragment extends Fragment {
         }
         if(score>highscore) {
             highscore = score;
+            editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
             textHighScore.setText("High score: " + String.valueOf(score));
         }
-        editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
-        editor.putInt(Constants.REM_COLOR_HIGHLEVEL, level);
+        if(level>highlevel) {
+            highlevel = level;
+            editor.putInt(Constants.REM_COLOR_HIGHLEVEL, level);
+        }
         lockShapes();
         for(DrawView view: listCreatedViews) {
             view.setAlpha(1.0f);

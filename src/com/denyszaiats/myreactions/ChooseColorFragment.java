@@ -71,6 +71,7 @@ public class ChooseColorFragment extends Fragment {
     private CountDownTimer cT;
     private int maxX;
     private int maxY;
+    private int highlevel;
 
     public ChooseColorFragment(){}
 
@@ -171,6 +172,7 @@ public class ChooseColorFragment extends Fragment {
         });
 
         highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
+        highlevel = prefs.getInt(Constants.COLOR_HIGHLEVEL,0);
         textHighScore.setText("High score: " + String.valueOf(highscore));
 
         boolean isFinished = prefs.getBoolean(Constants.COLOR_IS_FINISHED, true);
@@ -246,12 +248,16 @@ public class ChooseColorFragment extends Fragment {
                     size = helper.getShapeStartSize(context);
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
                     textColorTimer.setText("Level done!");
+                    highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
                     if(score>highscore) {
                         highscore = score;
                         textHighScore.setText("High score: " + String.valueOf(score));
                     }
+                    if(level>highlevel) {
+                        highlevel = level;
+                        editor.putInt(Constants.COLOR_HIGHLEVEL, level);
+                    }
                     editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
-                    editor.putInt(Constants.COLOR_HIGHLEVEL, level);
                     editor.putInt(Constants.COLOR_TEMP_LEVEL, level);
                     editor.putInt(Constants.COLOR_TEMP_SCORE, score);
 
@@ -261,17 +267,16 @@ public class ChooseColorFragment extends Fragment {
                     buttonRefresh.setVisibility(View.INVISIBLE);
                     tryAgainButton.setVisibility(View.VISIBLE);
                     highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
-                    if(score > highscore){
-                        highscore = score;
+                    if(level>highlevel) {
+                        highlevel = level;
+                        editor.putInt(Constants.COLOR_HIGHLEVEL, level);
                     }
-
                     if(score>highscore) {
                         highscore = score;
                         textHighScore.setText("High score: " + String.valueOf(score));
                     }
 
                     editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
-                    editor.putInt(Constants.COLOR_HIGHLEVEL, level);
 
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,true);
                     level = 1;

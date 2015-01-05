@@ -17,8 +17,8 @@
     <string-array name="nav_drawer_items">
         <item >Home</item>
         <item >Fast clicker</item>
-        <item >Choose color</item>
-        <item >Remember color</item>
+        <item >Recognize color</item>
+        <item >Memorize color</item>
         <item >Help</item>
         <item >About</item>
     </string-array>

@@ -147,7 +147,7 @@ public class FastClickerFragment extends Fragment {
                     v.setVisibility(View.INVISIBLE);
                     doAnimation(tapButton);
                     chronometer.setVisibility(View.VISIBLE);
-                    CountDownTimer cT = new CountDownTimer(10020, 1000) {
+                    CountDownTimer cT = new CountDownTimer(10010, 1000) {
 
                         public void onTick(long millisUntilFinished) {
                             int va = (int) ((millisUntilFinished % 60000) / 1000);
