@@ -199,6 +199,8 @@ public class RememberColorFragment extends Fragment {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
+                        cT.cancel();
+                        editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
                         level = 1;
                         size = helper.getShapeStartSize(context);
                         score = 0;

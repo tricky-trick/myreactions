@@ -34,11 +34,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="30dp"
                     android:textSize="16dp"
-                    android:textColor="@color/silver"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="4"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
                     android:textStyle="bold"/>
 
             <TextView
@@ -49,11 +44,6 @@
                     android:layout_below="@+id/textViewName"
                     android:layout_marginRight="30dp"
                     android:textSize="16dp"
-                    android:textColor="@color/silver"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="4"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
                     android:textStyle="bold"/>
 
             <TextView
@@ -64,11 +54,6 @@
                     android:layout_below="@+id/textViewAge"
                     android:layout_marginRight="30dp"
                     android:textSize="16dp"
-                    android:textColor="@color/silver"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="4"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
                     android:textStyle="bold"/>
         </RelativeLayout>
 
@@ -90,11 +75,6 @@
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:textColor="@color/silver"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="4"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
                     android:textStyle="bold"/>
 
             <TextView
@@ -282,7 +262,7 @@
                         android:layout_centerHorizontal="true"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:text="Results for Colors recognition"/>
+                        android:text="Results for 'Colors in the Fog'"/>
 
                 <TextView
                         android:id="@+id/textChooseColorHighlevel"
@@ -317,7 +297,7 @@
                         android:layout_centerHorizontal="true"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:text="Results for Colors memorization"/>
+                        android:text="Results for 'Colors tracking'"/>
 
                 <TextView
                         android:id="@+id/textRemColorHighlevel"
@@ -349,7 +329,7 @@
                         android:layout_below="@+id/textRemColorHighscore"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:background="@drawable/com_facebook_button_blue_normal"
+                        android:background="@drawable/facebookbutton"
                         android:text="Share on Facebook"
                         android:textColor="@color/white"
                         android:shadowColor="#000000"

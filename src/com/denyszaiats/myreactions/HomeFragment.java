@@ -67,6 +67,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             .asList("publish_actions");
     private Editor editor;
     private String summaryClicks;
+    private RelativeLayout viewResults;
 
     public HomeFragment() {
     }
@@ -109,6 +110,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         textTitleResults = (TextView) rootView.findViewById(R.id.textTitleForStatisticsInScrollView);
         resultsScrollView = (RelativeLayout) rootView.findViewById(R.id.scrollViewHome);
         userAreaView = (RelativeLayout) rootView.findViewById(R.id.viewHeaderHome);
+        viewResults = (RelativeLayout) rootView.findViewById(R.id.viewResultHome);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressDialog);
         textChooseColorHighlevel = (TextView) rootView.findViewById(R.id.textChooseColorHighlevel);
         textChooseColorHighscore= (TextView) rootView.findViewById(R.id.textChooseColorHighscore);
@@ -160,7 +162,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 } else {
                     imgUri = "https://graph.facebook.com/" + facebookId
                             + "/picture?type=large";
-                    Picasso.with(context).load(imgUri).into(imgIcon);
+                    Picasso.with(context).load(imgUri).resize(150, 150).into(imgIcon);
                 }
             }
         }
@@ -429,7 +431,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
             catch (UnsupportedOperationException ex){
                 TextView msg = new TextView(getActivity());
-                msg.setText("You need to login with Facebook account firstly. After login post results again. Do You want to do it right now?");
+                msg.setText("Firstly You need to login with Facebook account. After login post results again. Do You want to do it right now?");
                 msg.setPadding(20, 10, 20, 10);
                 msg.setGravity(Gravity.CENTER);
                 msg.setTextSize(20);
@@ -466,9 +468,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     }
 
     public void postStatusMessage() {
+        resultsMaxClicks = getMaxValueOfClicks().toString();
+        String additionalInfo = "";
+        if(!resultsMaxClicks.equals("0")){
+            additionalInfo = "My best result is " + resultsMaxClicks + " clicks per 10 seconds.";
+        }
         if (checkPermissions()) {
             Request request = Request.newStatusUpdateRequest(
-                    Session.getActiveSession(), "I have very good reaction! I did " + summaryClicks + " clicks. My best result is " + resultsMaxClicks + " per 10 seconds. Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName(),
+                    Session.getActiveSession(), "I have very good reaction! I did " + summaryClicks + " clicks. " + additionalInfo + "Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName(),
                     new Request.Callback() {
                         @Override
                         public void onCompleted(Response response) {

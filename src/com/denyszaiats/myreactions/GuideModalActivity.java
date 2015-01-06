@@ -50,7 +50,7 @@ public class GuideModalActivity extends Activity{
                 "You get 10 points and +1 life for clicking on the correct place.<br>" +
                 "When you are ready and time has not finished yet you can click on the button 'Ready'. In case of correct click You win additional points from seconds left and +1 life.<br>" +
                 "You decrease Your lives (-1) by clicking on incorrect places.<br>" +
-                "You can choose a hint by clicking on the lamp icon and in this case You lose 2 lives automatically.";
+                "You can choose a hint (if You have 2 or more lives) by clicking on the lamp icon and in this case You lose 2 lives automatically.";
 
 
         final String parentFragmentName = prefs.getString(Constants.FRAGMENT_NAME, "");
@@ -71,9 +71,9 @@ public class GuideModalActivity extends Activity{
 
         else if(parentFragmentName.equals(Constants.HELP_FRAGMENT)){
             guideText = "<h3>Home page</h3>" + userFragmentText +
-                        "<br><h3>Fast clicker</h3>" + fastClickerFragmentText +
-                        "<br><h3>Recognise color</h3>" + chooseColorFragmentText +
-                        "<br><h3>Memorize colors</h3>" + remColorFragmentText;
+                        "<br><h3>Crazy Fingers</h3>" + fastClickerFragmentText +
+                        "<br><h3>Colors in the Fog</h3>" + chooseColorFragmentText +
+                        "<br><h3>Colors memorising</h3>" + remColorFragmentText;
             mainLayout.removeView(dontShowAgain);
         }
 
