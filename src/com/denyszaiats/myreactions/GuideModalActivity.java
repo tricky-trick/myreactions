@@ -66,7 +66,6 @@ public class GuideModalActivity extends Activity{
         }
         else if(parentFragmentName.equals(Constants.REMEMBER_COLOR_FRAGMENT)){
             guideText = remColorFragmentText;
-
         }
 
         else if(parentFragmentName.equals(Constants.HELP_FRAGMENT)){

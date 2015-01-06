@@ -148,7 +148,9 @@ public class ChooseColorFragment extends Fragment {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        cT.cancel();
+                        if(cT != null) {
+                            cT.cancel();
+                        }
                         editor.putBoolean(Constants.COLOR_IS_FINISHED, true);
                         level = 1;
                         size = helper.getShapeStartSize(context);
