@@ -122,7 +122,7 @@ public class RememberColorFragment extends Fragment {
         areaViewAppear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nextLevelButton.getVisibility() == View.INVISIBLE && tryAgainButton.getVisibility() == View.INVISIBLE) {
+                if (nextLevelButton.getVisibility() == View.INVISIBLE && tryAgainButton.getVisibility() == View.INVISIBLE && readyButton.getVisibility() == View.INVISIBLE) {
                     failClicks--;
                     if (failClicks == 0) {
                         lockShapes();
