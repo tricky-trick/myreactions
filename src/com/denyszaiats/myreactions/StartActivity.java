@@ -50,8 +50,8 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 
 	private ConnectionResult mConnectionResult;
 
-	private SignInButton btnSignIn;
-	private Button btnSignOut;
+	//private SignInButton btnSignIn;
+	//private Button btnSignOut;
 
 	// nice example
 	// http://javatechig.com/android/using-facebook-sdk-in-android-example
@@ -81,12 +81,12 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 		ImageView logo = (ImageView) findViewById(R.id.imageViewLogo);
 		spinner = (ProgressBar) findViewById(R.id.spinner);
 
-		btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-		btnSignOut = (Button) findViewById(R.id.btn_sign_out);
+		//btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
+		//btnSignOut = (Button) findViewById(R.id.btn_sign_out);
 
 		// Button click listeners
-		btnSignIn.setOnClickListener(this);
-		btnSignOut.setOnClickListener(this);
+		//btnSignIn.setOnClickListener(this);
+		//btnSignOut.setOnClickListener(this);
 
 		mGoogleApiClient = new GoogleApiClient.Builder(this)
 				.addConnectionCallbacks(this)
@@ -143,16 +143,16 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	 * */
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.btn_sign_in:
-				// Signin button clicked
-				signInWithGplus();
-				break;
-			case R.id.btn_sign_out:
-				// Signout button clicked
-				signOutFromGplus();
-				break;
-		}
+//		switch (v.getId()) {
+//			case R.id.btn_sign_in:
+//				// Signin button clicked
+//				signInWithGplus();
+//				break;
+//			case R.id.btn_sign_out:
+//				// Signout button clicked
+//				signOutFromGplus();
+//				break;
+//		}
 	}
 
 	/**
@@ -366,8 +366,8 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	private void updateUI(boolean isSignedIn) {
 		if (isSignedIn) {
 			spinner.setVisibility(View.VISIBLE);
-			btnSignIn.setVisibility(View.GONE);
-			btnSignOut.setVisibility(View.VISIBLE);
+			//btnSignIn.setVisibility(View.GONE);
+			//btnSignOut.setVisibility(View.VISIBLE);
 
 			if (mGoogleApiClient.isConnected()) {
 				Person currentPerson = Plus.PeopleApi
@@ -389,8 +389,8 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 
 
 		} else {
-			btnSignIn.setVisibility(View.VISIBLE);
-			btnSignOut.setVisibility(View.GONE);
+			//btnSignIn.setVisibility(View.VISIBLE);
+			//btnSignOut.setVisibility(View.GONE);
 		}
 	}
 
