@@ -232,8 +232,15 @@ public class ChooseColorFragment extends Fragment {
         buttonRefresh.setVisibility(View.VISIBLE);
         textLevel.setText("Level " + String.valueOf(level));
         initShapes();
+        if(level > 1) {
+            if (score >= 30 * level) {
+                textColorScore.setTextColor(Color.WHITE);
+            } else {
+                textColorScore.setTextColor(Color.RED);
+            }
+        }
 
-        cT = new CountDownTimer(30000, 1000) {
+        cT = new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int va = (int) ((millisUntilFinished % 60000) / 1000);
@@ -244,7 +251,7 @@ public class ChooseColorFragment extends Fragment {
                 //areaColorAppear.setVisibility(View.INVISIBLE);
                 editor.putBoolean(Constants.COLOR_IS_CLICKABLE,false);
 
-                if(score >= 100*level){
+                if(score >= 30 * level){
                     nextLevelButton.setVisibility(View.VISIBLE);
                     level++;
                     timeAppearing = 4;
@@ -363,7 +370,7 @@ public class ChooseColorFragment extends Fragment {
         areaColorAppear.addView(drawCircleNominative);
 
         AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
-        animation.setDuration(timeAppearing * 1000);
+        animation.setDuration(timeAppearing * 300);
         areaViewAppear.startAnimation(animation);
 
     }
@@ -375,6 +382,13 @@ public class ChooseColorFragment extends Fragment {
             if(score>highscore) {
                 highscore = score;
                 textHighScore.setText("High score: " + String.valueOf(score));
+            }
+        }
+        if(level > 1) {
+            if (score >= 30 * level) {
+                textColorScore.setTextColor(Color.WHITE);
+            } else {
+                textColorScore.setTextColor(Color.RED);
             }
         }
         textColorScore.setText("Score: " + String.valueOf(score));

@@ -320,9 +320,9 @@ public class MainActivity extends Activity{
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	@Override
-	public void onBackPressed() {
-		// do nothing.
-	}
+//	@Override
+//	public void onBackPressed() {
+//		// do nothing.
+//	}
 
 }

@@ -77,24 +77,23 @@
                 android:textStyle="bold"
                 android:visibility="invisible"/>
 
-        <Button
-                android:id="@+id/startButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/handButton"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shapebutton_selector"
-                android:textSize="30dp"
-                android:text="@string/start"
-                android:textColor="@color/white"
-                android:shadowColor="#000000"
-                android:shadowRadius="4"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:textStyle="bold"/>
+            <Button
+                    android:id="@+id/startButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/handButton"
+                    android:background="@drawable/shapebutton_selector"
+                    android:textSize="30dp"
+                    android:paddingLeft="100dp"
+                    android:paddingRight="100dp"
+                    android:text="@string/start"
+                    android:textColor="@color/white"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="4"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:textStyle="bold"/>
 
         <ImageView
                 android:id="@+id/imageTapButton"
@@ -242,11 +241,11 @@
 
             <Button
                     android:id="@+id/tryAgainButton"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginRight="60dp"
+                    android:paddingLeft="60dp"
+                    android:paddingRight="60dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/shapebutton_selector"
                     android:layout_below="@+id/chartViewLatestResults"
