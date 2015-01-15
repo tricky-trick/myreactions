@@ -17,11 +17,9 @@
 
         <com.facebook.widget.LoginButton
                 android:id="@+id/fb_login_button"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
                 android:layout_marginTop="50dp"/>
 
         <!--<com.google.android.gms.common.SignInButton
@@ -50,14 +48,13 @@
 
         <Button
                 android:id="@+id/skip_login_button"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:paddingLeft="60dp"
                 android:paddingRight="60dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/shapebutton"
-                android:text="Skip login"
                 android:textStyle="bold"
                 android:onClick="goToApp"
                 android:textColor="@color/clue_theme"

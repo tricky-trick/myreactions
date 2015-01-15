@@ -66,6 +66,9 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 	private UiLifecycleHelper uiHelper;
 	private Editor editor;
 
+	private Button skipLogin;
+	private String prefix;
+
 	// private static String message = "Sample status posted from android app";
 
 	@Override
@@ -76,7 +79,10 @@ public class StartActivity extends FragmentActivity implements OnClickListener,
 		uiHelper = new UiLifecycleHelper(this, statusCallback);
 		uiHelper.onCreate(savedInstanceState);
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
 		setContentView(R.layout.activity_start);
+		skipLogin = (Button) findViewById(R.id.skip_login_button);
+		skipLogin.setText(Helper.setStringFromResources(this, "skip_login" + prefix));
 
 		ImageView logo = (ImageView) findViewById(R.id.imageViewLogo);
 		spinner = (ProgressBar) findViewById(R.id.spinner);

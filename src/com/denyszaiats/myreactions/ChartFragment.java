@@ -33,9 +33,12 @@ public class ChartFragment extends Activity {
 
     private XYSeriesRenderer mCurrentRenderer;
     private SharedPreferences prefs;
+    private String prefix;
 
     private void initChart() {
-        mCurrentSeries = new XYSeries("Click to see more details");
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
+        mCurrentSeries = new XYSeries(Helper.setStringFromResources(this, "chart_fragment_click" + prefix));
         mDataset.addSeries(mCurrentSeries);
         mCurrentRenderer = new XYSeriesRenderer();
         mCurrentRenderer.setLineWidth(8);
@@ -60,8 +63,8 @@ public class ChartFragment extends Activity {
         }
         mRenderer.setLabelsTextSize(labelTextSize);
         mRenderer.setLegendTextSize(30);
-        mRenderer.setXTitle("\n\n\n\n\n\nDate/Time");
-        mRenderer.setYTitle("Clicks");
+        mRenderer.setXTitle(Helper.setStringFromResources(this, "date_time_chart_fragment" + prefix));
+        mRenderer.setYTitle(Helper.setStringFromResources(this, "clicks_chart_fragment" + prefix));
         mRenderer.setAxisTitleTextSize(labelTextSize);
         mRenderer.setAxesColor(getResources().getColor(R.color.black));
         mRenderer.setGridColor(getResources().getColor(R.color.silver));
@@ -116,7 +119,7 @@ public class ChartFragment extends Activity {
                     date.setTime(Long.parseLong(s));
                     String formattedDate = dateFormat.format(date);
                     Toast.makeText(
-                            ChartFragment.this, String.format("Date: %s\nClicks: %s", formattedDate, String.valueOf(seriesSelection.getValue()).replace(".0","")), Toast.LENGTH_LONG).show();
+                            ChartFragment.this, String.format(Helper.setStringFromResources(ChartFragment.this, "toast_chart_fragment" + prefix), formattedDate) +  String.valueOf(seriesSelection.getValue()).replace(".0",""), Toast.LENGTH_LONG).show();
                 }
             }
         });

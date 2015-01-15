@@ -30,8 +30,7 @@
                 android:shadowRadius="4"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:textStyle="bold"
-                android:text="Version 1.0"/>
+                android:textStyle="bold"/>
 
         <TextView
                 android:id="@+id/textFindInSocNet"
@@ -47,8 +46,7 @@
                 android:shadowRadius="4"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:textStyle="bold"
-                android:text="Join us in social networks"/>
+                android:textStyle="bold"/>
 
         <RelativeLayout
                 android:id="@+id/aboutSocialImgArea"

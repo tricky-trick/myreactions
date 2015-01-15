@@ -90,8 +90,7 @@
                     android:shadowRadius="4"
                     android:shadowDx="1"
                     android:shadowDy="1"
-                    android:textStyle="bold"
-                    android:text="@string/title_statistics"/>
+                    android:textStyle="bold"/>
 
             <Spinner
                     android:id="@+id/dropMenuHand"
@@ -126,8 +125,7 @@
                     android:shadowRadius="4"
                     android:shadowDx="2"
                     android:shadowDy="2"
-                    android:textStyle="bold"
-                    android:text="Show results"/>
+                    android:textStyle="bold"/>
 
             <ProgressBar
                     android:id="@+id/progressDialog"
@@ -197,18 +195,17 @@
                         android:gravity="center"
                         android:layout_centerHorizontal="true"
                         android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:text="Graph of clicking frequency for Your best result"/>
+                        android:textStyle="bold"/>
 
                     <TextView
+                            android:id="@+id/labelClicks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textTitleOfChartTemp"
                             android:layout_marginTop="20dp"
                             android:gravity="center"
                             android:layout_alignParentLeft="true"
-                            android:textSize="10dp"
-                            android:text="C\nl\ni\nc\nk\ns\n"/>
+                            android:textSize="10dp"/>
 
 
                 <com.denyszaiats.myreactions.ChartView.ChartView
@@ -224,14 +221,14 @@
                         chartview:leftLabelWidth="20dp"/>
 
                 <TextView
+                        android:id="@+id/labelSeconds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/chartViewMaxResults"
                         android:layout_marginTop="-5dp"
                         android:gravity="center"
                         android:layout_centerHorizontal="true"
-                        android:textSize="10dp"
-                        android:text="Seconds"/>
+                        android:textSize="10dp"/>
 
                 <Button
                         android:id="@+id/buttonShowAllResults"
@@ -242,7 +239,6 @@
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
                         android:background="@drawable/shapebutton_selector"
-                        android:text="Show detailed chart"
                         android:textColor="@color/white"
                         android:shadowColor="#000000"
                         android:shadowRadius="4"
@@ -265,8 +261,7 @@
                         android:gravity="center"
                         android:layout_centerHorizontal="true"
                         android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:text="Results for 'Colors in the Fog'"/>
+                        android:textStyle="bold"/>
 
                 <TextView
                         android:id="@+id/textChooseColorHighlevel"
@@ -300,8 +295,7 @@
                         android:gravity="center"
                         android:layout_centerHorizontal="true"
                         android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:text="Results for 'Colors memorising'"/>
+                        android:textStyle="bold"/>
 
                 <TextView
                         android:id="@+id/textRemColorHighlevel"
@@ -336,7 +330,6 @@
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
                         android:background="@drawable/facebookbutton"
-                        android:text="Share on Facebook"
                         android:textColor="@color/white"
                         android:shadowColor="#000000"
                         android:shadowRadius="4"

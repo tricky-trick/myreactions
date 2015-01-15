@@ -2,14 +2,18 @@ package com.denyszaiats.myreactions;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AboutFragment extends Fragment {
@@ -19,20 +23,37 @@ public class AboutFragment extends Fragment {
     private ImageView gmail;
     private ImageView vkontakte;
     private RelativeLayout areaAboutSocial;
-	
-	public AboutFragment(){}
+    private TextView titleView;
+    private TextView versionView;
+    private SharedPreferences prefs;
+    private String prefix;
+
+    public AboutFragment(){}
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
+        prefs = PreferenceManager.getDefaultSharedPreferences(container.getContext());
+        prefix =  prefs.getString(Constants.LANG_PREFIX, "_en");
 
         facebook = (ImageView) rootView.findViewById(R.id.imageAboutFacebook);
         //twitter = (ImageView) rootView.findViewById(R.id.imageAboutTwitter);
         gmail = (ImageView) rootView.findViewById(R.id.imageAboutGoogle);
         vkontakte = (ImageView) rootView.findViewById(R.id.imageAboutVk);
         areaAboutSocial = (RelativeLayout) rootView.findViewById(R.id.aboutSocialImgArea);
+        titleView = (TextView) rootView.findViewById(R.id.textFindInSocNet);
+
+        titleView.setText(Helper.setStringFromResources(container.getContext(),"title_about" + prefix));
+
+        versionView = (TextView) rootView.findViewById(R.id.textAboutVersion);
+        try {
+            versionView.setText(Helper.setStringFromResources(container.getContext(),"version" + prefix) + " " + container.getContext().getPackageManager()
+                    .getPackageInfo(container.getContext().getPackageName(), 0).versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);
         animation.setDuration(1000);

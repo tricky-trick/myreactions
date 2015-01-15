@@ -55,17 +55,22 @@ public class MainActivity extends Activity{
 	private ArrayList<com.denyszaiats.myreactions.model.NavDrawerItem> navDrawerItems;
 	private com.denyszaiats.myreactions.adapter.NavDrawerListAdapter adapter;
 	private GoogleApiClient mGoogleApiClient;
+	private int MENU_ITEM_ITEM1 = 1;
+	private int MENU_ITEM_ITEM2 = 1;
+	private String prefix;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
 
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
-		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
-
+		navMenuTitles = getResources().getStringArray(getResources().getIdentifier("nav_drawer_items" + prefix, "array", getPackageName()));
+		//navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items_en);
 		// nav drawer icons from resources
 		navMenuIcons = getResources()
 				.obtainTypedArray(R.array.nav_drawer_icons);
@@ -74,8 +79,7 @@ public class MainActivity extends Activity{
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
 		navDrawerItems = new ArrayList<NavDrawerItem>();
-		
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
 		String username = prefs.getString("USER_NAME", "Guest");
 
 		// adding nav drawer items to array
@@ -170,30 +174,25 @@ public class MainActivity extends Activity{
 	}
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// toggle nav drawer on selecting action bar app icon/title
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		// Handle action bar actions click
-		switch (item.getItemId()) {
-			case R.id.action_clean:
-				TextView msg = new TextView(this);
-				msg.setText("Do You really want to delete all results?");
+        //getMenuInflater().inflate(R.menu.main, menu);
+		MenuItem item1 = menu.add(Menu.NONE,
+				MENU_ITEM_ITEM1,
+				Menu.NONE,
+				Helper.setStringFromResources(this, "clean_results" + prefix));
+		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				TextView msg = new TextView(MainActivity.this);
+				msg.setText(Helper.setStringFromResources(MainActivity.this, "dialog_msg_delete_rslt" + prefix));
 				msg.setPadding(20, 10, 20, 10);
 				msg.setGravity(Gravity.CENTER);
 				msg.setTextSize(20);
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-				builder.setTitle("Confirmation");
+				builder.setTitle(Helper.setStringFromResources(MainActivity.this, "dialog_title_delete_rslt" + prefix));
 				builder.setView(msg);
 
-				builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(Helper.setStringFromResources(MainActivity.this, "dialog_yes" + prefix), new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
 						SharedPreferences.Editor editor = prefs.edit();
@@ -207,7 +206,7 @@ public class MainActivity extends Activity{
 
 				});
 
-				builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+				builder.setNegativeButton(Helper.setStringFromResources(MainActivity.this, "dialog_no" + prefix), new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -219,16 +218,33 @@ public class MainActivity extends Activity{
 				alert.show();
 
 				return true;
-			case R.id.action_logout:
+			}
+		});
+
+		MenuItem item2 = menu.add(Menu.NONE,
+				MENU_ITEM_ITEM2,
+				Menu.NONE,
+				Helper.setStringFromResources(this, "logout_menu" + prefix));
+		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
 				SharedPreferences.Editor editor = prefs.edit();
 				editor.putBoolean(Constants.IS_LOGGED_IN,false);
 				editor.commit();
 				Intent i = new Intent(MainActivity.this, StartActivity.class);
 				startActivity(i);
 				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+			}
+		});
+        return true;
+    }
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
 		}
+		return super.onOptionsItemSelected(item);
 	}
  
     /***
@@ -238,7 +254,7 @@ public class MainActivity extends Activity{
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_logout).setVisible(!drawerOpen);
+        //menu.findItem(R.id.action_logout).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

@@ -34,6 +34,9 @@ public class FastClickerFragment extends Fragment {
 
     private TextView chronometer;
     private TextView resultsView;
+    private TextView textTitleFastClicker;
+    private TextView labelClicks;
+    private TextView labelSeconds;
     private Button startTimer;
     private Button tryAgain;
     private Button handButton;
@@ -57,6 +60,7 @@ public class FastClickerFragment extends Fragment {
     private String hand = Constants.RIGHT_HAND;
     private String finger = Constants.INDEX_FINGER;
     private LinearSeries series;
+    private String prefix;
 
     public FastClickerFragment() {
     }
@@ -69,6 +73,7 @@ public class FastClickerFragment extends Fragment {
                 container, false);
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
 
         editor = prefs.edit();
         boolean isChecked = prefs.getBoolean(Constants.FAST_CLICKER_FRAGMENT + "_CHECKED", false);
@@ -88,13 +93,30 @@ public class FastClickerFragment extends Fragment {
                 .findViewById(R.id.resultsFasterClicker);
 
         // Base
-        startTimer = (Button) rootView.findViewById(R.id.startButton);
-        tryAgain = (Button) rootView.findViewById(R.id.tryAgainButton);
-        handButton = (Button) rootView.findViewById(R.id.handButton);
-        fingerButton = (Button) rootView.findViewById(R.id.fingerButton);
+        startTimer = (Button) rootView.findViewById(R.id.startButton);{
+            startTimer.setText(Helper.setStringFromResources(context, "but_start" + prefix));
+        }
+        tryAgain = (Button) rootView.findViewById(R.id.tryAgainButton);{
+            tryAgain.setText(Helper.setStringFromResources(context, "but_try_again" + prefix));
+        }
+        handButton = (Button) rootView.findViewById(R.id.handButton);{
+            handButton.setText(Helper.setStringFromResources(context, "choose" + prefix) + " " + Helper.setStringFromResources(context, "hand" + prefix));
+        }
+        fingerButton = (Button) rootView.findViewById(R.id.fingerButton);{
+            fingerButton.setText(Helper.setStringFromResources(context, "choose" + prefix) + " " + Helper.setStringFromResources(context, "finger" + prefix));
+        }
         tapButton = (ImageView) rootView.findViewById(R.id.imageTapButton);
         scrollView = (RelativeLayout) rootView.findViewById(R.id.scrollViewResults);
         mainArea = (RelativeLayout) rootView.findViewById(R.id.areaMainFastClicker);
+        textTitleFastClicker = (TextView) rootView.findViewById(R.id.textTitleFastClicker);{
+            textTitleFastClicker.setText(Helper.setStringFromResources(context, "title_fast_clicker_fragment" + prefix));
+        }
+        labelClicks = (TextView) rootView.findViewById(R.id.fastLabelClicks);{
+            labelClicks.setText(Helper.setStringFromResources(context, "graph_lbl_clicks" + prefix));
+        }
+        labelSeconds = (TextView) rootView.findViewById(R.id.fastLabelSeconds);{
+            labelSeconds.setText(Helper.setStringFromResources(context, "graph_lbl_seconds" + prefix));
+        }
         // Hands
         leftHand = (ImageView) rootView.findViewById(R.id.imageHandLeft);
         rightHand = (ImageView) rootView.findViewById(R.id.imageRightHand);
@@ -126,14 +148,13 @@ public class FastClickerFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if(fingerButton.getText().toString().contains("Choose") || handButton.getText().toString().contains("Choose")){
+                if(fingerButton.getText().toString().contains(Helper.setStringFromResources(context, "choose" + prefix)) || handButton.getText().toString().contains(Helper.setStringFromResources(context, "choose" + prefix))){
                     TextView msg = new TextView(getActivity());
-                    msg.setText("Please, choose a hand and a finger!");
+                    msg.setText(Helper.setStringFromResources(context, "dialog_msg_fast_clicker" + prefix));
                     msg.setPadding(20, 10, 20, 10);
                     msg.setGravity(Gravity.CENTER);
                     msg.setTextSize(20);
                     new AlertDialog.Builder(getActivity())
-                            .setTitle("Alert")
                             .setView(msg)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -235,7 +256,7 @@ public class FastClickerFragment extends Fragment {
                 hand = Constants.LEFT_HAND;
                 leftHand.setVisibility(View.INVISIBLE);
                 rightHand.setVisibility(View.INVISIBLE);
-                handButton.setText("Left hand");
+                handButton.setText(Helper.setStringFromResources(context, "left_hand") + " " + Helper.setStringFromResources(context, "hand"));
             }
         });
 
@@ -246,7 +267,7 @@ public class FastClickerFragment extends Fragment {
                 hand = Constants.RIGHT_HAND;
                 leftHand.setVisibility(View.INVISIBLE);
                 rightHand.setVisibility(View.INVISIBLE);
-                handButton.setText("Right hand");
+                handButton.setText(Helper.setStringFromResources(context, "right_hand" + prefix) + " " + Helper.setStringFromResources(context, "hand" + prefix));
             }
         });
 
@@ -274,7 +295,7 @@ public class FastClickerFragment extends Fragment {
             public void onClick(View arg0) {
                 finger = Constants.THUMB_FINGER;
                 setFingersVisibility(View.INVISIBLE);
-                fingerButton.setText("Thumb finger");
+                fingerButton.setText(Helper.setStringFromResources(context, "thumb_finger" + prefix) + " " + Helper.setStringFromResources(context, "finger" + prefix));
             }
         });
 
@@ -284,7 +305,7 @@ public class FastClickerFragment extends Fragment {
             public void onClick(View arg0) {
                 finger = Constants.INDEX_FINGER;
                 setFingersVisibility(View.INVISIBLE);
-                fingerButton.setText("Index finger");
+                fingerButton.setText(Helper.setStringFromResources(context, "index_finger" + prefix) + " " + Helper.setStringFromResources(context, "finger" + prefix));
             }
         });
 
@@ -294,7 +315,7 @@ public class FastClickerFragment extends Fragment {
             public void onClick(View arg0) {
                 finger = Constants.MIDDLE_FINGER;
                 setFingersVisibility(View.INVISIBLE);
-                fingerButton.setText("Middle finger");
+                fingerButton.setText(Helper.setStringFromResources(context, "middle_finger" + prefix) + " " + Helper.setStringFromResources(context, "finger" + prefix));
             }
         });
 
@@ -304,7 +325,7 @@ public class FastClickerFragment extends Fragment {
             public void onClick(View arg0) {
                 finger = Constants.RING_FINGER;
                 setFingersVisibility(View.INVISIBLE);
-                fingerButton.setText("Ring finger");
+                fingerButton.setText(Helper.setStringFromResources(context, "ring_finger" + prefix) + " " + Helper.setStringFromResources(context, "finger" + prefix));
             }
         });
 
@@ -314,7 +335,7 @@ public class FastClickerFragment extends Fragment {
             public void onClick(View arg0) {
                 finger = Constants.PINKY_FINGER;
                 setFingersVisibility(View.INVISIBLE);
-                fingerButton.setText("Pinky finger");
+                fingerButton.setText(Helper.setStringFromResources(context, "pinky_finger" + prefix) + " " + Helper.setStringFromResources(context, "finger" + prefix));
             }
         });
 

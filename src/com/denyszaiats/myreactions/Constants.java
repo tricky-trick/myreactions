@@ -31,4 +31,5 @@ public class Constants {
 	public static final String HELP_FRAGMENT= "HELP_FRAGMENT";
 	public static final String FRAGMENT_NAME= "";
 	public static final String IS_SUCCESS_RESULT_REM_COLOR= "IS_SUCCESS_RESULT_REM_COLOR";
+	public static final String LANG_PREFIX = "LANG_PREFIX";
 }

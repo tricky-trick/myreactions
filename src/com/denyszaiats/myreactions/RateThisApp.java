@@ -45,7 +45,8 @@ public class RateThisApp {
 	 * If true, print LogCat
 	 */
 	public static final boolean DEBUG = false;
-	
+	private static String prefix_lang;
+
 	/**
 	 * Call this API when the launcher activity is launched.<br>
 	 * It is better to call this API in onStart() of the launcher activity.
@@ -108,18 +109,19 @@ public class RateThisApp {
 	 * @param context
 	 */
 	public static void showRateDialog(final Context context) {
+		prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		prefix_lang = prefs.getString(Constants.LANG_PREFIX, "_en");
 		TextView msg = new TextView(context);
-		msg.setText("Your feedback is very important for us");
+		msg.setText(Helper.setStringFromResources(context, "rate_msg" + prefix_lang));
 		msg.setPadding(20, 10, 20, 10);
 		msg.setGravity(Gravity.CENTER);
 		msg.setTextSize(20);
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		prefix = prefs.getString("prefix", "");
-		builder.setTitle("Rate us");
+		builder.setTitle(Helper.setStringFromResources(context, "rate_title" + prefix_lang));
 		builder.setView(msg);
-		builder.setPositiveButton("Rate now", new OnClickListener() {
+		builder.setPositiveButton(Helper.setStringFromResources(context, "rate_now" + prefix_lang), new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String appPackage = context.getPackageName();
@@ -128,13 +130,13 @@ public class RateThisApp {
 				setOptOut(context, true);
 			}
 		});
-		builder.setNeutralButton("Not now", new OnClickListener() {
+		builder.setNeutralButton(Helper.setStringFromResources(context, "rate_not_now" + prefix_lang), new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				clearSharedPreferences(context);
 			}
 		});
-		builder.setNegativeButton("No thanks", new OnClickListener() {
+		builder.setNegativeButton(Helper.setStringFromResources(context, "rate_no" + prefix_lang), new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				setOptOut(context, true);

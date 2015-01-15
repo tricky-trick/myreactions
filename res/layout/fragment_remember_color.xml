@@ -17,8 +17,7 @@
                 android:shadowRadius="4"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:textStyle="bold"
-                android:text="You have to memorize colors as soon as possible and choose necessary one from the grid."/>
+                android:textStyle="bold"/>
 
     <TextView
             android:id="@+id/textLevelRemColor"
@@ -64,7 +63,6 @@
             android:textSize="30dp"
             android:paddingLeft="100dp"
             android:paddingRight="100dp"
-            android:text="@string/start"
             android:textColor="@color/white"
             android:shadowColor="#000000"
             android:shadowRadius="4"
@@ -142,7 +140,6 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shapebutton_selector"
                     android:textSize="16dp"
-                    android:text="Ready"
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
                     android:textColor="@color/white"
@@ -216,7 +213,6 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/shapebutton_selector"
             android:textSize="30dp"
-            android:text="@string/try_again"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
             android:textColor="@color/white"
@@ -237,7 +233,6 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/shapebutton_selector"
             android:textSize="30dp"
-            android:text="Next level"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
             android:textColor="@color/white"

@@ -18,8 +18,7 @@
                 android:shadowRadius="4"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:textStyle="bold"
-                android:text="You have to recognize and choose a color as soon as possible"/>
+                android:textStyle="bold"/>
 
         <TextView
                 android:id="@+id/textLevel"
@@ -65,7 +64,6 @@
                 android:textSize="30dp"
                 android:paddingLeft="100dp"
                 android:paddingRight="100dp"
-                android:text="@string/start"
                 android:textColor="@color/white"
                 android:shadowColor="#000000"
                 android:shadowRadius="4"
@@ -156,10 +154,9 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/shapebutton_selector"
             android:textSize="30dp"
-            android:text="@string/try_again"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
-            android:textColor="@color/white"
+            android:textColor="@color/yellow"
             android:shadowColor="#000000"
             android:shadowRadius="4"
             android:shadowDx="2"
@@ -178,7 +175,6 @@
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/shapebutton_selector"
                 android:textSize="30dp"
-                android:text="Next level"
                 android:paddingLeft="60dp"
                 android:paddingRight="60dp"
                 android:textColor="@color/white"

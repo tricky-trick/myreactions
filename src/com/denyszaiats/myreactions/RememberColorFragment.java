@@ -49,6 +49,7 @@ public class RememberColorFragment extends Fragment {
     private TextView textLevel;
     private TextView textHighScore;
     private TextView textLife;
+    private TextView textTitleRemColor;
     private ImageView buttonRefresh;
     private ImageView buttonHelp;
     private LinkedList<Integer> usedCoordinates;
@@ -76,6 +77,7 @@ public class RememberColorFragment extends Fragment {
     private int maxX;
     private int maxY;
     private int highlevel;
+    private String prefix;
 
     public RememberColorFragment() {
     }
@@ -88,7 +90,7 @@ public class RememberColorFragment extends Fragment {
         editor = prefs.edit();
 
         helper = new Helper();
-
+        prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
         boolean isChecked = prefs.getBoolean(Constants.REMEMBER_COLOR_FRAGMENT + "_CHECKED", false);
         editor.putString(Constants.FRAGMENT_NAME, Constants.REMEMBER_COLOR_FRAGMENT);
         editor.commit();
@@ -104,10 +106,18 @@ public class RememberColorFragment extends Fragment {
         areaViewAppear = (RelativeLayout) rootView.findViewById(R.id.areaRemColorInternal);
         areaColorAppear = (RelativeLayout) rootView.findViewById(R.id.areaRemColorAppear);
         lifeArea = (RelativeLayout) rootView.findViewById(R.id.areaLifeRemColor);
-        buttonStart = (Button) rootView.findViewById(R.id.startButtonRemColor);
-        nextLevelButton = (Button) rootView.findViewById(R.id.nextLevelButtonRemColor);
-        tryAgainButton = (Button) rootView.findViewById(R.id.tryAgainButtonRemColor);
-        readyButton = (Button) rootView.findViewById(R.id.readyButtonRemColor);
+        buttonStart = (Button) rootView.findViewById(R.id.startButtonRemColor);{
+            buttonStart.setText(Helper.setStringFromResources(context, "but_start" + prefix));
+        }
+        nextLevelButton = (Button) rootView.findViewById(R.id.nextLevelButtonRemColor);{
+            nextLevelButton.setText(Helper.setStringFromResources(context, "but_next_level" + prefix));
+        }
+        tryAgainButton = (Button) rootView.findViewById(R.id.tryAgainButtonRemColor);{
+            tryAgainButton.setText(Helper.setStringFromResources(context, "but_try_again" + prefix));
+        }
+        readyButton = (Button) rootView.findViewById(R.id.readyButtonRemColor);{
+            readyButton.setText(Helper.setStringFromResources(context, "but_ready" + prefix));
+        }
         scoreArea = (RelativeLayout) rootView.findViewById(R.id.resultsAreaRemColor);
         textColorTimer = (TextView) rootView.findViewById(R.id.textTimerRemColor);
         textColorScore = (TextView) rootView.findViewById(R.id.textScoreRemColor);
@@ -116,6 +126,9 @@ public class RememberColorFragment extends Fragment {
         buttonRefresh = (ImageView) rootView.findViewById(R.id.buttomRefreshRemColor);
         buttonHelp = (ImageView) rootView.findViewById(R.id.buttomHelpRemColor);
         textHighScore = (TextView) rootView.findViewById(R.id.textRemColorHighscores);
+        textTitleRemColor = (TextView) rootView.findViewById(R.id.textTitleRemColor);{
+            textTitleRemColor.setText(Helper.setStringFromResources(context, "title_rem_color_fragment" + prefix));
+        }
         colorMap = new HashMap<Integer, Integer>();
         size = helper.getShapeStartSize(context);
 
@@ -132,12 +145,11 @@ public class RememberColorFragment extends Fragment {
                         repeatLeve();
                     } else if (failClicks == 3) {
                         TextView msg = new TextView(getActivity());
-                        msg.setText("You have " + String.valueOf(failClicks) + " attempts. Click on the lamp to take a hint");
+                        msg.setText(String.format(Helper.setStringFromResources(context, "clicks_attepmpts" + prefix), String.valueOf(failClicks)));
                         msg.setPadding(20, 10, 20, 10);
                         msg.setGravity(Gravity.CENTER);
                         msg.setTextSize(20);
                         new AlertDialog.Builder(getActivity())
-                                .setTitle("Alert")
                                 .setView(msg)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -187,16 +199,16 @@ public class RememberColorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 TextView msg = new TextView(getActivity());
-                msg.setText("Do You really want to start new game?");
+                msg.setText(Helper.setStringFromResources(context, "dialog_start_new_game_msg" + prefix));
                 msg.setPadding(20, 10, 20, 10);
                 msg.setGravity(Gravity.CENTER);
                 msg.setTextSize(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                builder.setTitle("Confirmation");
+                builder.setTitle(Helper.setStringFromResources(context, "dialog_title_delete_rslt" + prefix));
                 builder.setView(msg);
 
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(Helper.setStringFromResources(context, "dialog_yes" + prefix), new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         if(cT != null) {
@@ -214,7 +226,7 @@ public class RememberColorFragment extends Fragment {
 
                 });
 
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(Helper.setStringFromResources(context, "dialog_no" + prefix), new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -254,7 +266,7 @@ public class RememberColorFragment extends Fragment {
                             //score -= 25;
 
                             lockShapes();
-                            textColorScore.setText("Score: " + String.valueOf(score));
+                            textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
                             textLife.setText(String.valueOf(life));
                             cT = new CountDownTimer(1000, 100) {
 
@@ -278,7 +290,7 @@ public class RememberColorFragment extends Fragment {
                             textLife.setTextColor(Color.RED);
                         }
                     } else {
-                        Toast.makeText(context, "You need to continue level firstly", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, Helper.setStringFromResources(context, "continue_level" + prefix), Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -286,7 +298,7 @@ public class RememberColorFragment extends Fragment {
 
         highscore = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
         highlevel = prefs.getInt(Constants.REM_COLOR_HIGHLEVEL, 0);
-        textHighScore.setText("High score: " + String.valueOf(highscore));
+        textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(highscore));
 
         boolean isFinished = prefs.getBoolean(Constants.REM_COLOR_IS_FINISHED, true);
         if (!isFinished) {
@@ -306,8 +318,8 @@ public class RememberColorFragment extends Fragment {
             buttonHelp.setVisibility(View.VISIBLE);
             lifeArea.setVisibility(View.VISIBLE);
             textColorTimer.setText("00:10");
-            textLevel.setText("Level " + String.valueOf(tempLevel));
-            textColorScore.setText("Score: " + String.valueOf(tempScore));
+            textLevel.setText(Helper.setStringFromResources(context, "level" + prefix) + String.valueOf(tempLevel));
+            textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(tempScore));
             textLife.setText(String.valueOf(tempLife));
             if(tempLife<2){
                 textLife.setTextColor(Color.RED);
@@ -349,7 +361,7 @@ public class RememberColorFragment extends Fragment {
         colorMap.put(10, R.color.indigo);
         colorMap.put(11, R.color.dark_green);
         colorMap.put(12, R.color.brown);
-        textColorScore.setText("Score: " + String.valueOf(score));
+        textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
         tryAgainButton.setVisibility(View.INVISIBLE);
         nextLevelButton.setVisibility(View.INVISIBLE);
         buttonStart.setVisibility(View.INVISIBLE);
@@ -361,7 +373,7 @@ public class RememberColorFragment extends Fragment {
         buttonRefresh.setVisibility(View.VISIBLE);
         buttonHelp.setVisibility(View.VISIBLE);
         readyButton.setVisibility(View.VISIBLE);
-        textLevel.setText("Level " + String.valueOf(level));
+        textLevel.setText(Helper.setStringFromResources(context, "level" + prefix) + String.valueOf(level));
         textLife.setText(String.valueOf(life));
         if(life<2){
             textLife.setTextColor(Color.RED);
@@ -573,9 +585,9 @@ public class RememberColorFragment extends Fragment {
             }
             level++;
             life++;
-            textLevel.setText("Level " + String.valueOf(level));
-            textColorScore.setText("Score: " + String.valueOf(score));
-            nextLevelButton.setText("Next level");
+            textLevel.setText(Helper.setStringFromResources(context, "level" + prefix) + String.valueOf(level));
+            textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
+            nextLevelButton.setText(Helper.setStringFromResources(context, "but_next_level" + prefix));
             nextLevelButton.setTextColor(Color.WHITE);
             nextLevelButton.setVisibility(View.VISIBLE);
             editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);
@@ -591,15 +603,15 @@ public class RememberColorFragment extends Fragment {
             else {
                 tryAgainButton.setVisibility(View.VISIBLE);
                 tryAgainButton.setTextColor(Color.YELLOW);
-                textColorScore.setText("Score: " + String.valueOf(score));
+                textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
                 editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
-                textColorTimer.setText("Game over");
+                textColorTimer.setText(Helper.setStringFromResources(context, "game_over" + prefix));
             }
         }
         if(score>highscore) {
             highscore = score;
             editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
-            textHighScore.setText("High score: " + String.valueOf(score));
+            textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(score));
         }
         if(level>highlevel) {
             highlevel = level;
@@ -615,8 +627,8 @@ public class RememberColorFragment extends Fragment {
 
     private void repeatLeve(){
         life--;
-        textLevel.setText("Level " + String.valueOf(level));
-        textColorScore.setText("Score: " + String.valueOf(score));
+        textLevel.setText(Helper.setStringFromResources(context, "level" + prefix) + String.valueOf(level));
+        textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
         textLife.setText(String.valueOf(life));
         if(life<2){
             textLife.setTextColor(Color.RED);
@@ -624,7 +636,7 @@ public class RememberColorFragment extends Fragment {
         else {
             textLife.setTextColor(Color.WHITE);
         }
-        nextLevelButton.setText("Repeat level");
+        nextLevelButton.setText(Helper.setStringFromResources(context, "but_repeat_level" + prefix));
         nextLevelButton.setTextColor(Color.RED);
         nextLevelButton.setVisibility(View.VISIBLE);
         editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, false);

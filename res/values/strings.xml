@@ -3,26 +3,13 @@
 
     <string name="app_name">My Reaction</string>
     <string name="app_id">715404325209319</string>
+    <string name="title_activity_main">My Reaction</string>
     <string name="btn_logout_from_google">Sign out</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="clean_results">Clean all results</string>
-    <string name="logout_menu">Logout</string>
-    <string name="title_activity_main">My Reaction</string>
-    
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
-    
-    <!-- Nav Drawer Menu Items -->
-    <string-array name="nav_drawer_items">
-        <item >Home</item>
-        <item >Crazy Fingers</item>
-        <item >Colors in the Fog</item>
-        <item >Colors memorising</item>
-        <item >Help</item>
-        <item >About</item>
-    </string-array>
-    
+
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
@@ -33,12 +20,109 @@
         <item>@drawable/helpicon</item>
         <item>@drawable/about</item>
     </array>
+
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <!--EN-->
+
+    <string name="clean_results_en">Clean all results</string>
+    <string name="logout_menu_en">Logout</string>
+    
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items_en">
+        <item >Home</item>
+        <item >Crazy Fingers</item>
+        <item >Colors in the Fog</item>
+        <item >Colors memorising</item>
+        <item >Help</item>
+        <item >About</item>
+    </string-array>
+
     
     <!-- Content Description -->
-    <string name="desc_list_item_icon">Item Icon</string>
-    <string name="you_have_10_seconds_how_much_taps_you_can_make">"You have 10 seconds. How much taps You can make? Choose hand and finger for tapping."</string>
-    <string name="start">START</string>
-    <string name="try_again">Try again</string>
-    <string name="title_statistics">Choose a hand and a finger from the list to see Your results.</string>
+
+    <!--Start Ativity-->
+    <string name="skip_login_en">Skip login</string>
+
+    <!--Main Activity-->
+    <string name="dialog_msg_delete_rslt_en">Do You really want to delete all results?</string>
+    <string name="dialog_title_delete_rslt_en">Confirmation</string>
+
+    <!--About Fragment-->
+    <string name="title_about_en">Join us in social networks</string>
+    <string name="version_en">Version</string>
+
+    <!--Chart Fragment-->
+    <string name="chart_fragment_click_en">Click to see more details</string>
+    <string name="date_time_chart_fragment_en">\n\n\n\n\n\nDate/Time</string>
+    <string name="clicks_chart_fragment_en">Clicks</string>
+    <string name="toast_chart_fragment_en">Date:%s\nClicks: </string>
+
+    <!--Rate Fragment-->
+    <string name="rate_msg_en">Your feedback is very important for us</string>
+    <string name="rate_title_en">Rate us</string>
+    <string name="rate_now_en">Rate now</string>
+    <string name="rate_not_now_en">Not now</string>
+    <string name="rate_no_en">No</string>
+
+    <!--Home Fragment-->
+    <string name="title_statistics_en">Choose a hand and a finger from the list to see Your results.</string>
+    <string name="button_show_results_en">Show results</string>
+    <string name="graph_click_frq_best_rslt_en">Graph of clicking frequency for Your best result</string>
+    <string name="graph_lbl_clicks_en">C\nl\ni\nc\nk\ns\n</string>
+    <string name="graph_lbl_seconds_en">Seconds</string>
+    <string name="but_show_detailed_chart_en">Show detailed chart</string>
+    <string name="rslt_color_in_fog_en">Results for \"Colors in the Fog\"</string>
+    <string name="rslt_color_memoris_en">Results for \"Colors memorising\"</string>
+    <string name="but_share_facebook_en">Share on Facebook</string>
+    <string name="thumb_finger_en">Thumb</string>
+    <string name="index_finger_en">Index</string>
+    <string name="middle_finger_en">Middle</string>
+    <string name="ring_finger_en">Ring</string>
+    <string name="pinky_finger_en">Pinky</string>
+    <string name="right_hand_en">Right</string>
+    <string name="left_hand_en">Left</string>
+    <string name="you_not_do_any_clicks_en">You made no clicks. Just do it!</string>
+    <string name="you_made_clicks_en">You already made %s clicks</string>
+    <string name="high_level_home_en">High level: </string>
+    <string name="high_score_home_en">High score: </string>
+    <string name="showed_results_home_en">Results are showed for the %s hand and the finger </string>
+    <string name="sum_clicks_title_home_en">Summary clicks after %s tests: </string>
+    <string name="max_clicks_10_sec_en">Max clicks per 10 seconds: </string>
+    <string name="min_clicks_10_sec_en">Min clicks per 10 seconds: </string>
+    <string name="facebook_share_dialog_message_en">Firstly You need to login with Facebook account. After login post results again. Do You want to do it right now?</string>
+    <string name="facebook_share_dialog_title_en">Login with Facebook</string>
+    <string name="dialog_yes_en">YES</string>
+    <string name="dialog_no_en">NO</string>
+    <string name="my_best_rslt_msg_en">My best result is %s clicks per 10 seconds.</string>
+    <string name="facebook_share_message_en">I have very good reaction! I did % clicks. </string>
+    <string name="try_yourself_en">Try Yourself with application </string>
+    <string name="status_updated_en">Status updated successfully</string>
+
+    <!--FastClicker Fragment-->
+    <string name="title_fast_clicker_fragment_en">You have to do so many clicks as You can per 10 seconds</string>
+    <string name="choose_en">Choose</string>
+    <string name="hand_en">hand</string>
+    <string name="finger_en">finger</string>
+    <string name="dialog_msg_fast_clicker_en">Please, choose a hand and a finger!</string>
+
+    <!--ChooseColor Fragment-->
+    <string name="title_choose_color_fragment_en">You have to recognize and choose a color as soon as possible</string>
+    <string name="score_en">Score: </string>
+    <string name="level_en">Score: </string>
+    <string name="level_done_en">Level done!</string>
+    <string name="game_over_en">Game over</string>
+
+    <!--RemColor Fragment-->
+    <string name="title_rem_color_fragment_en">You have to memorize colors as soon as possible and choose necessary one from the grid</string>
+    <string name="but_ready_en">Ready</string>
+    <string name="clicks_attepmpts_en">You have %s attempts. Click on the lamp to take a hint</string>
+    <string name="continue_level_en">You need to continue level firstly</string>
+
+    <string name="but_start_en">START</string>
+    <string name="but_try_again_en">TRY AGAIN</string>
+    <string name="but_next_level_en">NEXT LEVEL</string>
+    <string name="but_repeat_level_en">NEXT LEVEL</string>
+    <string name="dialog_start_new_game_msg_en">Do You really want to start new game?</string>
 
 </resources>

@@ -68,6 +68,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private Editor editor;
     private String summaryClicks;
     private RelativeLayout viewResults;
+    private TextView textTitleView;
+    private TextView titleGraphClickBestRslt;
+    private String prefix;
+    private TextView labelClicks;
+    private TextView labelSeconds;
+    private TextView textTitleChooseColor;
+    private TextView textTitleRemColor;
 
     public HomeFragment() {
     }
@@ -77,6 +84,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                              Bundle savedInstanceState) {
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
         editor = prefs.edit();
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -101,9 +109,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         imgIcon = (ImageView) rootView.findViewById(R.id.imageProfileHome);
         dropMenuHand = (Spinner) rootView.findViewById(R.id.dropMenuHand);
         dropMenuFinger = (Spinner) rootView.findViewById(R.id.dropMenuFinger);
-        buttonShowResults = (Button) rootView.findViewById(R.id.buttonShowResults);
-        buttonPostFacebook = (Button) rootView.findViewById(R.id.buttonPostResultsFacebook);
-        buttonShowChartAllResults = (Button) rootView.findViewById(R.id.buttonShowAllResults);
+        buttonShowResults = (Button) rootView.findViewById(R.id.buttonShowResults);{
+            buttonShowResults.setText(Helper.setStringFromResources(context, "button_show_results" + prefix));
+        }
+        buttonPostFacebook = (Button) rootView.findViewById(R.id.buttonPostResultsFacebook);{
+            buttonPostFacebook.setText(Helper.setStringFromResources(context, "but_share_facebook" + prefix));
+        }
+        buttonShowChartAllResults = (Button) rootView.findViewById(R.id.buttonShowAllResults);{
+            buttonShowChartAllResults.setText(Helper.setStringFromResources(context, "but_show_detailed_chart" + prefix));
+        }
         textSummaryClicks = (TextView) rootView.findViewById(R.id.textSummaryClicksByHandAndFinger);
         textMaxClicks = (TextView) rootView.findViewById(R.id.textMaxClicksByHandAndFinger);
         textMinClicks = (TextView) rootView.findViewById(R.id.textMinClicksByHandAndFinger);
@@ -116,11 +130,39 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         textChooseColorHighscore= (TextView) rootView.findViewById(R.id.textChooseColorHighscore);
         textRemColorHighlevel = (TextView) rootView.findViewById(R.id.textRemColorHighlevel);
         textRemColorHighscore= (TextView) rootView.findViewById(R.id.textRemColorHighscore);
+        textTitleView = (TextView) rootView.findViewById(R.id.textTitleStatistics);{
+            textTitleView.setText(Helper.setStringFromResources(context, "title_statistics" + prefix));
+        }
+        titleGraphClickBestRslt = (TextView) rootView.findViewById(R.id.textTitleOfChartTemp);{
+            titleGraphClickBestRslt.setText(Helper.setStringFromResources(context, "graph_click_frq_best_rslt" + prefix));
+        }
+        labelClicks = (TextView) rootView.findViewById(R.id.labelClicks);{
+            labelClicks.setText(Helper.setStringFromResources(context, "graph_lbl_clicks" + prefix));
+        }
+        labelSeconds= (TextView) rootView.findViewById(R.id.labelSeconds);{
+            labelSeconds.setText(Helper.setStringFromResources(context, "graph_lbl_seconds" + prefix));
+        }
 
-        String[] fingers = new String[]{"Thumb", "Index", "Middle", "Ring", "Pinky"};
+        textTitleChooseColor = (TextView) rootView.findViewById(R.id.textTitleChooseColor);{
+            textTitleChooseColor.setText(Helper.setStringFromResources(context, "rslt_color_in_fog" + prefix));
+        }
+
+        textTitleRemColor = (TextView) rootView.findViewById(R.id.textTitleRemColor);{
+            textTitleRemColor.setText(Helper.setStringFromResources(context, "rslt_color_memoris" + prefix));
+        }
+                
+
+        String[] fingers = new String[]{
+                Helper.setStringFromResources(context, "thumb_finger" + prefix),
+                Helper.setStringFromResources(context, "index_finger" + prefix),
+                Helper.setStringFromResources(context, "middle_finger" + prefix),
+                Helper.setStringFromResources(context, "ring_finger" + prefix),
+                Helper.setStringFromResources(context, "pinky_finger" + prefix), };
         setSpinnerAdapter(fingers, dropMenuFinger);
 
-        String[] hands = new String[]{"Right", "Left"};
+        String[] hands = new String[]{
+                Helper.setStringFromResources(context, "right_hand" + prefix),
+                Helper.setStringFromResources(context, "left_hand" + prefix), };
         setSpinnerAdapter(hands, dropMenuHand);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -152,7 +194,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             genderView.setText("Gender: " + gender);
             ageView.setText("Age: " + age);
 
-            String imgUri = "";
+            String imgUri;
             if (username.equals("Guest")) {
                 imgIcon.setImageResource(R.drawable.ic_guest);
             } else {
@@ -169,37 +211,37 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         summaryClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");
         if (summaryClicks.equals("")) {
-            summaryResults.setText("You made no clicks. Just do it!");
+            summaryResults.setText(Helper.setStringFromResources(context, "you_not_do_any_clicks" + prefix));
         } else {
-            summaryResults.setText("You already made " + summaryClicks + " clicks");
+            summaryResults.setText(String.format(Helper.setStringFromResources(context, "you_made_clicks" + prefix), summaryClicks));
         }
 
         int highlevelRemColor = prefs.getInt(Constants.REM_COLOR_HIGHLEVEL, 0);
         int highscoreRemColor = prefs.getInt(Constants.REM_COLOR_HIGHSCORE, 0);
         int highlevelChooseColor = prefs.getInt(Constants.COLOR_HIGHLEVEL, 0);
         int highscoreChooseColor = prefs.getInt(Constants.COLOR_HIGHSCORE, 0);
-        textChooseColorHighlevel.setText("High level: " + String.valueOf(highlevelChooseColor));
-        textChooseColorHighscore.setText("High score: " + String.valueOf(highscoreChooseColor));
-        textRemColorHighlevel.setText("High level: " + String.valueOf(highlevelRemColor));
-        textRemColorHighscore.setText("High score: " + String.valueOf(highscoreRemColor));
+        textChooseColorHighlevel.setText(Helper.setStringFromResources(context, "high_level_home" + prefix) + String.valueOf(highlevelChooseColor));
+        textChooseColorHighscore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(highscoreChooseColor));
+        textRemColorHighlevel.setText(Helper.setStringFromResources(context, "high_level_home" + prefix) + String.valueOf(highlevelRemColor));
+        textRemColorHighscore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(highscoreRemColor));
 
         buttonShowResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dropMenuHand.getSelectedItem().equals("Right")) {
+                if (dropMenuHand.getSelectedItem().equals(Helper.setStringFromResources(context, "right_hand" + prefix))) {
                     hand = Constants.RIGHT_HAND;
                 } else {
                     hand = Constants.LEFT_HAND;
                 }
-                if (dropMenuFinger.getSelectedItem().equals("Thumb")) {
+                if (dropMenuFinger.getSelectedItem().equals(Helper.setStringFromResources(context, "thumb_finger" + prefix))) {
                     finger = Constants.THUMB_FINGER;
-                } else if (dropMenuFinger.getSelectedItem().equals("Index")) {
+                } else if (dropMenuFinger.getSelectedItem().equals(Helper.setStringFromResources(context, "index_finger" + prefix))) {
                     finger = Constants.INDEX_FINGER;
-                } else if (dropMenuFinger.getSelectedItem().equals("Middle")) {
+                } else if (dropMenuFinger.getSelectedItem().equals(Helper.setStringFromResources(context, "middle_finger" + prefix))) {
                     finger = Constants.MIDDLE_FINGER;
-                } else if (dropMenuFinger.getSelectedItem().equals("Ring")) {
+                } else if (dropMenuFinger.getSelectedItem().equals(Helper.setStringFromResources(context, "ring_finger" + prefix))) {
                     finger = Constants.RING_FINGER;
-                } else if (dropMenuFinger.getSelectedItem().equals("Pinky")) {
+                } else if (dropMenuFinger.getSelectedItem().equals(Helper.setStringFromResources(context, "pinky_finger" + prefix))) {
                     finger = Constants.PINKY_FINGER;
                 }
 
@@ -218,10 +260,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 resultsAmountOfTests = getAmountOfTests().toString();
                 progressBar.setVisibility(View.INVISIBLE);
                 resultsScrollView.setVisibility(View.VISIBLE);
-                textTitleResults.setText(String.format("Results are showed for the %s hand and the %s finger:", dropMenuHand.getSelectedItem(), dropMenuFinger.getSelectedItem()));
-                textSummaryClicks.setText(String.format("Summary clicks after %s tests: %s", resultsAmountOfTests, resultsSummaryClicks));
-                textMaxClicks.setText("Max clicks per 10 seconds: " + resultsMaxClicks);
-                textMinClicks.setText("Min clicks per 10 seconds: " + resultsMinClicks);
+                textTitleResults.setText(String.format(Helper.setStringFromResources(context, "showed_results_home" + prefix), dropMenuHand.getSelectedItem()) + dropMenuFinger.getSelectedItem() + ":");
+                textSummaryClicks.setText(String.format(Helper.setStringFromResources(context, "sum_clicks_title_home" + prefix), resultsAmountOfTests) + resultsSummaryClicks);
+                textMaxClicks.setText(Helper.setStringFromResources(context, "max_clicks_10_sec" + prefix) + resultsMaxClicks);
+                textMinClicks.setText(Helper.setStringFromResources(context, "min_clicks_10_sec" + prefix) + resultsMinClicks);
                 //TODO android graphs. Vertical - clicks, horizontal - seconds
                 //http://stackoverflow.com/questions/9741300/charts-for-android
                 //http://javapapers.com/android/android-chart-using-androidplot/
@@ -431,16 +473,16 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
             catch (UnsupportedOperationException ex){
                 TextView msg = new TextView(getActivity());
-                msg.setText("Firstly You need to login with Facebook account. After login post results again. Do You want to do it right now?");
+                msg.setText(Helper.setStringFromResources(context, "facebook_share_dialog_message" + prefix));
                 msg.setPadding(20, 10, 20, 10);
                 msg.setGravity(Gravity.CENTER);
                 msg.setTextSize(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-                builder.setTitle("Login with Facebook");
+                builder.setTitle(Helper.setStringFromResources(context, "facebook_share_dialog_title" + prefix));
                 builder.setView(msg);
 
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(Helper.setStringFromResources(context, "dialog_yes" + prefix), new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferences.Editor editor = prefs.edit();
@@ -453,7 +495,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
                 });
 
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(Helper.setStringFromResources(context, "dialog_no" + prefix), new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -471,17 +513,17 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         resultsMaxClicks = getMaxValueOfClicks().toString();
         String additionalInfo = "";
         if(!resultsMaxClicks.equals("0")){
-            additionalInfo = "My best result is " + resultsMaxClicks + " clicks per 10 seconds.";
+            additionalInfo = String.format(Helper.setStringFromResources(context, "my_best_rslt_msg" + prefix), resultsMaxClicks);
         }
         if (checkPermissions()) {
             Request request = Request.newStatusUpdateRequest(
-                    Session.getActiveSession(), "I have very good reaction! I did " + summaryClicks + " clicks. " + additionalInfo + "Try Yourself with application https://play.google.com/store/apps/details?id="  + context.getPackageName(),
+                    Session.getActiveSession(), String.format(Helper.setStringFromResources(context, "facebook_share_message" + prefix), summaryClicks) + additionalInfo + Helper.setStringFromResources(context, "try_yourself" + prefix) + "https://play.google.com/store/apps/details?id="  + context.getPackageName(),
                     new Request.Callback() {
                         @Override
                         public void onCompleted(Response response) {
                             if (response.getError() == null)
                                 Toast.makeText(context,
-                                        "Status updated successfully",
+                                        Helper.setStringFromResources(context, "status_updated" + prefix),
                                         Toast.LENGTH_LONG).show();
                         }
                     });

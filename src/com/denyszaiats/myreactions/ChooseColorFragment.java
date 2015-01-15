@@ -48,6 +48,7 @@ public class ChooseColorFragment extends Fragment {
     private TextView textColorScore;
     private TextView textLevel;
     private TextView textHighScore;
+    private TextView textTitleChooseColor;
     private ImageView buttonRefresh;
     private LinkedList<Integer> usedCoordinates;
     private LinkedList<DrawRect> listCreatedViews;
@@ -72,6 +73,7 @@ public class ChooseColorFragment extends Fragment {
     private int maxX;
     private int maxY;
     private int highlevel;
+    private String prefix;
 
     public ChooseColorFragment(){}
 
@@ -80,6 +82,7 @@ public class ChooseColorFragment extends Fragment {
             Bundle savedInstanceState) {
         context = container.getContext();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
         editor = prefs.edit();
         helper = new Helper();
         boolean isChecked = prefs.getBoolean(Constants.CHOOSE_COLOR_FRAGMENT + "_CHECKED", false);
@@ -96,15 +99,24 @@ public class ChooseColorFragment extends Fragment {
         areaView = (RelativeLayout) rootView.findViewById(R.id.areaChooseColor);
         areaViewAppear = (RelativeLayout) rootView.findViewById(R.id.areaChooseColorAppear);
         areaColorAppear = (RelativeLayout) rootView.findViewById(R.id.areaColorAppear);
-        buttonStart = (Button) rootView.findViewById(R.id.startButtonChooseColor);
-        nextLevelButton = (Button) rootView.findViewById(R.id.nextLevelButtonChooseColor);
-        tryAgainButton = (Button) rootView.findViewById(R.id.tryAgainButtonChooseColor);
+        buttonStart = (Button) rootView.findViewById(R.id.startButtonChooseColor);{
+            buttonStart.setText(Helper.setStringFromResources(context, "but_start" + prefix));
+        }
+        nextLevelButton = (Button) rootView.findViewById(R.id.nextLevelButtonChooseColor);{
+            nextLevelButton.setText(Helper.setStringFromResources(context, "but_next_level" + prefix));
+        }
+        tryAgainButton = (Button) rootView.findViewById(R.id.tryAgainButtonChooseColor);{
+            tryAgainButton.setText(Helper.setStringFromResources(context, "but_try_again" + prefix));
+        }
         scoreArea = (RelativeLayout) rootView.findViewById(R.id.resultsArea);
         textColorTimer = (TextView) rootView.findViewById(R.id.textTimerColor);
         textColorScore = (TextView) rootView.findViewById(R.id.textScoreColor);
         textLevel = (TextView) rootView.findViewById(R.id.textLevel);
         buttonRefresh = (ImageView) rootView.findViewById(R.id.buttomRefresh);
         textHighScore = (TextView) rootView.findViewById(R.id.textColorHighscores);
+        textTitleChooseColor = (TextView) rootView.findViewById(R.id.textTitleChooseColor);{
+            textTitleChooseColor.setText(Helper.setStringFromResources(context, "title_choose_color_fragment" + prefix));
+        }
         colorMap = new HashMap<Integer, Integer>();
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,15 +149,15 @@ public class ChooseColorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 TextView msg = new TextView(getActivity());
-                msg.setText("Do You really want to start new game?");
+                msg.setText(Helper.setStringFromResources(context, "dialog_start_new_game_msg" + prefix));
                 msg.setPadding(20, 10, 20, 10);
                 msg.setGravity(Gravity.CENTER);
                 msg.setTextSize(20);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Confirmation");
+                builder.setTitle(Helper.setStringFromResources(context, "dialog_title_delete_rslt" + prefix));
                 builder.setView(msg);
 
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(Helper.setStringFromResources(context, "dialog_yes" + prefix), new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         if(cT != null) {
@@ -162,7 +174,7 @@ public class ChooseColorFragment extends Fragment {
 
                 });
 
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(Helper.setStringFromResources(context, "dialog_no" + prefix), new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -177,7 +189,7 @@ public class ChooseColorFragment extends Fragment {
 
         highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
         highlevel = prefs.getInt(Constants.COLOR_HIGHLEVEL,0);
-        textHighScore.setText("High score: " + String.valueOf(highscore));
+        textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(highscore));
 
         boolean isFinished = prefs.getBoolean(Constants.COLOR_IS_FINISHED, true);
         if (!isFinished) {
@@ -193,10 +205,10 @@ public class ChooseColorFragment extends Fragment {
             textColorTimer.setVisibility(View.VISIBLE);
             textHighScore.setVisibility(View.VISIBLE);
             buttonRefresh.setVisibility(View.VISIBLE);
-            textColorTimer.setText("Level done!");
-            textLevel.setText("Level " + String.valueOf(tempLevel));
-            textColorScore.setText("Score: " + String.valueOf(tempScore));
-            textHighScore.setText("High score: " + String.valueOf(highscore));
+            textColorTimer.setText(Helper.setStringFromResources(context, "level_done" + prefix));
+            textLevel.setText(Helper.setStringFromResources(context, "level" + prefix) + String.valueOf(tempLevel));
+            textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(tempScore));
+            textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(highscore));
             level = tempLevel;
             score = tempScore;
         }
@@ -221,7 +233,7 @@ public class ChooseColorFragment extends Fragment {
         colorMap.put(6, Color.MAGENTA);
         colorMap.put(7, Color.CYAN);
         colorMap.put(8, Color.GRAY);
-        textColorScore.setText("Score: " + String.valueOf(score));
+        textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
         tryAgainButton.setVisibility(View.INVISIBLE);
         nextLevelButton.setVisibility(View.INVISIBLE);
         buttonStart.setVisibility(View.INVISIBLE);
@@ -230,7 +242,7 @@ public class ChooseColorFragment extends Fragment {
         textLevel.setVisibility(View.VISIBLE);
         textHighScore.setVisibility(View.VISIBLE);
         buttonRefresh.setVisibility(View.VISIBLE);
-        textLevel.setText("Level " + String.valueOf(level));
+        textLevel.setText(Helper.setStringFromResources(context, "level" + prefix) + String.valueOf(level));
         initShapes();
         if(level > 1) {
             if (score >= 30 * level) {
@@ -258,11 +270,11 @@ public class ChooseColorFragment extends Fragment {
                     countShapes = 2;
                     size = helper.getShapeStartSize(context);
                     editor.putBoolean(Constants.COLOR_IS_FINISHED,false);
-                    textColorTimer.setText("Level done!");
+                    textColorTimer.setText(Helper.setStringFromResources(context, "level_done" + prefix));
                     highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
                     if(score>highscore) {
                         highscore = score;
-                        textHighScore.setText("High score: " + String.valueOf(score));
+                        textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(score));
                     }
                     if(level>highlevel) {
                         highlevel = level;
@@ -274,7 +286,7 @@ public class ChooseColorFragment extends Fragment {
 
                 }
                 else {
-                    textColorTimer.setText("Game over");
+                    textColorTimer.setText(Helper.setStringFromResources(context, "game_over" + prefix));
                     buttonRefresh.setVisibility(View.INVISIBLE);
                     tryAgainButton.setVisibility(View.VISIBLE);
                     highscore = prefs.getInt(Constants.COLOR_HIGHSCORE,0);
@@ -284,7 +296,7 @@ public class ChooseColorFragment extends Fragment {
                     }
                     if(score>highscore) {
                         highscore = score;
-                        textHighScore.setText("High score: " + String.valueOf(score));
+                        textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(score));
                     }
 
                     editor.putInt(Constants.COLOR_HIGHSCORE, highscore);
@@ -381,7 +393,7 @@ public class ChooseColorFragment extends Fragment {
             score += 10;
             if(score>highscore) {
                 highscore = score;
-                textHighScore.setText("High score: " + String.valueOf(score));
+                textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(score));
             }
         }
         if(level > 1) {
@@ -391,7 +403,7 @@ public class ChooseColorFragment extends Fragment {
                 textColorScore.setTextColor(Color.RED);
             }
         }
-        textColorScore.setText("Score: " + String.valueOf(score));
+        textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
         initShapes();
         System.gc();
     }

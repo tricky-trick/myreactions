@@ -92,4 +92,8 @@ public class Helper{
         return type;
     }
 
+    public static String setStringFromResources(Context context, String stringName){
+        return context.getResources().getString(context.getResources().getIdentifier(stringName, "string", context.getPackageName()));
+    }
+
 }
