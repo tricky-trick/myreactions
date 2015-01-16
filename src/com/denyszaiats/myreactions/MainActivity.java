@@ -2,10 +2,12 @@ package com.denyszaiats.myreactions;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
+import android.app.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -14,9 +16,6 @@ import com.denyszaiats.myreactions.model.NavDrawerItem;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -63,7 +62,11 @@ public class MainActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ActionBar bar = getActionBar();
+//for color
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#004C52")));
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
 		prefix = prefs.getString(Constants.LANG_PREFIX, "_en");
 
 		mTitle = mDrawerTitle = getTitle();
@@ -274,10 +277,10 @@ public class MainActivity extends Activity{
 				fragment = new RememberColorFragment();
 				break;
 			case 2:
-				fragment = new ChooseColorFragment();
+				fragment = new FastClickerFragment();
 				break;
 			case 3:
-				fragment = new FastClickerFragment();
+				fragment = new ChooseColorFragment();
 				break;
 			case 4:
 				SharedPreferences.Editor editor = prefs.edit();

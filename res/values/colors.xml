@@ -2,7 +2,7 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="black">#000000</color>
-    <color name="clue_theme">#BED55F</color>
+    <color name="clue_theme">#01cbcd</color>
     <color name="white">#FFFFFF</color>
     <color name="list_background">#303030</color>
     <color name="list_background_pressed">#992416</color>

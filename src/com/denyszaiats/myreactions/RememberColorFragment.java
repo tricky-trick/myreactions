@@ -142,7 +142,27 @@ public class RememberColorFragment extends Fragment {
                         for (DrawView view : listCreatedViews) {
                             view.setAlpha(1.0f);
                         }
-                        repeatLeve();
+                        if(life>0) {
+                            repeatLeve();
+                        }
+                        else {
+                            tryAgainButton.setVisibility(View.VISIBLE);
+                            tryAgainButton.setTextColor(Color.YELLOW);
+                            textColorScore.setText(Helper.setStringFromResources(context, "score" + prefix) + String.valueOf(score));
+                            editor.putBoolean(Constants.REM_COLOR_IS_FINISHED, true);
+                            textColorTimer.setText(Helper.setStringFromResources(context, "game_over" + prefix));
+                            if(score>highscore) {
+                                highscore = score;
+                                editor.putInt(Constants.REM_COLOR_HIGHSCORE, highscore);
+                                textHighScore.setText(Helper.setStringFromResources(context, "high_score_home" + prefix) + String.valueOf(score));
+                            }
+                            if(level>highlevel) {
+                                highlevel = level;
+                                editor.putInt(Constants.REM_COLOR_HIGHLEVEL, level);
+                            }
+                            editor.commit();
+                        }
+
                     } else if (failClicks == 3) {
                         TextView msg = new TextView(getActivity());
                         msg.setText(String.format(Helper.setStringFromResources(context, "clicks_attepmpts" + prefix), String.valueOf(failClicks)));

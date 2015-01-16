@@ -149,7 +149,7 @@
     <string name="but_start_en">START</string>
     <string name="but_try_again_en">TRY AGAIN</string>
     <string name="but_next_level_en">NEXT LEVEL</string>
-    <string name="but_repeat_level_en">NEXT LEVEL</string>
+    <string name="but_repeat_level_en">REPEAT LEVEL</string>
     <string name="dialog_start_new_game_msg_en">Do You really want to start new game?</string>
 
     <!--UA-->
@@ -195,14 +195,14 @@
     <string name="rate_no_ua">Не хочу</string>
 
     <!--Home Fragment-->
-    <string name="title_statistics_ua">Виберіть зі списку руку та палець щоб побачити результати.</string>
+    <string name="title_statistics_ua">Вибери зі списку руку та палець щоб побачити результати.</string>
     <string name="button_show_results_ua">Показати результати</string>
     <string name="graph_click_frq_best_rslt_ua">Графік частоти клікання для найкращого результату</string>
     <string name="graph_lbl_clicks_ua">К\nл\nі\nк\nи\n</string>
     <string name="graph_lbl_seconds_ua">Секунди</string>
     <string name="but_show_detailed_chart_ua">Показати детальний графік</string>
     <string name="rslt_color_in_fog_ua">Результат для \"Колір в Тумані\"</string>
-    <string name="rslt_color_memoris_ua">Результат для \"Запам\'ятовування кольорів\"</string>
+    <string name="rslt_color_memoris_ua">Результат для \"Запам\'ятай кольори\"</string>
     <string name="but_share_facebook_ua">Поширити на Facebook</string>
     <string name="thumb_finger_ua">Великий</string>
     <string name="index_finger_ua">Вказівний</string>
@@ -211,7 +211,7 @@
     <string name="pinky_finger_ua">Мізинець</string>
     <string name="right_hand_ua">Права</string>
     <string name="left_hand_ua">Ліва</string>
-    <string name="you_not_do_any_clicks_ua">Ти ще не зробив жодного кліку. Зробіть це!</string>
+    <string name="you_not_do_any_clicks_ua">Ти ще не зробив жодного кліку. Зроби це!</string>
     <string name="you_made_clicks_ua">Ти вже зробив %s кліків</string>
     <string name="high_level_home_ua">Найвищий рівень: </string>
     <string name="high_score_home_ua">Рекорд: </string>
@@ -245,35 +245,35 @@
     <!--RemColor Fragment-->
     <string name="title_rem_color_fragment_ua">Ти повинен якомога швидше запам\'ятати розташування кольорів і натиснути на місце розташування відповідного кольору</string>
     <string name="but_ready_ua">Готово</string>
-    <string name="clicks_attepmpts_ua">Ти маєш %s спроб. Клікни на лампу щоб взяти підказку</string>
+    <string name="clicks_attepmpts_ua">Ти маєш %s спроби. Клікни на лампу, щоб взяти підказку</string>
     <string name="continue_level_ua">Ти повинен продовжити рівень спочатку</string>
 
     <!--Guide Modal Activity-->
     <string name="title_guide_ua">Правила гри</string>
     <string name="dont_show_again_checkbox_ua">Не показувати цього вікна знову</string>
     <string name="home_title_ua">Домашня сторінка</string>
-    <string name="fast_clicker_title_ua">Скажені пальні</string>
+    <string name="fast_clicker_title_ua">Божевільні пальні</string>
     <string name="choose_color_title_ua">Кольори в Тумані</string>
-    <string name="rem_color_title_ua">Запам\'ятовування кольорів</string>
+    <string name="rem_color_title_ua">Запам\'ятай кольори</string>
     <string name="guide_home_page_ua">Тут Ти можеш слідкувати за своїми результатами.
         Обери руку та палець, щоб побачити результати усіх кліків.
         Також тут є можливість бачити  найкращі та найгірші результати та результати всіх кліків протягом користування даною програмою.
         Результати інших ігор також доступні в цьому розділі.</string>
     <string name="guide_fast_clicker_ua">Ти повинен зробити якомога більше кліків за 10 секунд.
         Ти можеш обрати руку та палець для гри і повторити тест для кожної руки та пальця.
-        По закінченню 10-ти секунд Ти побачиш результат та графік активності кліків для останньої гри.</string>
+        По закінченню 10-ти секунд Ти побачиш результат та графік активності кліків протягом останньої гри.</string>
     <string name="guide_choose_color_ua">Ти повинен розпізнати квадрат з потрібним кольором і клікнути на нього якомога швидше під час його появи.
         Ти маєш 10 секунд на рівень. Кількість квадратів та час їхньої появи будуть збільшуватися з кожнем рівнем.
         Ти повинен набрати не менше 30 пунктів за 1 рівень.</string>
     <string name="guide_rem_color_ua">Ти повинен запам\'ятати кольори квадратів та їх розташування.
-        У тебе є 10 секунд для цього. Опісля Ти повинен клікнути на ту область екрану, де знаходився квадрат з потрібним кольором .
-        Ти отримаєш 10 пунктів та 1 життя за правильну відповідь. Якщо Ти готовий вгадувати, але час ще не закінчився - натисни на кнопку \'Готово\'.
+        У тебе є 10 секунд для цього. Опісля Ти повинен клікнути на ту область екрану, де знаходився квадрат з потрібним кольором.
+        Ти отримаєш 10 пунктів та 1 життя за правильну відповідь. Якщо Ти готовий вгадувати, але час ще не закінчився, натисни на кнопку \'Готово\'.
         У разі правильної відповіді Ти отримаєш додаткові пункти та 1 життя. В разі неправильної відповіді у Тебе відніметься 1 життя.
-        Ти можеш взяти підказу (якщо маєш 2 і більше життів) кліком на іконку лампи. У цьому разі у Тебе автоматично відніметься 2 життя.</string>
+        Ти можеш взяти підказу (якщо маєш 2 і більше життів), клікнувши на іконку лампи. У цьому разі у Тебе автоматично відніметься 2 життя.</string>
 
     <!--Common-->
     <string name="but_start_ua">СТАРТ</string>
-    <string name="but_try_again_ua">ЩЕ РАЗ</string>
+    <string name="but_try_again_ua">НОВА ГРА</string>
     <string name="but_next_level_ua">НАСТУПНИЙ РІВЕНЬ</string>
     <string name="but_repeat_level_ua">ПОВТОРИТИ РІВЕНЬ</string>
     <string name="dialog_start_new_game_msg_ua">Ти дійсно хочеш розпочати нову гру?</string>

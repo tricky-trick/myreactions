@@ -189,8 +189,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             mainHomeView.removeView(userAreaView);
         }
         else {
-
-            nameView.setText("Name: " + username);
+            //TODO - add this panel in the future
+            mainHomeView.removeView(userAreaView);
+            /*nameView.setText("Name: " + username);
             genderView.setText("Gender: " + gender);
             ageView.setText("Age: " + age);
 
@@ -206,7 +207,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                             + "/picture?type=large";
                     Picasso.with(context).load(imgUri).resize(150, 150).into(imgIcon);
                 }
-            }
+            }*/
         }
 
         summaryClicks = prefs.getString(Constants.SUMMARY_CLICKS, "");

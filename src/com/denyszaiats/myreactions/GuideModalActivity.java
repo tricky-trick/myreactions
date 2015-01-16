@@ -66,9 +66,9 @@ public class GuideModalActivity extends Activity{
 
         else if(parentFragmentName.equals(Constants.HELP_FRAGMENT)){
             guideText = "<h3>" + Helper.setStringFromResources(this, "home_title" + prefix) + "</h3>" + userFragmentText +
+                    "<br><h3>" + Helper.setStringFromResources(this, "rem_color_title" + prefix) + "</h3>" + remColorFragmentText +
                         "<br><h3>" + Helper.setStringFromResources(this, "fast_clicker_title" + prefix) + "</h3>" + fastClickerFragmentText +
-                        "<br><h3>" + Helper.setStringFromResources(this, "choose_color_title" + prefix) + "</h3>" + chooseColorFragmentText +
-                        "<br><h3>" + Helper.setStringFromResources(this, "rem_color_title" + prefix) + "</h3>" + remColorFragmentText;
+                        "<br><h3>" + Helper.setStringFromResources(this, "choose_color_title" + prefix) + "</h3>" + chooseColorFragmentText;
             mainLayout.removeView(dontShowAgain);
         }
 

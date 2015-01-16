@@ -256,7 +256,7 @@ public class FastClickerFragment extends Fragment {
                 hand = Constants.LEFT_HAND;
                 leftHand.setVisibility(View.INVISIBLE);
                 rightHand.setVisibility(View.INVISIBLE);
-                handButton.setText(Helper.setStringFromResources(context, "left_hand") + " " + Helper.setStringFromResources(context, "hand"));
+                handButton.setText(Helper.setStringFromResources(context, "left_hand" + prefix) + " " + Helper.setStringFromResources(context, "hand" + prefix).replace("ку","ка"));
             }
         });
 
@@ -267,7 +267,7 @@ public class FastClickerFragment extends Fragment {
                 hand = Constants.RIGHT_HAND;
                 leftHand.setVisibility(View.INVISIBLE);
                 rightHand.setVisibility(View.INVISIBLE);
-                handButton.setText(Helper.setStringFromResources(context, "right_hand" + prefix) + " " + Helper.setStringFromResources(context, "hand" + prefix));
+                handButton.setText(Helper.setStringFromResources(context, "right_hand" + prefix) + " " + Helper.setStringFromResources(context, "hand" + prefix).replace("ку","ка"));
             }
         });
 
