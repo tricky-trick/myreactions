@@ -31,8 +31,7 @@
                 android:shadowRadius="4"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:textStyle="bold"
-                android:text="Game guide"/>
+                android:textStyle="bold"/>
 
 
             <WebView android:id="@+id/textGuide"
@@ -54,7 +53,6 @@
                 android:layout_below="@id/textGuide"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
-                android:text="Don't show this window again"
                 android:layout_centerHorizontal="true"
                 android:textStyle="italic"/>
 

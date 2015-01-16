@@ -260,7 +260,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 resultsAmountOfTests = getAmountOfTests().toString();
                 progressBar.setVisibility(View.INVISIBLE);
                 resultsScrollView.setVisibility(View.VISIBLE);
-                textTitleResults.setText(String.format(Helper.setStringFromResources(context, "showed_results_home" + prefix), dropMenuHand.getSelectedItem()) + dropMenuFinger.getSelectedItem() + ":");
+                textTitleResults.setText(String.format(Helper.setStringFromResources(context, "showed_results_home" + prefix), dropMenuHand.getSelectedItem()) + " \'"+ dropMenuFinger.getSelectedItem() + "\': ");
                 textSummaryClicks.setText(String.format(Helper.setStringFromResources(context, "sum_clicks_title_home" + prefix), resultsAmountOfTests) + resultsSummaryClicks);
                 textMaxClicks.setText(Helper.setStringFromResources(context, "max_clicks_10_sec" + prefix) + resultsMaxClicks);
                 textMinClicks.setText(Helper.setStringFromResources(context, "min_clicks_10_sec" + prefix) + resultsMinClicks);

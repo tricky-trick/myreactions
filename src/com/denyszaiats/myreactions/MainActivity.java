@@ -271,13 +271,13 @@ public class MainActivity extends Activity{
 				fragment = new HomeFragment();
 				break;
 			case 1:
-				fragment = new FastClickerFragment();
+				fragment = new RememberColorFragment();
 				break;
 			case 2:
 				fragment = new ChooseColorFragment();
 				break;
 			case 3:
-				fragment = new RememberColorFragment();
+				fragment = new FastClickerFragment();
 				break;
 			case 4:
 				SharedPreferences.Editor editor = prefs.edit();
@@ -336,9 +336,9 @@ public class MainActivity extends Activity{
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-//	@Override
-//	public void onBackPressed() {
-//		// do nothing.
-//	}
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+	}
 
 }

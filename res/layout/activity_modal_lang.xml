@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/imageLangLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/playstore_icon"/>
+
+    <TextView
+            android:id="@+id/titleLang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/imageLangLogo"
+            android:text="Choose language\nОберіть мову"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+    <RelativeLayout
+            android:id="@+id/mainLayoutLang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/titleLang"
+            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:paddingRight="10dp">
+
+
+        <ImageView
+                android:id="@+id/imageLangEn"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/unitedkingdom_flag"/>
+
+
+        <ImageView
+                android:id="@+id/imageLangUa"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/imageLangEn"
+                android:src="@drawable/ukraine_flag"/>
+
+    </RelativeLayout>
+</RelativeLayout>
