@@ -245,7 +245,7 @@ public class ChooseColorFragment extends Fragment {
         textLevel.setText(Helper.setStringFromResources(context, "level" + prefix) + String.valueOf(level));
         initShapes();
         if(level > 1) {
-            if (score >= 30 * level) {
+            if (score >= 40 * level) {
                 textColorScore.setTextColor(Color.WHITE);
             } else {
                 textColorScore.setTextColor(Color.RED);
@@ -263,7 +263,7 @@ public class ChooseColorFragment extends Fragment {
                 //areaColorAppear.setVisibility(View.INVISIBLE);
                 editor.putBoolean(Constants.COLOR_IS_CLICKABLE,false);
 
-                if(score >= 30 * level){
+                if(score >= 40 * level){
                     nextLevelButton.setVisibility(View.VISIBLE);
                     level++;
                     timeAppearing = 4;
@@ -397,7 +397,7 @@ public class ChooseColorFragment extends Fragment {
             }
         }
         if(level > 1) {
-            if (score >= 30 * level) {
+            if (score >= 40 * level) {
                 textColorScore.setTextColor(Color.WHITE);
             } else {
                 textColorScore.setTextColor(Color.RED);

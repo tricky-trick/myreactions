@@ -137,7 +137,7 @@
     <string name="guide_choose_color_en">You have to recognize the rectangle with appropriate color and click on it as
         soon as possible while it appears. You have 10 seconds per level.
         The number of rectangles and time of their appearance increase with each level.
-        You need to collect not less than 30 points per each level.</string>
+        You need to collect not less than 40 points per each level.</string>
     <string name="guide_rem_color_en">You have to memorize colors of rectangles and their location on the screen. You have 10 seconds for this.
         Then You have to click on the place where the rectangle with appropriate color was located.
         You get 10 points and +1 life for clicking on the correct place.
@@ -264,7 +264,7 @@
         По закінченню 10-ти секунд Ти побачиш результат та графік активності кліків протягом останньої гри.</string>
     <string name="guide_choose_color_ua">Ти повинен розпізнати квадрат з потрібним кольором і клікнути на нього якомога швидше під час його появи.
         Ти маєш 10 секунд на рівень. Кількість квадратів та час їхньої появи будуть збільшуватися з кожнем рівнем.
-        Ти повинен набрати не менше 30 пунктів за 1 рівень.</string>
+        Ти повинен набрати не менше 40 пунктів за 1 рівень.</string>
     <string name="guide_rem_color_ua">Ти повинен запам\'ятати кольори квадратів та їх розташування.
         У тебе є 10 секунд для цього. Опісля Ти повинен клікнути на ту область екрану, де знаходився квадрат з потрібним кольором.
         Ти отримаєш 10 пунктів та 1 життя за правильну відповідь. Якщо Ти готовий вгадувати, але час ще не закінчився, натисни на кнопку \'Готово\'.
